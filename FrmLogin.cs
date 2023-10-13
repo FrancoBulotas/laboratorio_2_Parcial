@@ -4,7 +4,7 @@ namespace Frms
 {
     public partial class FrmLogin : Form
     {
-        //private Usuario[] listaUsuarios;
+        private RRHH RRHH = new();
         private List<Usuario> listaUsuarios;
         public FrmMenuOperario menuOperario;
         public FrmMenuSupervisor menuSupervisor;
@@ -12,8 +12,7 @@ namespace Frms
 
         public FrmLogin()
         {
-            //listaUsuarios = new Usuario[20];
-            listaUsuarios = new List<Usuario>();
+            listaUsuarios = RRHH.ListaUsuarios;
             stock = new Stock();
             InitializeComponent();
         }
@@ -22,33 +21,25 @@ namespace Frms
         {
             string nombre = this.tNombre.Text;
             string pass = this.tPass.Text;
-            
 
             if (listaUsuarios.Count >= 1)
             {
                 for (int i = 0; i < listaUsuarios.Count; i++)
                 {
                     //MessageBox.Show(listaUsuarios[0].nombreUsuario);
-
                     if (nombre != String.Empty)
                     {
                         if (pass != String.Empty)
                         {
                             if (listaUsuarios != null)
                             {
-                                if (nombre == listaUsuarios[i].nombreUsuario && pass == listaUsuarios[i].contraseña)
+                                if (nombre == listaUsuarios[i].nombreUsuario && pass == listaUsuarios[i].contrasenia)
                                 {
                                     menuOperario = new FrmMenuOperario(listaUsuarios, i, this, stock);
                                     menuSupervisor = new FrmMenuSupervisor(listaUsuarios, i, this, stock);
 
-                                    if (listaUsuarios[i].tipoUsuario == "operario")
-                                    {
-                                        menuOperario.Show();
-                                    }
-                                    else
-                                    {
-                                        menuSupervisor.Show();
-                                    }
+                                    if (listaUsuarios[i].tipoUsuario == "operario") { menuOperario.Show(); }
+                                    else { menuSupervisor.Show(); }
                                     this.tNombre.Text = "";
                                     this.tPass.Text = "";
                                     this.Hide();
@@ -83,7 +74,7 @@ namespace Frms
             {
                 this.labelError.Text = "Error. No hay usuarios creados.";
                 this.labelError.Visible = true;
-            }            
+            }
         }
 
         private void botonSalir_Click(object sender, EventArgs e)
@@ -93,10 +84,20 @@ namespace Frms
 
         private void registro_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmRegistro registro = new FrmRegistro(listaUsuarios, this);
+            FrmRegistro registro = new FrmRegistro(listaUsuarios, this, RRHH);
             tNombre.Text = string.Empty;
             tPass.Text = string.Empty;
             registro.Show();
+        }
+
+        private void linkLabelVerUsuarios_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string mensaje = "";
+            for (int i = 0; i < listaUsuarios.Count; i++)
+            {
+                mensaje += string.Format("{0} | {1} | {2}\n", listaUsuarios[i].nombreUsuario, listaUsuarios[i].contrasenia, listaUsuarios[i].tipoUsuario);
+            }
+            MessageBox.Show(mensaje);
         }
 
         private void tPass_TextChanged(object sender, EventArgs e)
@@ -113,5 +114,7 @@ namespace Frms
         {
 
         }
+
+        
     }
 }

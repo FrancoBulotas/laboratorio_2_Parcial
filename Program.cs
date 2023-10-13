@@ -1,3 +1,6 @@
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
+
 namespace Frms
 {
     internal static class Program
@@ -12,6 +15,7 @@ namespace Frms
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new FrmLogin());
+
         }
     }
 }

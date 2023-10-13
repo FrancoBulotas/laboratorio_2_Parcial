@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,9 @@ namespace Frms
     public partial class FrmMenuSupervisor : Form
     {
         private List<Usuario> listaUsuarios;
-        private int indexUsuarioLogueado;
         public FrmLogin login;
         private Stock stock;
+        private int indexUsuarioLogueado;
         private int cantidadPapelAComprar;
         private int cantidadTintaAComprar;
         private int cantidadTroquelAComprar;
@@ -34,13 +35,13 @@ namespace Frms
 
         private void FrmMenu_Load(object sender, EventArgs e)
         {
-            cargarStock();
+            CargarStock();
 
             for (int i = 0; i < listaUsuarios.Count; i++)
             {
                 if (listaUsuarios != null)
                 {
-                    string[] usuario = { listaUsuarios[i].nombreUsuario, listaUsuarios[i].contraseña, listaUsuarios[i].tipoUsuario };
+                    string[] usuario = { listaUsuarios[i].nombreUsuario, listaUsuarios[i].contrasenia, listaUsuarios[i].tipoUsuario };
                     this.dataGridView1.Rows.Add(usuario);
                 }
             }
@@ -50,7 +51,7 @@ namespace Frms
             this.labelPrecioTroquel.Text = "$ " + stock.PrecioTroquelUni.ToString();
             this.labelPrecioEncuadernacion.Text = "$ " + stock.PrecioEncuadernacionUni.ToString();
         }
-        private void cargarStock()
+        private void CargarStock()
         {
             this.label3.Text = stock.Papel.ToString() + " Uni.";
             this.label4.Text = stock.Tinta.ToString() + " L.";
@@ -66,11 +67,6 @@ namespace Frms
             login.Show();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void botonMenuOperarios_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -78,14 +74,8 @@ namespace Frms
             login.menuOperario.Show();
         }
 
-        private void calcularCompra()
+        private void CalcularCompra()
         {
-
-            cantidadPapelAComprar = validarCantidadIngresada(this.textBoxPapel.Text);
-            cantidadTroquelAComprar = validarCantidadIngresada(this.textBoxTroquel.Text);
-            cantidadTintaAComprar = validarCantidadIngresada(this.textBoxTinta.Text);
-            cantidadEncuadernacionAComprar = validarCantidadIngresada(this.textBoxEncuadernacion.Text);
-
             cantidadTotalAComprar = (cantidadPapelAComprar * stock.PrecioPapelUni)
                         + (cantidadTroquelAComprar * stock.PrecioTroquelUni)
                         + (cantidadTintaAComprar * stock.PrecioTintaUni)
@@ -111,37 +101,35 @@ namespace Frms
 
         }
 
-        private int validarCantidadIngresada(string cantidad)
-        {
-            try
-            {
-                return Convert.ToInt32(cantidad);
-            }
-            catch (System.FormatException)
-            {
-                return -1;
-            }
-        }
-
         private void buttonComprar_Click(object sender, EventArgs e)
         {
             if ((this.textBoxPapel.Text != string.Empty ||
                 this.textBoxTinta.Text != string.Empty ||
                 this.textBoxTroquel.Text != string.Empty ||
-                this.textBoxEncuadernacion.Text != string.Empty) &&
-                (validarCantidadIngresada(this.textBoxPapel.Text) >= 0 ||
-                validarCantidadIngresada(this.textBoxTinta.Text) >= 0 ||
-                validarCantidadIngresada(this.textBoxTroquel.Text) >= 0 ||
-                validarCantidadIngresada(this.textBoxEncuadernacion.Text) >= 0))
+                this.textBoxEncuadernacion.Text != string.Empty))
             {
-                calcularCompra();
+                int.TryParse(this.textBoxPapel.Text, out int papelIngresado);
+                int.TryParse(this.textBoxTinta.Text, out int tintaIngresada);
+                int.TryParse(this.textBoxTroquel.Text, out int troquelIngresado);
+                int.TryParse(this.textBoxEncuadernacion.Text, out int encuIngresado);
+
+                this.cantidadPapelAComprar = papelIngresado;
+                this.cantidadTintaAComprar = tintaIngresada;
+                this.cantidadTroquelAComprar = troquelIngresado;
+                this.cantidadEncuadernacionAComprar = encuIngresado;
+                CalcularCompra();
             }
-            login.menuOperario.cargarStock();
-            cargarStock();
+            login.menuOperario.CargarStock();
+            CargarStock();
 
         }
 
         private void labelPrecioTinta_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

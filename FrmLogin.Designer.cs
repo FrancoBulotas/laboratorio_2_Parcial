@@ -35,6 +35,7 @@
             registro = new LinkLabel();
             botonSalir = new Button();
             label1 = new Label();
+            linkLabelVerUsuarios = new LinkLabel();
             SuspendLayout();
             // 
             // login
@@ -83,7 +84,7 @@
             // 
             registro.AutoSize = true;
             registro.LinkColor = Color.Black;
-            registro.Location = new Point(12, 330);
+            registro.Location = new Point(12, 320);
             registro.Name = "registro";
             registro.Size = new Size(77, 15);
             registro.TabIndex = 6;
@@ -113,11 +114,24 @@
             label1.TabIndex = 8;
             label1.Text = "Login";
             // 
+            // linkLabelVerUsuarios
+            // 
+            linkLabelVerUsuarios.AutoSize = true;
+            linkLabelVerUsuarios.LinkColor = Color.Black;
+            linkLabelVerUsuarios.Location = new Point(12, 340);
+            linkLabelVerUsuarios.Name = "linkLabelVerUsuarios";
+            linkLabelVerUsuarios.Size = new Size(85, 15);
+            linkLabelVerUsuarios.TabIndex = 9;
+            linkLabelVerUsuarios.TabStop = true;
+            linkLabelVerUsuarios.Text = "VER USUARIOS";
+            linkLabelVerUsuarios.LinkClicked += linkLabelVerUsuarios_LinkClicked;
+            // 
             // FrmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(275, 367);
+            Controls.Add(linkLabelVerUsuarios);
             Controls.Add(label1);
             Controls.Add(botonSalir);
             Controls.Add(registro);
@@ -141,5 +155,6 @@
         private LinkLabel registro;
         private Button botonSalir;
         private Label label1;
+        private LinkLabel linkLabelVerUsuarios;
     }
 }

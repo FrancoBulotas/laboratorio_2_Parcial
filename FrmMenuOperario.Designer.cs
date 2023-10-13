@@ -41,7 +41,6 @@
             label9 = new Label();
             botonSalir = new Button();
             label10 = new Label();
-            progressBar1 = new ProgressBar();
             radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
             button1 = new Button();
@@ -50,8 +49,6 @@
             label15 = new Label();
             nombreLogueado = new Label();
             dataGridView1 = new DataGridView();
-            botonVolverSup = new Button();
-            radioButton3 = new RadioButton();
             Pedido = new DataGridViewTextBoxColumn();
             Cantidad = new DataGridViewTextBoxColumn();
             Papel = new DataGridViewTextBoxColumn();
@@ -60,6 +57,12 @@
             Encuadernacion = new DataGridViewTextBoxColumn();
             Ganancia = new DataGridViewTextBoxColumn();
             Seleccion = new DataGridViewCheckBoxColumn();
+            botonVolverSup = new Button();
+            radioButton3 = new RadioButton();
+            labelPedido = new Label();
+            labelPedidoSeleccionado = new Label();
+            labelMaquinaria = new Label();
+            labelMaquinariaNecesaria = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -168,18 +171,10 @@
             label10.TabIndex = 10;
             label10.Text = "Trabajos Pendientes";
             // 
-            // progressBar1
-            // 
-            progressBar1.Location = new Point(9, 581);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(824, 29);
-            progressBar1.Style = ProgressBarStyle.Continuous;
-            progressBar1.TabIndex = 14;
-            // 
             // radioButton1
             // 
             radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(18, 250);
+            radioButton1.Location = new Point(306, 243);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(81, 19);
             radioButton1.TabIndex = 15;
@@ -190,7 +185,7 @@
             // radioButton2
             // 
             radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(118, 250);
+            radioButton2.Location = new Point(406, 243);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(94, 19);
             radioButton2.TabIndex = 16;
@@ -220,7 +215,7 @@
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label14.Location = new Point(16, 217);
+            label14.Location = new Point(304, 210);
             label14.Name = "label14";
             label14.Size = new Size(146, 21);
             label14.TabIndex = 19;
@@ -274,30 +269,6 @@
             dataGridView1.Size = new Size(713, 136);
             dataGridView1.TabIndex = 22;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // botonVolverSup
-            // 
-            botonVolverSup.BackColor = SystemColors.ControlDark;
-            botonVolverSup.Location = new Point(913, 555);
-            botonVolverSup.Margin = new Padding(0);
-            botonVolverSup.Name = "botonVolverSup";
-            botonVolverSup.Size = new Size(90, 26);
-            botonVolverSup.TabIndex = 23;
-            botonVolverSup.Text = "VOLVER";
-            botonVolverSup.UseVisualStyleBackColor = false;
-            botonVolverSup.Visible = false;
-            botonVolverSup.Click += botonVolverSup_Click;
-            // 
-            // radioButton3
-            // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new Point(218, 250);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(111, 19);
-            radioButton3.TabIndex = 24;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "Encuadernadora";
-            radioButton3.UseVisualStyleBackColor = true;
             // 
             // Pedido
             // 
@@ -358,6 +329,69 @@
             Seleccion.HeaderText = "";
             Seleccion.Name = "Seleccion";
             Seleccion.Resizable = DataGridViewTriState.False;
+            Seleccion.TrueValue = "";
+            // 
+            // botonVolverSup
+            // 
+            botonVolverSup.BackColor = SystemColors.ControlDark;
+            botonVolverSup.Location = new Point(913, 555);
+            botonVolverSup.Margin = new Padding(0);
+            botonVolverSup.Name = "botonVolverSup";
+            botonVolverSup.Size = new Size(90, 26);
+            botonVolverSup.TabIndex = 23;
+            botonVolverSup.Text = "VOLVER";
+            botonVolverSup.UseVisualStyleBackColor = false;
+            botonVolverSup.Visible = false;
+            botonVolverSup.Click += botonVolverSup_Click;
+            // 
+            // radioButton3
+            // 
+            radioButton3.AutoSize = true;
+            radioButton3.Location = new Point(506, 243);
+            radioButton3.Name = "radioButton3";
+            radioButton3.Size = new Size(111, 19);
+            radioButton3.TabIndex = 24;
+            radioButton3.TabStop = true;
+            radioButton3.Text = "Encuadernadora";
+            radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // labelPedido
+            // 
+            labelPedido.AutoSize = true;
+            labelPedido.Location = new Point(14, 215);
+            labelPedido.Name = "labelPedido";
+            labelPedido.Size = new Size(85, 15);
+            labelPedido.TabIndex = 25;
+            labelPedido.Text = "Para el pedido ";
+            labelPedido.Visible = false;
+            // 
+            // labelPedidoSeleccionado
+            // 
+            labelPedidoSeleccionado.AutoSize = true;
+            labelPedidoSeleccionado.Location = new Point(110, 215);
+            labelPedidoSeleccionado.Name = "labelPedidoSeleccionado";
+            labelPedidoSeleccionado.Size = new Size(0, 15);
+            labelPedidoSeleccionado.TabIndex = 26;
+            labelPedidoSeleccionado.Visible = false;
+            // 
+            // labelMaquinaria
+            // 
+            labelMaquinaria.AutoSize = true;
+            labelMaquinaria.Location = new Point(12, 230);
+            labelMaquinaria.Name = "labelMaquinaria";
+            labelMaquinaria.Size = new Size(112, 15);
+            labelMaquinaria.TabIndex = 27;
+            labelMaquinaria.Text = " es necesario utilizar";
+            labelMaquinaria.Visible = false;
+            // 
+            // labelMaquinariaNecesaria
+            // 
+            labelMaquinariaNecesaria.AutoSize = true;
+            labelMaquinariaNecesaria.Location = new Point(130, 230);
+            labelMaquinariaNecesaria.Name = "labelMaquinariaNecesaria";
+            labelMaquinariaNecesaria.Size = new Size(0, 15);
+            labelMaquinariaNecesaria.TabIndex = 28;
+            labelMaquinariaNecesaria.Visible = false;
             // 
             // FrmMenuOperario
             // 
@@ -365,6 +399,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.HighlightText;
             ClientSize = new Size(1012, 619);
+            Controls.Add(labelMaquinariaNecesaria);
+            Controls.Add(labelMaquinaria);
+            Controls.Add(labelPedidoSeleccionado);
+            Controls.Add(labelPedido);
             Controls.Add(radioButton3);
             Controls.Add(botonVolverSup);
             Controls.Add(dataGridView1);
@@ -375,7 +413,6 @@
             Controls.Add(button1);
             Controls.Add(radioButton2);
             Controls.Add(radioButton1);
-            Controls.Add(progressBar1);
             Controls.Add(label10);
             Controls.Add(botonSalir);
             Controls.Add(label8);
@@ -412,7 +449,6 @@
         private Label label9;
         private Button botonSalir;
         private Label label10;
-        private ProgressBar progressBar1;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
         private Button button1;
@@ -423,6 +459,10 @@
         private DataGridView dataGridView1;
         internal Button botonVolverSup;
         private RadioButton radioButton3;
+        private Label labelPedido;
+        private Label labelPedidoSeleccionado;
+        private Label labelMaquinaria;
+        private Label labelMaquinariaNecesaria;
         private DataGridViewTextBoxColumn Pedido;
         private DataGridViewTextBoxColumn Cantidad;
         private DataGridViewTextBoxColumn Papel;

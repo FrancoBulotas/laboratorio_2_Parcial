@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.Logging;
+﻿using Biblioteca;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +17,13 @@ namespace Frms
     {
         private List<Usuario> listaUsuarios;
         public FrmLogin login;
+        private RRHH RRHH;
 
-        public FrmRegistro(List<Usuario> listaUsuarios, FrmLogin login)
+        public FrmRegistro(List<Usuario> listaUsuarios, FrmLogin login, RRHH rrhh)
         {
             InitializeComponent();
 
+            this.RRHH = rrhh;
             this.listaUsuarios = listaUsuarios;
             this.login = login;
             login.Hide();
@@ -54,7 +57,7 @@ namespace Frms
 
                     Usuario user = new Usuario(nombre, contra, tipoUsuario);
 
-                    if (user.AgregarUsuario(this.listaUsuarios, user, tipoUsuario))
+                    if (RRHH.AgregarUsuario(this.listaUsuarios, user, tipoUsuario))
                     {
                         this.Hide();
                         login.Show();
@@ -110,12 +113,12 @@ namespace Frms
 
         private void linkLabelRandom_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.tbNombreUsuario.Text = ValorRandom(true, false);
-            string contra = ValorRandom(false, false);
+            this.tbNombreUsuario.Text = RRHH.ValorRandom(true, false);
+            string contra = RRHH.ValorRandom(false, false);
             this.tbContraseña.Text = contra;
             this.tbRepContraseña.Text = contra;
 
-            if (ValorRandom(false, true) == "0")
+            if (RRHH.ValorRandom(false, true) == "0")
             {
                 this.checkBoxOperario.Checked = true;
                 this.checkBoxSupervisor.Checked = false;
@@ -127,42 +130,42 @@ namespace Frms
             }
         }
 
-        public static string ValorRandom(bool nombreUsuario, bool tipoUsuario)
-        {
-            List<string> listaNombres = new List<string>
-            {
-                "Franco","Pedro","Juan","Fausto","Adriana","Agustina","Joaquin","Malena"
-            };
+        //public static string ValorRandom(bool nombreUsuario, bool tipoUsuario)
+        //{
+        //    List<string> listaNombres = new List<string>
+        //    {
+        //        "Franco","Pedro","Juan","Fausto","Adriana","Agustina","Joaquin","Malena"
+        //    };
 
-            string caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-            char[] arrayChar = new char[4];
-            string tipo = "01";
-            char[] arrayTipo = new char[1];
-            Random random = new Random();
+        //    string caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        //    char[] arrayChar = new char[4];
+        //    string tipo = "01";
+        //    char[] arrayTipo = new char[1];
+        //    Random random = new Random();
 
-            if (tipoUsuario)
-            {
-                for (int i = 0; i < arrayTipo.Length; i++)
-                {
-                    arrayTipo[i] = tipo[random.Next(tipo.Length)];
-                }
-                return new String(arrayTipo);
-            }
-            else
-            {
-                if (!nombreUsuario)
-                {
-                    for (int i = 0; i < arrayChar.Length; i++)
-                    {
-                        arrayChar[i] = caracteres[random.Next(caracteres.Length)];
-                    }
-                    return new String(arrayChar);
-                }
-                else
-                {
-                    return listaNombres[random.Next(listaNombres.Count)];
-                }
-            }
-        }
+        //    if (tipoUsuario)
+        //    {
+        //        for (int i = 0; i < arrayTipo.Length; i++)
+        //        {
+        //            arrayTipo[i] = tipo[random.Next(tipo.Length)];
+        //        }
+        //        return new String(arrayTipo);
+        //    }
+        //    else
+        //    {
+        //        if (!nombreUsuario)
+        //        {
+        //            for (int i = 0; i < arrayChar.Length; i++)
+        //            {
+        //                arrayChar[i] = caracteres[random.Next(caracteres.Length)];
+        //            }
+        //            return new String(arrayChar);
+        //        }
+        //        else
+        //        {
+        //            return listaNombres[random.Next(listaNombres.Count)];
+        //        }
+        //    }
+        //}
     }
 }

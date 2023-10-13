@@ -94,7 +94,7 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(275, 154);
+            dataGridView1.Size = new Size(275, 188);
             dataGridView1.TabIndex = 9;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -151,7 +151,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(652, 140);
+            label8.Location = new Point(652, 190);
             label8.Name = "label8";
             label8.Size = new Size(13, 15);
             label8.TabIndex = 32;
@@ -160,7 +160,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(497, 140);
+            label9.Location = new Point(497, 190);
             label9.Name = "label9";
             label9.Size = new Size(165, 15);
             label9.TabIndex = 31;
@@ -169,7 +169,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(549, 108);
+            label6.Location = new Point(549, 158);
             label6.Name = "label6";
             label6.Size = new Size(13, 15);
             label6.TabIndex = 30;
@@ -178,7 +178,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(497, 108);
+            label7.Location = new Point(497, 158);
             label7.Name = "label7";
             label7.Size = new Size(46, 15);
             label7.TabIndex = 29;
@@ -187,7 +187,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(539, 75);
+            label4.Location = new Point(539, 125);
             label4.Name = "label4";
             label4.Size = new Size(13, 15);
             label4.TabIndex = 28;
@@ -196,7 +196,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(497, 75);
+            label5.Location = new Point(497, 125);
             label5.Name = "label5";
             label5.Size = new Size(38, 15);
             label5.TabIndex = 27;
@@ -205,7 +205,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(539, 44);
+            label3.Location = new Point(539, 94);
             label3.Name = "label3";
             label3.Size = new Size(13, 15);
             label3.TabIndex = 26;
@@ -214,7 +214,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(497, 44);
+            label2.Location = new Point(497, 94);
             label2.Name = "label2";
             label2.Size = new Size(36, 15);
             label2.TabIndex = 25;
@@ -234,7 +234,7 @@
             // 
             buttonComprar.BackColor = SystemColors.Control;
             buttonComprar.ForeColor = SystemColors.ControlText;
-            buttonComprar.Location = new Point(410, 36);
+            buttonComprar.Location = new Point(314, 68);
             buttonComprar.Name = "buttonComprar";
             buttonComprar.Size = new Size(65, 23);
             buttonComprar.TabIndex = 34;
@@ -245,7 +245,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(497, 193);
+            label10.Location = new Point(314, 36);
             label10.Name = "label10";
             label10.Size = new Size(82, 15);
             label10.TabIndex = 35;
@@ -254,7 +254,7 @@
             // labelPresupuesto
             // 
             labelPresupuesto.AutoSize = true;
-            labelPresupuesto.Location = new Point(589, 193);
+            labelPresupuesto.Location = new Point(406, 36);
             labelPresupuesto.Name = "labelPresupuesto";
             labelPresupuesto.Size = new Size(0, 15);
             labelPresupuesto.TabIndex = 36;
@@ -262,7 +262,7 @@
             // textBoxPapel
             // 
             textBoxPapel.BorderStyle = BorderStyle.None;
-            textBoxPapel.Location = new Point(432, 73);
+            textBoxPapel.Location = new Point(430, 94);
             textBoxPapel.Name = "textBoxPapel";
             textBoxPapel.PlaceholderText = "Cantidad";
             textBoxPapel.Size = new Size(43, 16);
@@ -272,7 +272,7 @@
             // textBoxTinta
             // 
             textBoxTinta.BorderStyle = BorderStyle.None;
-            textBoxTinta.Location = new Point(432, 106);
+            textBoxTinta.Location = new Point(430, 127);
             textBoxTinta.Name = "textBoxTinta";
             textBoxTinta.PlaceholderText = "Cantidad";
             textBoxTinta.Size = new Size(43, 16);
@@ -282,7 +282,7 @@
             // textBoxTroquel
             // 
             textBoxTroquel.BorderStyle = BorderStyle.None;
-            textBoxTroquel.Location = new Point(432, 139);
+            textBoxTroquel.Location = new Point(430, 160);
             textBoxTroquel.Name = "textBoxTroquel";
             textBoxTroquel.PlaceholderText = "Cantidad";
             textBoxTroquel.Size = new Size(43, 16);
@@ -292,7 +292,7 @@
             // textBoxEncuadernacion
             // 
             textBoxEncuadernacion.BorderStyle = BorderStyle.None;
-            textBoxEncuadernacion.Location = new Point(432, 171);
+            textBoxEncuadernacion.Location = new Point(430, 192);
             textBoxEncuadernacion.Name = "textBoxEncuadernacion";
             textBoxEncuadernacion.PlaceholderText = "Cantidad";
             textBoxEncuadernacion.Size = new Size(43, 16);
@@ -301,7 +301,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(-7, 211);
+            button1.Location = new Point(-5, 227);
             button1.Name = "button1";
             button1.Size = new Size(728, 10);
             button1.TabIndex = 41;
@@ -311,14 +311,14 @@
             // 
             button2.Location = new Point(298, -3);
             button2.Name = "button2";
-            button2.Size = new Size(10, 224);
+            button2.Size = new Size(10, 240);
             button2.TabIndex = 42;
             button2.UseVisualStyleBackColor = true;
             // 
             // labelPrecioPapel
             // 
             labelPrecioPapel.AutoSize = true;
-            labelPrecioPapel.Location = new Point(359, 73);
+            labelPrecioPapel.Location = new Point(357, 94);
             labelPrecioPapel.Name = "labelPrecioPapel";
             labelPrecioPapel.Size = new Size(0, 15);
             labelPrecioPapel.TabIndex = 43;
@@ -326,7 +326,7 @@
             // labelPrecioTinta
             // 
             labelPrecioTinta.AutoSize = true;
-            labelPrecioTinta.Location = new Point(359, 107);
+            labelPrecioTinta.Location = new Point(357, 128);
             labelPrecioTinta.Name = "labelPrecioTinta";
             labelPrecioTinta.Size = new Size(0, 15);
             labelPrecioTinta.TabIndex = 44;
@@ -335,7 +335,7 @@
             // labelPrecioTroquel
             // 
             labelPrecioTroquel.AutoSize = true;
-            labelPrecioTroquel.Location = new Point(359, 140);
+            labelPrecioTroquel.Location = new Point(357, 161);
             labelPrecioTroquel.Name = "labelPrecioTroquel";
             labelPrecioTroquel.Size = new Size(0, 15);
             labelPrecioTroquel.TabIndex = 45;
@@ -343,7 +343,7 @@
             // labelPrecioEncuadernacion
             // 
             labelPrecioEncuadernacion.AutoSize = true;
-            labelPrecioEncuadernacion.Location = new Point(359, 171);
+            labelPrecioEncuadernacion.Location = new Point(357, 192);
             labelPrecioEncuadernacion.Name = "labelPrecioEncuadernacion";
             labelPrecioEncuadernacion.Size = new Size(0, 15);
             labelPrecioEncuadernacion.TabIndex = 46;
@@ -352,7 +352,7 @@
             // 
             button3.Location = new Point(481, -3);
             button3.Name = "button3";
-            button3.Size = new Size(10, 224);
+            button3.Size = new Size(10, 240);
             button3.TabIndex = 47;
             button3.UseVisualStyleBackColor = true;
             // 
@@ -369,7 +369,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(398, 73);
+            label12.Location = new Point(396, 94);
             label12.Name = "label12";
             label12.Size = new Size(36, 15);
             label12.TabIndex = 49;
@@ -378,7 +378,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(398, 172);
+            label13.Location = new Point(396, 193);
             label13.Name = "label13";
             label13.Size = new Size(36, 15);
             label13.TabIndex = 50;
@@ -387,7 +387,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(398, 140);
+            label14.Location = new Point(396, 161);
             label14.Name = "label14";
             label14.Size = new Size(36, 15);
             label14.TabIndex = 51;
@@ -396,7 +396,7 @@
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(398, 107);
+            label16.Location = new Point(396, 128);
             label16.Name = "label16";
             label16.Size = new Size(24, 15);
             label16.TabIndex = 52;

@@ -40,7 +40,7 @@ C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrim
 C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.pdb
 C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.genruntimeconfig.cache
 C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\ref\Frms.dll
-C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\BulotasFrancoParcial.FrmLogin.resources
-C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\BulotasFrancoParcial.FrmMenuOperario.resources
-C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\BulotasFrancoParcial.FrmMenuSupervisor.resources
-C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\BulotasFrancoParcial.FrmRegistro.resources
+C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmLogin.resources
+C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmMenuOperario.resources
+C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmMenuSupervisor.resources
+C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmRegistro.resources

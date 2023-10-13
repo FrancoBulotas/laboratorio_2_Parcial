@@ -30,11 +30,11 @@ namespace Frms
         private void FrmPruebaMenu_Load(object sender, EventArgs e)
         {
             this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].nombreUsuario;
-            cargarStock();
+            CargarStock();
             cargarDataGridView();
             controlTrabajosPendientes();
         }
-        internal void cargarStock()
+        internal void CargarStock()
         {
             this.label3.Text = stock.Papel.ToString() + " Uni.";
             this.label4.Text = stock.Tinta.ToString() + " L.";
@@ -53,6 +53,115 @@ namespace Frms
             dataGridView1.Rows.Add(pedido2);
             dataGridView1.Rows.Add(pedido3);
             dataGridView1.Rows.Add(pedido4);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Seleccion")
+            {
+                int cantElegido = 0;
+                bool resultado;
+                // Se toma la fila seleccionada
+                DataGridViewRow filasPedidos = dataGridView1.Rows[e.RowIndex];
+
+                // Se selecciona la celda del checkbox
+                DataGridViewCheckBoxCell celdaSeleccion = filasPedidos.Cells["Seleccion"] as DataGridViewCheckBoxCell;
+
+
+                // Tuve que hacer esto porque sino al seleccionar por segunda vez un elemento rompia (como que celdaSeleccion.Value cambiaba
+                // y no podia convertirlo)
+                try
+                {
+                    resultado = !Convert.ToBoolean(celdaSeleccion.Value);
+                }
+                catch (FormatException)
+                {
+                    resultado = false;
+                }
+
+                if (resultado)
+                {
+                    if (Convert.ToInt32(filasPedidos.Cells["Papel"].Value) <= stock.Papel &&
+                        Convert.ToInt32(filasPedidos.Cells["Tinta"].Value) <= stock.Tinta &&
+                        Convert.ToInt32(filasPedidos.Cells["Troquel"].Value) <= stock.Troquel &&
+                        Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value) <= stock.Encuadernacion)
+                    {
+                        stock.Papel = -Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
+                        stock.Tinta = -Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
+                        stock.Troquel = -Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
+                        stock.Encuadernacion = -Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
+                        CargarStock();
+
+                        string mensaje = string.Format("Hay stock suficiente para \n\nPedido: '{0}' \nGanancia: '{1}'",
+                                    filasPedidos.Cells["Pedido"].Value,
+                                    filasPedidos.Cells["Ganancia"].Value);
+                        MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        filasPedidos.DefaultCellStyle.BackColor = Color.Green;
+                        this.labelPedido.Visible = true;
+                        this.labelPedidoSeleccionado.Text = filasPedidos.Cells["Pedido"].Value.ToString();
+                        this.labelPedidoSeleccionado.Visible = true;
+                        this.labelMaquinaria.Visible = true;
+                        this.labelMaquinariaNecesaria.Visible = true;
+
+                        string maquinarias = "";
+                        if (Convert.ToInt32(filasPedidos.Cells["Papel"].Value) > 0)
+                        {
+                            maquinarias = "Impresora ";
+                        }
+                        if (Convert.ToInt32(filasPedidos.Cells["Troquel"].Value) > 0)
+                        {
+                            maquinarias += "| Troqueladora ";
+                        }
+                        if (Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value) > 0)
+                        {
+                            maquinarias += "| Encuadernadora ";
+                        }
+                        this.labelMaquinariaNecesaria.Text += maquinarias;
+
+                    }
+                    else
+                    {
+                        string mensaje = string.Format("NO hay stock suficiente para \n\nPedido: '{0}' \nGanancia: '{1}'",
+                                    filasPedidos.Cells["Pedido"].Value,
+                                    filasPedidos.Cells["Ganancia"].Value);
+                        MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        filasPedidos.DefaultCellStyle.BackColor = Color.Red;
+                        this.labelPedido.Visible = false;
+                        this.labelPedidoSeleccionado.Visible = false;
+                        this.labelMaquinaria.Visible = false;
+                        this.labelMaquinariaNecesaria.Visible = false;
+                        this.labelMaquinariaNecesaria.Text = "";
+                    }
+
+                    celdaSeleccion.Value = true;
+
+                }
+                else
+                {
+                    if (filasPedidos.DefaultCellStyle.BackColor == Color.Green)
+                    {
+                        stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
+                        stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
+                        stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
+                        stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
+                        CargarStock();
+                    }
+
+                    string mensaje = string.Format("Se ha quitado la seleccion n\nPedido: '{0}' \nGanancia: '{1}'",
+                                                        filasPedidos.Cells["Pedido"].Value,
+                                                        filasPedidos.Cells["Ganancia"].Value);
+                    MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    filasPedidos.DefaultCellStyle.BackColor = Color.White;
+                    this.labelPedido.Visible = false;
+                    this.labelPedidoSeleccionado.Visible = false;
+                    this.labelMaquinaria.Visible = false;
+                    this.labelMaquinariaNecesaria.Visible = false;
+                    this.labelMaquinariaNecesaria.Text = "";
+                    celdaSeleccion.Value = false;
+                }
+            }
         }
 
         private void controlTrabajosPendientes()
@@ -90,73 +199,8 @@ namespace Frms
 
         }
 
-
-
         private void nombreLogueado_Click(object sender, EventArgs e)
         {
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "Seleccion")
-            {
-                // Se toma la fila seleccionada
-                DataGridViewRow filasPedidos = dataGridView1.Rows[e.RowIndex];
-
-                // Se selecciona la celda del checkbox
-                DataGridViewCheckBoxCell celdaSeleccion = filasPedidos.Cells["Seleccion"] as DataGridViewCheckBoxCell;
-
-                if (!Convert.ToBoolean(celdaSeleccion.Value))
-                {
-                    if (Convert.ToInt32(filasPedidos.Cells["Papel"].Value) <= stock.Papel &&
-                        Convert.ToInt32(filasPedidos.Cells["Tinta"].Value) <= stock.Tinta &&
-                        Convert.ToInt32(filasPedidos.Cells["Troquel"].Value) <= stock.Troquel &&
-                        Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value) <= stock.Encuadernacion)
-                    {
-                        stock.Papel = -Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
-                        stock.Tinta = -Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
-                        stock.Troquel = -Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
-                        stock.Encuadernacion = -Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
-                        cargarStock();
-
-                        string mensaje = string.Format("Hay stock suficiente para \n\nPedido: '{0}' \nGanancia: '{1}'",
-                                    filasPedidos.Cells["Pedido"].Value,
-                                    filasPedidos.Cells["Ganancia"].Value);
-                        MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        filasPedidos.DefaultCellStyle.BackColor = Color.Green;
-                    }
-                    else
-                    {
-                        string mensaje = string.Format("NO hay stock suficiente para \n\nPedido: '{0}' \nGanancia: '{1}'",
-                                    filasPedidos.Cells["Pedido"].Value,
-                                    filasPedidos.Cells["Ganancia"].Value);
-                        MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        
-                        filasPedidos.DefaultCellStyle.BackColor = Color.Red;
-
-                    }
-
-                }
-                else
-                {
-                    if (filasPedidos.DefaultCellStyle.BackColor == Color.Green)
-                    {
-                        stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
-                        stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
-                        stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
-                        stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
-                        cargarStock();
-                    }
-
-                    string mensaje = string.Format("Se ha quitado la seleccion n\nPedido: '{0}' \nGanancia: '{1}'",
-                                                        filasPedidos.Cells["Pedido"].Value,
-                                                        filasPedidos.Cells["Ganancia"].Value);
-                    MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    filasPedidos.DefaultCellStyle.BackColor = Color.White;
-
-                }
-            }
         }
 
         private void label3_Click(object sender, EventArgs e)
