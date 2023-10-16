@@ -35,7 +35,8 @@
             registro = new LinkLabel();
             botonSalir = new Button();
             label1 = new Label();
-            linkLabelVerUsuarios = new LinkLabel();
+            linkLabelHardcodeOp = new LinkLabel();
+            linkLabelHardcodeSup = new LinkLabel();
             SuspendLayout();
             // 
             // login
@@ -61,6 +62,7 @@
             // 
             // tNombre
             // 
+            tNombre.ForeColor = SystemColors.WindowText;
             tNombre.Location = new Point(12, 73);
             tNombre.Name = "tNombre";
             tNombre.PlaceholderText = "Nombre de usuario";
@@ -71,6 +73,7 @@
             // labelError
             // 
             labelError.AutoSize = true;
+            labelError.BackColor = Color.Transparent;
             labelError.ForeColor = Color.Red;
             labelError.Location = new Point(12, 150);
             labelError.Name = "labelError";
@@ -85,7 +88,7 @@
             registro.AutoSize = true;
             registro.BackColor = Color.Transparent;
             registro.LinkColor = Color.Black;
-            registro.Location = new Point(12, 320);
+            registro.Location = new Point(12, 340);
             registro.Name = "registro";
             registro.Size = new Size(77, 15);
             registro.TabIndex = 6;
@@ -116,25 +119,39 @@
             label1.TabIndex = 8;
             label1.Text = "LOGIN";
             // 
-            // linkLabelVerUsuarios
+            // linkLabelHardcodeOp
             // 
-            linkLabelVerUsuarios.AutoSize = true;
-            linkLabelVerUsuarios.BackColor = Color.Transparent;
-            linkLabelVerUsuarios.LinkColor = Color.Black;
-            linkLabelVerUsuarios.Location = new Point(12, 340);
-            linkLabelVerUsuarios.Name = "linkLabelVerUsuarios";
-            linkLabelVerUsuarios.Size = new Size(85, 15);
-            linkLabelVerUsuarios.TabIndex = 9;
-            linkLabelVerUsuarios.TabStop = true;
-            linkLabelVerUsuarios.Text = "VER USUARIOS";
-            linkLabelVerUsuarios.LinkClicked += linkLabelVerUsuarios_LinkClicked;
+            linkLabelHardcodeOp.AutoSize = true;
+            linkLabelHardcodeOp.BackColor = Color.Transparent;
+            linkLabelHardcodeOp.LinkColor = Color.Black;
+            linkLabelHardcodeOp.Location = new Point(12, 254);
+            linkLabelHardcodeOp.Name = "linkLabelHardcodeOp";
+            linkLabelHardcodeOp.Size = new Size(144, 15);
+            linkLabelHardcodeOp.TabIndex = 10;
+            linkLabelHardcodeOp.TabStop = true;
+            linkLabelHardcodeOp.Text = "HARDCODEAR OPERARIO";
+            linkLabelHardcodeOp.LinkClicked += linkLabelHardcodeOp_LinkClicked;
+            // 
+            // linkLabelHardcodeSup
+            // 
+            linkLabelHardcodeSup.AutoSize = true;
+            linkLabelHardcodeSup.BackColor = Color.Transparent;
+            linkLabelHardcodeSup.LinkColor = Color.Black;
+            linkLabelHardcodeSup.Location = new Point(12, 278);
+            linkLabelHardcodeSup.Name = "linkLabelHardcodeSup";
+            linkLabelHardcodeSup.Size = new Size(154, 15);
+            linkLabelHardcodeSup.TabIndex = 11;
+            linkLabelHardcodeSup.TabStop = true;
+            linkLabelHardcodeSup.Text = "HARDCODEAR SUPERVISOR";
+            linkLabelHardcodeSup.LinkClicked += linkLabelHardcodeSup_LinkClicked;
             // 
             // FrmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(275, 367);
-            Controls.Add(linkLabelVerUsuarios);
+            Controls.Add(linkLabelHardcodeSup);
+            Controls.Add(linkLabelHardcodeOp);
             Controls.Add(label1);
             Controls.Add(botonSalir);
             Controls.Add(registro);
@@ -152,12 +169,13 @@
         #endregion
 
         private Button login;
-        private TextBox tPass;
-        private TextBox tNombre;
-        private Label labelError;
+        internal TextBox tPass;
+        internal TextBox tNombre;
+        internal Label labelError;
         private LinkLabel registro;
         private Button botonSalir;
         private Label label1;
-        private LinkLabel linkLabelVerUsuarios;
+        private LinkLabel linkLabelHardcodeOp;
+        private LinkLabel linkLabelHardcodeSup;
     }
 }

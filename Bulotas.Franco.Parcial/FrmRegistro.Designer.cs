@@ -55,12 +55,13 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(143, 46);
+            label1.Size = new Size(171, 46);
             label1.TabIndex = 1;
-            label1.Text = "Registro";
+            label1.Text = "REGISTRO";
             // 
             // tbNombreUsuario
             // 
@@ -103,6 +104,7 @@
             // labelErrorRegistro
             // 
             labelErrorRegistro.AutoSize = true;
+            labelErrorRegistro.BackColor = Color.Transparent;
             labelErrorRegistro.ForeColor = Color.Red;
             labelErrorRegistro.Location = new Point(12, 226);
             labelErrorRegistro.Name = "labelErrorRegistro";
@@ -114,6 +116,7 @@
             // linkLabelVaciar
             // 
             linkLabelVaciar.AutoSize = true;
+            linkLabelVaciar.BackColor = Color.Transparent;
             linkLabelVaciar.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             linkLabelVaciar.LinkColor = Color.Black;
             linkLabelVaciar.Location = new Point(16, 327);
@@ -128,26 +131,29 @@
             // checkBoxOperario
             // 
             checkBoxOperario.AutoSize = true;
+            checkBoxOperario.BackColor = Color.Transparent;
             checkBoxOperario.Location = new Point(16, 204);
             checkBoxOperario.Name = "checkBoxOperario";
             checkBoxOperario.Size = new Size(72, 19);
             checkBoxOperario.TabIndex = 8;
             checkBoxOperario.Text = "Operario";
-            checkBoxOperario.UseVisualStyleBackColor = true;
+            checkBoxOperario.UseVisualStyleBackColor = false;
             // 
             // checkBoxSupervisor
             // 
             checkBoxSupervisor.AutoSize = true;
+            checkBoxSupervisor.BackColor = Color.Transparent;
             checkBoxSupervisor.Location = new Point(101, 204);
             checkBoxSupervisor.Name = "checkBoxSupervisor";
             checkBoxSupervisor.Size = new Size(81, 19);
             checkBoxSupervisor.TabIndex = 9;
             checkBoxSupervisor.Text = "Supervisor";
-            checkBoxSupervisor.UseVisualStyleBackColor = true;
+            checkBoxSupervisor.UseVisualStyleBackColor = false;
             // 
             // linkLabelRandom
             // 
             linkLabelRandom.AutoSize = true;
+            linkLabelRandom.BackColor = Color.Transparent;
             linkLabelRandom.LinkColor = Color.Black;
             linkLabelRandom.Location = new Point(16, 312);
             linkLabelRandom.Name = "linkLabelRandom";

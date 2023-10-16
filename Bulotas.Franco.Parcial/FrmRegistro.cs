@@ -17,9 +17,9 @@ namespace Frms
     {
         private List<Usuario> listaUsuarios;
         public FrmLogin login;
-        private RRHH RRHH;
+        private Administracion RRHH;
 
-        public FrmRegistro(List<Usuario> listaUsuarios, FrmLogin login, RRHH rrhh)
+        public FrmRegistro(List<Usuario> listaUsuarios, FrmLogin login, Administracion rrhh)
         {
             InitializeComponent();
 
@@ -27,6 +27,7 @@ namespace Frms
             this.listaUsuarios = listaUsuarios;
             this.login = login;
             login.Hide();
+            this.BackgroundImage = Image.FromFile("C:\\Users\\Franco\\Desktop\\UTN FRA\\Tecnicatura Superior en Programacion\\2do Cuatrimestre\\Laboratorio II\\PRIMER-PARCIAL\\posible-fondo-login3.jpg");
         }
 
         private void botonCancelar_Click(object sender, EventArgs e)
@@ -113,12 +114,12 @@ namespace Frms
 
         private void linkLabelRandom_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.tbNombreUsuario.Text = RRHH.ValorRandom(true, false);
-            string contra = RRHH.ValorRandom(false, false);
+            this.tbNombreUsuario.Text = Administracion.ValorRandomUsuario(true, false);
+            string contra = Administracion.ValorRandomUsuario(false, false);
             this.tbContraseña.Text = contra;
             this.tbRepContraseña.Text = contra;
 
-            if (RRHH.ValorRandom(false, true) == "0")
+            if (Administracion.ValorRandomUsuario(false, true) == "0")
             {
                 this.checkBoxOperario.Checked = true;
                 this.checkBoxSupervisor.Checked = false;

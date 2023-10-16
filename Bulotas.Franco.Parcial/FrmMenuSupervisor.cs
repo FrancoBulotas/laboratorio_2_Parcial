@@ -44,7 +44,7 @@ namespace Frms
             {
                 if (listaUsuarios != null)
                 {
-                    string[] usuario = { listaUsuarios[i].nombreUsuario, listaUsuarios[i].contrasenia, listaUsuarios[i].tipoUsuario };
+                    string[] usuario = { listaUsuarios[i].nombreUsuario, listaUsuarios[i].contrasenia, listaUsuarios[i].tipoUsuario, listaUsuarios[i].TrabajosRealizados.ToString() };
                     this.dataGridView1.Rows.Add(usuario);
                 }
             }
@@ -70,7 +70,7 @@ namespace Frms
 
         private void buttonComprar_Click(object sender, EventArgs e)
         {
-            Calculos.BotonComprarStock(this, stock);
+            Operacion.BotonComprarStock(this, stock);
             stock.CargarStock(login.menuOperario);
             stock.CargarStock(this);
         }

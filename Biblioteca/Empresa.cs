@@ -20,14 +20,17 @@ namespace Biblioteca
             List<Usuario>? lista = new();
             for(int i = 0; i <= 20; i++)
             {
-                string nombreUsuario = RRHH.ValorRandom(true, false);
-                string contrasenia = RRHH.ValorRandom(false, false);
-                string tipoUsuario = RRHH.ValorRandom(false, true);
+                string nombreUsuario = Administracion.ValorRandomUsuario(true, false);
+                string contrasenia = Administracion.ValorRandomUsuario(false, false);
+                string tipoUsuario = Administracion.ValorRandomUsuario(false, true);
                 Usuario usuario = new(nombreUsuario, contrasenia, tipoUsuario);
                 lista.Add(usuario);
             }
             return lista;
         }
+
+        //public abstract void ControlProduccion();
+
 
         public List<Usuario> ListaUsuarios { get { return listaUsuarios; } set {; } }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca
 {
-    public class RRHH : Empresa
+    public class Administracion : Empresa
     {
 
         public bool AgregarUsuario(List<Usuario> listaUsuariosExtra, Usuario usuario, string tipoUsuario)
@@ -30,7 +30,7 @@ namespace Biblioteca
             return true;
         }
 
-        public static string ValorRandom(bool nombreUsuario, bool tipoUsuario)
+        public static string ValorRandomUsuario(bool nombreUsuario, bool tipoUsuario)
         {
             List<string> listaNombres = new List<string>
             {
@@ -64,5 +64,10 @@ namespace Biblioteca
                 }
             }
         }
+
+        //public override void ControlProduccion()
+        //{
+            
+        //}
     }
 }

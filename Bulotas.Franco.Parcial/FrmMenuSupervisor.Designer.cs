@@ -30,9 +30,6 @@
         {
             botonSalir = new Button();
             dataGridView1 = new DataGridView();
-            USUARIO = new DataGridViewTextBoxColumn();
-            CONTRASEÑA = new DataGridViewTextBoxColumn();
-            TIPO = new DataGridViewTextBoxColumn();
             nombreLogueado = new Label();
             label15 = new Label();
             botonMenuOperarios = new Button();
@@ -61,13 +58,17 @@
             label13 = new Label();
             label14 = new Label();
             label16 = new Label();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            label17 = new Label();
+            label18 = new Label();
+            label19 = new Label();
+            label20 = new Label();
+            USUARIO = new DataGridViewTextBoxColumn();
+            CONTRASEÑA = new DataGridViewTextBoxColumn();
+            TIPO = new DataGridViewTextBoxColumn();
+            Trabajos = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // botonSalir
@@ -90,35 +91,16 @@
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { USUARIO, CONTRASEÑA, TIPO });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { USUARIO, CONTRASEÑA, TIPO, Trabajos });
             dataGridView1.GridColor = Color.Black;
-            dataGridView1.Location = new Point(12, 46);
+            dataGridView1.Location = new Point(7, 46);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(275, 359);
+            dataGridView1.Size = new Size(312, 359);
             dataGridView1.TabIndex = 9;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // USUARIO
-            // 
-            USUARIO.HeaderText = "USUARIO";
-            USUARIO.Name = "USUARIO";
-            USUARIO.ReadOnly = true;
-            USUARIO.SortMode = DataGridViewColumnSortMode.Programmatic;
-            // 
-            // CONTRASEÑA
-            // 
-            CONTRASEÑA.HeaderText = "CONTRASEÑA";
-            CONTRASEÑA.Name = "CONTRASEÑA";
-            CONTRASEÑA.ReadOnly = true;
-            // 
-            // TIPO
-            // 
-            TIPO.HeaderText = "TIPO";
-            TIPO.Name = "TIPO";
-            TIPO.ReadOnly = true;
             // 
             // nombreLogueado
             // 
@@ -157,7 +139,7 @@
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
-            label8.Location = new Point(669, 260);
+            label8.Location = new Point(658, 119);
             label8.Name = "label8";
             label8.Size = new Size(13, 15);
             label8.TabIndex = 32;
@@ -167,7 +149,7 @@
             // 
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
-            label9.Location = new Point(508, 259);
+            label9.Location = new Point(497, 118);
             label9.Name = "label9";
             label9.Size = new Size(165, 15);
             label9.TabIndex = 31;
@@ -177,7 +159,7 @@
             // 
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
-            label6.Location = new Point(560, 227);
+            label6.Location = new Point(549, 86);
             label6.Name = "label6";
             label6.Size = new Size(13, 15);
             label6.TabIndex = 30;
@@ -187,7 +169,7 @@
             // 
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
-            label7.Location = new Point(508, 227);
+            label7.Location = new Point(497, 86);
             label7.Name = "label7";
             label7.Size = new Size(46, 15);
             label7.TabIndex = 29;
@@ -197,7 +179,7 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Location = new Point(550, 194);
+            label4.Location = new Point(411, 126);
             label4.Name = "label4";
             label4.Size = new Size(13, 15);
             label4.TabIndex = 28;
@@ -207,17 +189,17 @@
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
-            label5.Location = new Point(508, 194);
+            label5.Location = new Point(366, 126);
             label5.Name = "label5";
-            label5.Size = new Size(38, 15);
+            label5.Size = new Size(33, 15);
             label5.TabIndex = 27;
-            label5.Text = "Tintas";
+            label5.Text = "Tinta";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
-            label3.Location = new Point(550, 163);
+            label3.Location = new Point(408, 86);
             label3.Name = "label3";
             label3.Size = new Size(13, 15);
             label3.TabIndex = 26;
@@ -227,7 +209,7 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Location = new Point(508, 163);
+            label2.Location = new Point(366, 86);
             label2.Name = "label2";
             label2.Size = new Size(36, 15);
             label2.TabIndex = 25;
@@ -238,7 +220,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(550, 46);
+            label1.Location = new Point(359, 29);
             label1.Name = "label1";
             label1.Size = new Size(104, 37);
             label1.TabIndex = 33;
@@ -248,7 +230,7 @@
             // 
             buttonComprar.BackColor = SystemColors.Control;
             buttonComprar.ForeColor = SystemColors.ControlText;
-            buttonComprar.Location = new Point(350, 293);
+            buttonComprar.Location = new Point(359, 370);
             buttonComprar.Name = "buttonComprar";
             buttonComprar.Size = new Size(71, 32);
             buttonComprar.TabIndex = 34;
@@ -260,7 +242,7 @@
             // 
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
-            label10.Location = new Point(310, 99);
+            label10.Location = new Point(549, 196);
             label10.Name = "label10";
             label10.Size = new Size(82, 15);
             label10.TabIndex = 35;
@@ -270,7 +252,7 @@
             // 
             labelPresupuesto.AutoSize = true;
             labelPresupuesto.BackColor = Color.Transparent;
-            labelPresupuesto.Location = new Point(408, 99);
+            labelPresupuesto.Location = new Point(647, 196);
             labelPresupuesto.Name = "labelPresupuesto";
             labelPresupuesto.Size = new Size(0, 15);
             labelPresupuesto.TabIndex = 36;
@@ -278,7 +260,7 @@
             // textBoxPapel
             // 
             textBoxPapel.BorderStyle = BorderStyle.None;
-            textBoxPapel.Location = new Point(411, 161);
+            textBoxPapel.Location = new Point(544, 239);
             textBoxPapel.Name = "textBoxPapel";
             textBoxPapel.PlaceholderText = "Cantidad";
             textBoxPapel.Size = new Size(43, 16);
@@ -288,7 +270,7 @@
             // textBoxTinta
             // 
             textBoxTinta.BorderStyle = BorderStyle.None;
-            textBoxTinta.Location = new Point(411, 194);
+            textBoxTinta.Location = new Point(544, 272);
             textBoxTinta.Name = "textBoxTinta";
             textBoxTinta.PlaceholderText = "Cantidad";
             textBoxTinta.Size = new Size(43, 16);
@@ -298,7 +280,7 @@
             // textBoxTroquel
             // 
             textBoxTroquel.BorderStyle = BorderStyle.None;
-            textBoxTroquel.Location = new Point(411, 227);
+            textBoxTroquel.Location = new Point(544, 305);
             textBoxTroquel.Name = "textBoxTroquel";
             textBoxTroquel.PlaceholderText = "Cantidad";
             textBoxTroquel.Size = new Size(43, 16);
@@ -308,7 +290,7 @@
             // textBoxEncuadernacion
             // 
             textBoxEncuadernacion.BorderStyle = BorderStyle.None;
-            textBoxEncuadernacion.Location = new Point(411, 259);
+            textBoxEncuadernacion.Location = new Point(544, 337);
             textBoxEncuadernacion.Name = "textBoxEncuadernacion";
             textBoxEncuadernacion.PlaceholderText = "Cantidad";
             textBoxEncuadernacion.Size = new Size(43, 16);
@@ -319,7 +301,7 @@
             // 
             labelPrecioPapel.AutoSize = true;
             labelPrecioPapel.BackColor = Color.Transparent;
-            labelPrecioPapel.Location = new Point(332, 161);
+            labelPrecioPapel.Location = new Point(465, 239);
             labelPrecioPapel.Name = "labelPrecioPapel";
             labelPrecioPapel.Size = new Size(0, 15);
             labelPrecioPapel.TabIndex = 43;
@@ -328,7 +310,7 @@
             // 
             labelPrecioTinta.AutoSize = true;
             labelPrecioTinta.BackColor = Color.Transparent;
-            labelPrecioTinta.Location = new Point(332, 195);
+            labelPrecioTinta.Location = new Point(465, 273);
             labelPrecioTinta.Name = "labelPrecioTinta";
             labelPrecioTinta.Size = new Size(0, 15);
             labelPrecioTinta.TabIndex = 44;
@@ -338,7 +320,7 @@
             // 
             labelPrecioTroquel.AutoSize = true;
             labelPrecioTroquel.BackColor = Color.Transparent;
-            labelPrecioTroquel.Location = new Point(332, 228);
+            labelPrecioTroquel.Location = new Point(465, 306);
             labelPrecioTroquel.Name = "labelPrecioTroquel";
             labelPrecioTroquel.Size = new Size(0, 15);
             labelPrecioTroquel.TabIndex = 45;
@@ -347,7 +329,7 @@
             // 
             labelPrecioEncuadernacion.AutoSize = true;
             labelPrecioEncuadernacion.BackColor = Color.Transparent;
-            labelPrecioEncuadernacion.Location = new Point(332, 259);
+            labelPrecioEncuadernacion.Location = new Point(465, 337);
             labelPrecioEncuadernacion.Name = "labelPrecioEncuadernacion";
             labelPrecioEncuadernacion.Size = new Size(0, 15);
             labelPrecioEncuadernacion.TabIndex = 46;
@@ -357,7 +339,7 @@
             label11.AutoSize = true;
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            label11.Location = new Point(310, 46);
+            label11.Location = new Point(359, 178);
             label11.Name = "label11";
             label11.Size = new Size(144, 37);
             label11.TabIndex = 48;
@@ -367,7 +349,7 @@
             // 
             label12.AutoSize = true;
             label12.BackColor = Color.Transparent;
-            label12.Location = new Point(377, 161);
+            label12.Location = new Point(510, 239);
             label12.Name = "label12";
             label12.Size = new Size(36, 15);
             label12.TabIndex = 49;
@@ -377,7 +359,7 @@
             // 
             label13.AutoSize = true;
             label13.BackColor = Color.Transparent;
-            label13.Location = new Point(377, 260);
+            label13.Location = new Point(510, 338);
             label13.Name = "label13";
             label13.Size = new Size(36, 15);
             label13.TabIndex = 50;
@@ -387,7 +369,7 @@
             // 
             label14.AutoSize = true;
             label14.BackColor = Color.Transparent;
-            label14.Location = new Point(377, 228);
+            label14.Location = new Point(510, 306);
             label14.Name = "label14";
             label14.Size = new Size(36, 15);
             label14.TabIndex = 51;
@@ -397,47 +379,109 @@
             // 
             label16.AutoSize = true;
             label16.BackColor = Color.Transparent;
-            label16.Location = new Point(377, 195);
+            label16.Location = new Point(510, 273);
             label16.Name = "label16";
             label16.Size = new Size(24, 15);
             label16.TabIndex = 52;
             label16.Text = "/ L.";
             // 
-            // pictureBox1
+            // panel1
             // 
-            pictureBox1.BackColor = SystemColors.ControlText;
-            pictureBox1.Location = new Point(475, 33);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(12, 318);
-            pictureBox1.TabIndex = 53;
-            pictureBox1.TabStop = false;
+            panel1.BackColor = SystemColors.InfoText;
+            panel1.Location = new Point(1, 24);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(750, 2);
+            panel1.TabIndex = 56;
             // 
-            // pictureBox2
+            // panel2
             // 
-            pictureBox2.BackColor = SystemColors.ControlText;
-            pictureBox2.Location = new Point(286, 341);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(434, 10);
-            pictureBox2.TabIndex = 54;
-            pictureBox2.TabStop = false;
+            panel2.BackColor = SystemColors.InfoText;
+            panel2.Location = new Point(325, 178);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(420, 2);
+            panel2.TabIndex = 57;
             // 
-            // pictureBox3
+            // label17
             // 
-            pictureBox3.BackColor = SystemColors.ControlText;
-            pictureBox3.Location = new Point(-11, 33);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(739, 10);
-            pictureBox3.TabIndex = 55;
-            pictureBox3.TabStop = false;
+            label17.AutoSize = true;
+            label17.BackColor = Color.Transparent;
+            label17.Location = new Point(359, 240);
+            label17.Name = "label17";
+            label17.Size = new Size(36, 15);
+            label17.TabIndex = 58;
+            label17.Text = "Papel";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.BackColor = Color.Transparent;
+            label18.Location = new Point(359, 273);
+            label18.Name = "label18";
+            label18.Size = new Size(33, 15);
+            label18.TabIndex = 59;
+            label18.Text = "Tinta";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.BackColor = Color.Transparent;
+            label19.Location = new Point(359, 305);
+            label19.Name = "label19";
+            label19.Size = new Size(46, 15);
+            label19.TabIndex = 60;
+            label19.Text = "Troquel";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.BackColor = Color.Transparent;
+            label20.Location = new Point(359, 339);
+            label20.Name = "label20";
+            label20.Size = new Size(92, 15);
+            label20.TabIndex = 61;
+            label20.Text = "Encuadernacion";
+            // 
+            // USUARIO
+            // 
+            USUARIO.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            USUARIO.FillWeight = 92.724205F;
+            USUARIO.HeaderText = "USUARIO";
+            USUARIO.Name = "USUARIO";
+            USUARIO.ReadOnly = true;
+            USUARIO.SortMode = DataGridViewColumnSortMode.Programmatic;
+            USUARIO.Width = 81;
+            // 
+            // CONTRASEÑA
+            // 
+            CONTRASEÑA.FillWeight = 121.827423F;
+            CONTRASEÑA.HeaderText = "CONTRASEÑA";
+            CONTRASEÑA.Name = "CONTRASEÑA";
+            CONTRASEÑA.ReadOnly = true;
+            // 
+            // TIPO
+            // 
+            TIPO.FillWeight = 92.724205F;
+            TIPO.HeaderText = "TIPO";
+            TIPO.Name = "TIPO";
+            TIPO.ReadOnly = true;
+            // 
+            // Trabajos
+            // 
+            Trabajos.FillWeight = 92.724205F;
+            Trabajos.HeaderText = "TRABAJOS HECHOS";
+            Trabajos.Name = "Trabajos";
             // 
             // FrmMenuSupervisor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(712, 414);
-            Controls.Add(pictureBox3);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            Controls.Add(label20);
+            Controls.Add(label19);
+            Controls.Add(label18);
+            Controls.Add(label17);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Controls.Add(label16);
             Controls.Add(label14);
             Controls.Add(label13);
@@ -473,19 +517,13 @@
             Text = "FrmMenu";
             Load += FrmMenu_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Button botonSalir;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn USUARIO;
-        private DataGridViewTextBoxColumn CONTRASEÑA;
-        private DataGridViewTextBoxColumn TIPO;
+        internal DataGridView dataGridView1;
         internal Label nombreLogueado;
         private Label label15;
         private Button botonMenuOperarios;
@@ -514,8 +552,15 @@
         private Label label13;
         private Label label14;
         private Label label16;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
+        private Panel panel1;
+        private Panel panel2;
+        private Label label17;
+        private Label label18;
+        private Label label19;
+        private Label label20;
+        private DataGridViewTextBoxColumn USUARIO;
+        private DataGridViewTextBoxColumn CONTRASEÑA;
+        private DataGridViewTextBoxColumn TIPO;
+        private DataGridViewTextBoxColumn Trabajos;
     }
 }

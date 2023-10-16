@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -64,11 +64,16 @@
             progressBarImpresora = new ProgressBar();
             progressBarTroqueladora = new ProgressBar();
             progressBarEncuadernadora = new ProgressBar();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
+            label11 = new Label();
+            label12 = new Label();
+            label13 = new Label();
+            labelCantImp = new Label();
+            labelCantTroq = new Label();
+            labelCantEncu = new Label();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel3 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -119,9 +124,9 @@
             label5.BackColor = Color.Transparent;
             label5.Location = new Point(12, 99);
             label5.Name = "label5";
-            label5.Size = new Size(38, 15);
+            label5.Size = new Size(33, 15);
             label5.TabIndex = 3;
-            label5.Text = "Tintas";
+            label5.Text = "Tinta";
             // 
             // label6
             // 
@@ -180,18 +185,18 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.Location = new Point(287, 9);
+            label10.Location = new Point(285, 9);
             label10.Name = "label10";
-            label10.Size = new Size(252, 37);
+            label10.Size = new Size(299, 37);
             label10.TabIndex = 10;
-            label10.Text = "Trabajos Pendientes";
+            label10.Text = "TRABAJOS PENDIENTES";
             // 
             // radioButtonImpresora
             // 
             radioButtonImpresora.AutoSize = true;
             radioButtonImpresora.BackColor = Color.Transparent;
             radioButtonImpresora.Enabled = false;
-            radioButtonImpresora.Location = new Point(217, 304);
+            radioButtonImpresora.Location = new Point(215, 333);
             radioButtonImpresora.Name = "radioButtonImpresora";
             radioButtonImpresora.Size = new Size(81, 19);
             radioButtonImpresora.TabIndex = 15;
@@ -205,7 +210,7 @@
             radioButtonTroqueladora.AutoSize = true;
             radioButtonTroqueladora.BackColor = Color.Transparent;
             radioButtonTroqueladora.Enabled = false;
-            radioButtonTroqueladora.Location = new Point(458, 304);
+            radioButtonTroqueladora.Location = new Point(445, 333);
             radioButtonTroqueladora.Name = "radioButtonTroqueladora";
             radioButtonTroqueladora.Size = new Size(94, 19);
             radioButtonTroqueladora.TabIndex = 16;
@@ -219,11 +224,11 @@
             label14.AutoSize = true;
             label14.BackColor = Color.Transparent;
             label14.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label14.Location = new Point(401, 242);
+            label14.Location = new Point(375, 268);
             label14.Name = "label14";
-            label14.Size = new Size(203, 30);
+            label14.Size = new Size(246, 30);
             label14.TabIndex = 19;
-            label14.Text = "Linea de Produccón";
+            label14.Text = "LINEA DE PRODUCCIÓN";
             // 
             // label15
             // 
@@ -254,17 +259,17 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dataGridView1.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle6.BackColor = SystemColors.Control;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Pedido, Cantidad, Papel, Tinta, Troquel, Encuadernacion, Ganancia, Seleccion });
             dataGridView1.Location = new Point(287, 49);
@@ -355,7 +360,7 @@
             radioButtonEncuadernadora.AutoSize = true;
             radioButtonEncuadernadora.BackColor = Color.Transparent;
             radioButtonEncuadernadora.Enabled = false;
-            radioButtonEncuadernadora.Location = new Point(681, 304);
+            radioButtonEncuadernadora.Location = new Point(679, 333);
             radioButtonEncuadernadora.Name = "radioButtonEncuadernadora";
             radioButtonEncuadernadora.Size = new Size(111, 19);
             radioButtonEncuadernadora.TabIndex = 24;
@@ -368,80 +373,156 @@
             // 
             labelPedido.AutoSize = true;
             labelPedido.BackColor = Color.Transparent;
-            labelPedido.Location = new Point(12, 210);
+            labelPedido.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelPedido.Location = new Point(12, 206);
             labelPedido.Name = "labelPedido";
-            labelPedido.Size = new Size(120, 15);
+            labelPedido.Size = new Size(176, 20);
             labelPedido.TabIndex = 25;
-            labelPedido.Text = "Pedido Seleccionado:";
+            labelPedido.Text = "PEDIDO SELECCIONADO:";
             labelPedido.Visible = false;
             // 
             // labelPedidoSeleccionado
             // 
             labelPedidoSeleccionado.AutoSize = true;
-            labelPedidoSeleccionado.Location = new Point(142, 210);
+            labelPedidoSeleccionado.BackColor = Color.Transparent;
+            labelPedidoSeleccionado.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelPedidoSeleccionado.Location = new Point(197, 206);
             labelPedidoSeleccionado.Name = "labelPedidoSeleccionado";
-            labelPedidoSeleccionado.Size = new Size(0, 15);
+            labelPedidoSeleccionado.Size = new Size(0, 20);
             labelPedidoSeleccionado.TabIndex = 26;
             labelPedidoSeleccionado.Visible = false;
             // 
             // labelMaquinaria
             // 
             labelMaquinaria.AutoSize = true;
-            labelMaquinaria.Location = new Point(12, 230);
+            labelMaquinaria.BackColor = Color.Transparent;
+            labelMaquinaria.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelMaquinaria.Location = new Point(12, 226);
             labelMaquinaria.Name = "labelMaquinaria";
-            labelMaquinaria.Size = new Size(56, 15);
+            labelMaquinaria.Size = new Size(79, 20);
             labelMaquinaria.TabIndex = 27;
-            labelMaquinaria.Text = "Requiere:";
+            labelMaquinaria.Text = "REQUIERE:";
             labelMaquinaria.Visible = false;
             // 
             // labelMaquinariaNecesaria
             // 
             labelMaquinariaNecesaria.AutoSize = true;
-            labelMaquinariaNecesaria.Location = new Point(130, 230);
+            labelMaquinariaNecesaria.BackColor = Color.Transparent;
+            labelMaquinariaNecesaria.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelMaquinariaNecesaria.Location = new Point(117, 226);
             labelMaquinariaNecesaria.Name = "labelMaquinariaNecesaria";
-            labelMaquinariaNecesaria.Size = new Size(0, 15);
+            labelMaquinariaNecesaria.Size = new Size(0, 20);
             labelMaquinariaNecesaria.TabIndex = 28;
             labelMaquinariaNecesaria.Visible = false;
             // 
             // progressBarImpresora
             // 
-            progressBarImpresora.Location = new Point(164, 367);
+            progressBarImpresora.Location = new Point(162, 396);
             progressBarImpresora.Name = "progressBarImpresora";
             progressBarImpresora.Size = new Size(203, 23);
             progressBarImpresora.TabIndex = 29;
             // 
             // progressBarTroqueladora
             // 
-            progressBarTroqueladora.Location = new Point(401, 367);
+            progressBarTroqueladora.Location = new Point(385, 396);
             progressBarTroqueladora.Name = "progressBarTroqueladora";
-            progressBarTroqueladora.Size = new Size(213, 23);
+            progressBarTroqueladora.Size = new Size(227, 23);
             progressBarTroqueladora.TabIndex = 30;
             progressBarTroqueladora.Click += progressBarTroqueladora_Click;
             // 
             // progressBarEncuadernadora
             // 
-            progressBarEncuadernadora.Location = new Point(631, 367);
+            progressBarEncuadernadora.Location = new Point(629, 396);
             progressBarEncuadernadora.Name = "progressBarEncuadernadora";
             progressBarEncuadernadora.Size = new Size(213, 23);
             progressBarEncuadernadora.TabIndex = 31;
             // 
-            // pictureBox1
+            // label11
             // 
-            pictureBox1.BackColor = SystemColors.ControlText;
-            pictureBox1.Location = new Point(-21, 193);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1049, 10);
-            pictureBox1.TabIndex = 32;
-            pictureBox1.TabStop = false;
+            label11.AutoSize = true;
+            label11.BackColor = Color.Transparent;
+            label11.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Location = new Point(162, 380);
+            label11.Name = "label11";
+            label11.Size = new Size(60, 13);
+            label11.TabIndex = 35;
+            label11.Text = "Cantidad: ";
             // 
-            // pictureBox2
+            // label12
             // 
-            pictureBox2.BackColor = SystemColors.ControlText;
-            pictureBox2.Location = new Point(271, -8);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(10, 211);
-            pictureBox2.TabIndex = 33;
-            pictureBox2.TabStop = false;
+            label12.AutoSize = true;
+            label12.BackColor = Color.Transparent;
+            label12.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Location = new Point(385, 380);
+            label12.Name = "label12";
+            label12.Size = new Size(60, 13);
+            label12.TabIndex = 36;
+            label12.Text = "Cantidad: ";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.BackColor = Color.Transparent;
+            label13.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.Location = new Point(629, 380);
+            label13.Name = "label13";
+            label13.Size = new Size(60, 13);
+            label13.TabIndex = 37;
+            label13.Text = "Cantidad: ";
+            // 
+            // labelCantImp
+            // 
+            labelCantImp.AutoSize = true;
+            labelCantImp.BackColor = Color.Transparent;
+            labelCantImp.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCantImp.Location = new Point(228, 380);
+            labelCantImp.Name = "labelCantImp";
+            labelCantImp.Size = new Size(0, 13);
+            labelCantImp.TabIndex = 38;
+            // 
+            // labelCantTroq
+            // 
+            labelCantTroq.AutoSize = true;
+            labelCantTroq.BackColor = Color.Transparent;
+            labelCantTroq.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCantTroq.Location = new Point(451, 380);
+            labelCantTroq.Name = "labelCantTroq";
+            labelCantTroq.Size = new Size(0, 13);
+            labelCantTroq.TabIndex = 39;
+            // 
+            // labelCantEncu
+            // 
+            labelCantEncu.AutoSize = true;
+            labelCantEncu.BackColor = Color.Transparent;
+            labelCantEncu.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCantEncu.Location = new Point(695, 380);
+            labelCantEncu.Name = "labelCantEncu";
+            labelCantEncu.Size = new Size(0, 13);
+            labelCantEncu.TabIndex = 40;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.InfoText;
+            panel1.Location = new Point(0, 201);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1050, 2);
+            panel1.TabIndex = 57;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = SystemColors.InfoText;
+            panel2.Location = new Point(263, -7);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(2, 210);
+            panel2.TabIndex = 58;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = SystemColors.InfoText;
+            panel3.Location = new Point(0, 249);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1050, 2);
+            panel3.TabIndex = 59;
             // 
             // FrmMenuOperario
             // 
@@ -449,8 +530,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.HighlightText;
             ClientSize = new Size(1012, 461);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Controls.Add(labelCantEncu);
+            Controls.Add(labelCantTroq);
+            Controls.Add(labelCantImp);
+            Controls.Add(label13);
+            Controls.Add(label12);
+            Controls.Add(label11);
             Controls.Add(progressBarEncuadernadora);
             Controls.Add(progressBarTroqueladora);
             Controls.Add(progressBarImpresora);
@@ -486,8 +574,6 @@
             Text = "Sispro";
             Load += FrmPruebaMenu_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -525,10 +611,17 @@
         private DataGridViewTextBoxColumn Encuadernacion;
         private DataGridViewTextBoxColumn Ganancia;
         private DataGridViewCheckBoxColumn Seleccion;
-        private ProgressBar progressBarImpresora;
-        private ProgressBar progressBarTroqueladora;
-        private ProgressBar progressBarEncuadernadora;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
+        internal ProgressBar progressBarImpresora;
+        internal ProgressBar progressBarTroqueladora;
+        internal ProgressBar progressBarEncuadernadora;
+        private Label label11;
+        private Label label12;
+        private Label label13;
+        internal Label labelCantImp;
+        internal Label labelCantTroq;
+        internal Label labelCantEncu;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel3;
     }
 }

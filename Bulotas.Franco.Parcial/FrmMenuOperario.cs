@@ -16,8 +16,10 @@ namespace Frms
     {
         private List<Usuario> listaUsuarios;
         private int indexUsuarioLogueado;
-        public FrmLogin login;
-        private Stock stock;
+        internal FrmLogin login;
+        internal Stock stock;
+        internal DataGridViewRow filaPedidoEnProceso;
+        internal int contProcesos = 0;
 
         public FrmMenuOperario(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login, Stock stock)
         {
@@ -26,43 +28,36 @@ namespace Frms
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
             this.stock = stock;
-            this.BackgroundImage = Image.FromFile("C:\\Users\\Franco\\Desktop\\UTN FRA\\Tecnicatura Superior en Programacion\\2do Cuatrimestre\\Laboratorio II\\PRIMER-PARCIAL\\posible-fondo-app-2.jpg");
+
         }
 
         private void FrmPruebaMenu_Load(object sender, EventArgs e)
         {
+            this.BackgroundImage = Image.FromFile("C:\\Users\\Franco\\Desktop\\UTN FRA\\Tecnicatura Superior en Programacion\\2do Cuatrimestre\\Laboratorio II\\PRIMER-PARCIAL\\posible-fondo-app-2.jpg");
             this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].nombreUsuario;
             stock.CargarStock(this);
-            CargarDataGridView();
-        }
-
-        private void CargarDataGridView()
-        {
-            string[] pedido1 = { "Libros de matematica", "10000", "5000", "1500", "1250", "0", "$100000" };
-            string[] pedido2 = { "Boletas", "50000", "7500", "1200", "0", "0", "$170000" };
-            string[] pedido3 = { "Cuadernillos", "6000", "5000 ", "1500", "800", "2000", "$130000" };
-            string[] pedido4 = { "LIbros de literatura", "3000", "2200", "700", "0", "280", "$60000" };
-
-            dataGridView1.Rows.Add(pedido1);
-            dataGridView1.Rows.Add(pedido2);
-            dataGridView1.Rows.Add(pedido3);
-            dataGridView1.Rows.Add(pedido4);
+            Operacion.CargarPedidosDataGridView(this);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Calculos.ManejoDataGrid(this, stock, e);
+            Operacion.ManejoDataGrid(this, e);
         }
 
         private void botonVolverSup_Click(object sender, EventArgs e)
         {
+            stock.CargarStock(login.menuSupervisor);
+            stock.ControlStock(this, filaPedidoEnProceso);
+
             this.Hide();
             login.menuSupervisor.Show();
-            stock.CargarStock(login.menuSupervisor);
+
         }
 
         private void botonSalir_Click(object sender, EventArgs e)
         {
+            stock.ControlStock(this, filaPedidoEnProceso);
+
             this.Hide();
             login.Show();
         }
@@ -73,7 +68,13 @@ namespace Frms
             if (radioButtonImpresora.Checked)
             {
                 radioButtonImpresora.Enabled = false;
-                RealizarTarea(true, false, false);
+                Operacion.RealizarTarea(true, false, false, this);
+
+                Operacion.ControlProduccion(this, true, false);
+                Operacion.ControlProduccion(this, true, false, false, listaUsuarios[indexUsuarioLogueado]);
+
+                login.menuSupervisor.dataGridView1.Refresh();
+                login.menuSupervisor.dataGridView1.Update();
             }
         }
         private void radioButtonTroqueladora_CheckedChanged(object sender, EventArgs e)
@@ -81,7 +82,13 @@ namespace Frms
             if (radioButtonTroqueladora.Checked)
             {
                 radioButtonTroqueladora.Enabled = false;
-                RealizarTarea(false, true, false);
+                Operacion.RealizarTarea(false, true, false, this);
+
+                Operacion.ControlProduccion(this, false, true);
+                Operacion.ControlProduccion(this, true, true, false, listaUsuarios[indexUsuarioLogueado]);
+
+                login.menuSupervisor.dataGridView1.Refresh();
+                login.menuSupervisor.dataGridView1.Update();
             }
         }
         private void radioButtonEncuadernadora_CheckedChanged(object sender, EventArgs e)
@@ -89,42 +96,12 @@ namespace Frms
             if (radioButtonEncuadernadora.Checked)
             {
                 radioButtonEncuadernadora.Enabled = false;
-                RealizarTarea(false, false, true);
-            }
-        }
+                Operacion.RealizarTarea(false, false, true, this);
 
+                Operacion.ControlProduccion(this, true, true, true, listaUsuarios[indexUsuarioLogueado]);
 
-        private void RealizarTarea(bool impresora, bool troqueladora, bool encuadernadora) // REPLICAR CON LOS DEMAS
-        {
-            if (impresora)
-            {
-                for (int i = 0; i <= 100; i++)
-                {
-                    progressBarImpresora.Value = i;
-                    progressBarImpresora.Refresh();
-                    Thread.Sleep(30);
-                }
-                progressBarImpresora.Value = progressBarImpresora.Maximum;
-            }
-            else if (troqueladora)
-            {
-                for (int i = 0; i <= 100; i++)
-                {
-                    progressBarTroqueladora.Value = i;
-                    progressBarTroqueladora.Refresh();
-                    Thread.Sleep(30);
-                }
-                progressBarTroqueladora.Value = progressBarTroqueladora.Maximum;
-            }
-            else if (encuadernadora)
-            {
-                for (int i = 0; i <= 100; i++)
-                {
-                    progressBarEncuadernadora.Value = i;
-                    progressBarEncuadernadora.Refresh();
-                    Thread.Sleep(30);
-                }
-                progressBarEncuadernadora.Value = progressBarEncuadernadora.Maximum;
+                login.menuSupervisor.dataGridView1.Refresh();
+                login.menuSupervisor.dataGridView1.Update();
             }
         }
 

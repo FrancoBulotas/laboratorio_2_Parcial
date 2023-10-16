@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Frms
 {
-    public class Stock : Empresa
+    public class Stock : Administracion
     {
         // son static para que en caso de que se inicialice otro Stock,
         // estos atributos se mantengan iguales (van por clase no por instancia), y evitar que se pisen
@@ -22,18 +22,22 @@ namespace Frms
         private static int valorTinta;
         private static int valorTroquel;
         private static int valorEncuadernacion;
+        private const int CantPapel = 7000;
+        private const int CantTinta = 3000;
+        private const int CantTroquel = 2000;
+        private const int CantEncuadernacion = 6000;
 
         public Stock()
         {
-            cantPapel = 7000;
-            cantTinta = 3000;
-            cantTroquel = 2000;
-            cantEncuadernacion = 6000;
+            cantPapel = CantPapel;
+            cantTinta = CantTinta;
+            cantTroquel = CantTroquel;
+            cantEncuadernacion = CantEncuadernacion;
             presupuesto = 500000;
-            valorPapelUni = 600;
-            valorTinta = 800;
-            valorTroquel = 1500;
-            valorEncuadernacion = 650;
+            valorPapelUni = 60;
+            valorTinta = 80;
+            valorTroquel = 150;
+            valorEncuadernacion = 65;
         }
 
         internal void CargarStock(FrmMenuSupervisor form)
@@ -52,6 +56,35 @@ namespace Frms
             form.label4.Text = Tinta.ToString() + " L.";
             form.label6.Text = Troquel.ToString() + " Uni.";
             form.label8.Text = Encuadernacion.ToString() + " Uni.";
+        }
+
+        internal void ControlStock(FrmMenuOperario form)
+        {
+            if (Papel < CantPapel*0.2)
+            {
+                form.label3.BackColor = Color.Red;
+            }
+            if (Tinta < CantTinta*0.2)
+            {
+                form.label4.BackColor = Color.Red;
+            }
+            if (Troquel < CantTroquel* 0.2)
+            {
+                form.label6.BackColor = Color.Red;
+            }
+            if (Encuadernacion < CantEncuadernacion * 0.1)
+            {
+                form.label8.BackColor = Color.Red;
+            }
+        }
+        
+        internal void ControlStock(FrmMenuOperario form, DataGridViewRow filasPedidos)
+        {
+            form.stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
+            form.stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
+            form.stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
+            form.stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
+            CargarStock(form);
         }
 
         public int Papel { get { return cantPapel; } set { cantPapel += value; } }
