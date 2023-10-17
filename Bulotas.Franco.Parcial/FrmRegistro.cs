@@ -27,7 +27,12 @@ namespace Frms
             this.listaUsuarios = listaUsuarios;
             this.login = login;
             login.Hide();
-            this.BackgroundImage = Image.FromFile("C:\\Users\\Franco\\Desktop\\UTN FRA\\Tecnicatura Superior en Programacion\\2do Cuatrimestre\\Laboratorio II\\PRIMER-PARCIAL\\posible-fondo-login3.jpg");
+
+            string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
+            string rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-login.jpg");
+            string rutaIcono = Path.Combine(directorioEjecutable, "icono-sistema.ico");
+            this.BackgroundImage = Image.FromFile(rutaImagenFondo);
+            this.Icon = new Icon(rutaIcono);
         }
 
         private void botonCancelar_Click(object sender, EventArgs e)
@@ -130,43 +135,5 @@ namespace Frms
                 this.checkBoxSupervisor.Checked = true;
             }
         }
-
-        //public static string ValorRandom(bool nombreUsuario, bool tipoUsuario)
-        //{
-        //    List<string> listaNombres = new List<string>
-        //    {
-        //        "Franco","Pedro","Juan","Fausto","Adriana","Agustina","Joaquin","Malena"
-        //    };
-
-        //    string caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        //    char[] arrayChar = new char[4];
-        //    string tipo = "01";
-        //    char[] arrayTipo = new char[1];
-        //    Random random = new Random();
-
-        //    if (tipoUsuario)
-        //    {
-        //        for (int i = 0; i < arrayTipo.Length; i++)
-        //        {
-        //            arrayTipo[i] = tipo[random.Next(tipo.Length)];
-        //        }
-        //        return new String(arrayTipo);
-        //    }
-        //    else
-        //    {
-        //        if (!nombreUsuario)
-        //        {
-        //            for (int i = 0; i < arrayChar.Length; i++)
-        //            {
-        //                arrayChar[i] = caracteres[random.Next(caracteres.Length)];
-        //            }
-        //            return new String(arrayChar);
-        //        }
-        //        else
-        //        {
-        //            return listaNombres[random.Next(listaNombres.Count)];
-        //        }
-        //    }
-        //}
     }
 }

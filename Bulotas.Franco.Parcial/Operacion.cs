@@ -18,14 +18,20 @@ namespace Frms
         private static bool encuadernacionRequerida = false;
         private static DataGridViewRow filaPedidoElegido;
 
+        /// <summary>
+        /// Carga los pedidos pendientes al DataGridView del Frm del operario.
+        /// </summary>
+        /// <param name="form"></param>
         public static void CargarPedidosDataGridView(FrmMenuOperario form)
         {
-            string[] pedido1 = { "Libros de matematica", "10000", "5000", "1500", "1250", "0", "$100000" };
-            string[] pedido2 = { "Boletas", "50000", "7500", "1200", "0", "0", "$170000" };
-            string[] pedido3 = { "Cuadernillos", "6000", "5000 ", "1500", "800", "2000", "$130000" };
-            string[] pedido4 = { "Libros de literatura", "3000", "2200", "700", "0", "280", "$60000" };
-            string[] pedido5 = { "Libros de historia", "3400", "2600", "750", "0", "300", "$70000" };
-            string[] pedido6 = { "Envases botellas", "11000", "6200", "3000", "0", "0", "$140000" };
+            //List<string[]> pedidos = new List<string[]>();
+
+            string[] pedido1 = { "Libros de matematica", "10000", "5000", "1500", "1250", "0", "$500000" };
+            string[] pedido2 = { "Boletas", "50000", "7500", "1200", "0", "0", "$600000" };
+            string[] pedido3 = { "Cuadernillos", "6000", "5000 ", "1500", "800", "2000", "$450000" };
+            string[] pedido4 = { "Libros de literatura", "3000", "2200", "700", "200", "280", "$260000" };
+            string[] pedido5 = { "Libros de historia", "3400", "2600", "750", "250", "300", "$280000" };
+            string[] pedido6 = { "Envoltorio botellas", "11000", "6200", "3000", "0", "0", "$700000" };
 
             form.dataGridView1.Rows.Add(pedido1);
             form.dataGridView1.Rows.Add(pedido2);
@@ -35,6 +41,45 @@ namespace Frms
             form.dataGridView1.Rows.Add(pedido6);
         }
 
+        /// <summary>
+        /// Carga los materiales con su respectivo stock al DataGridView del Frm del supervisor.
+        /// </summary>
+        /// <param name="form"></param>
+        public static void CargarMaterialesDataGridView(FrmMenuSupervisor form)
+        {
+            string[] papel = { "Papel", form.stock.Papel.ToString() };
+            string[] tinta = { "Tinta", form.stock.Tinta.ToString() };
+            string[] troquel = { "Troquel", form.stock.Troquel.ToString() };
+            string[] encuadernacion = { "Encuadernacion", form.stock.Encuadernacion.ToString() };
+
+            form.dataGridView2.Rows.Add(papel);
+            form.dataGridView2.Rows.Add(tinta);
+            form.dataGridView2.Rows.Add(troquel);
+            form.dataGridView2.Rows.Add(encuadernacion);
+        }
+
+        /// <summary>
+        /// Carga los materiales con su respectivo stock al DataGridView del Frm del operario.
+        /// </summary>
+        /// <param name="form"></param>
+        public static void CargarMaterialesDataGridView(FrmMenuOperario form)
+        {
+            string[] papel = { "Papel", form.stock.Papel.ToString() };
+            string[] tinta = { "Tinta", form.stock.Tinta.ToString() };
+            string[] troquel = { "Troquel", form.stock.Troquel.ToString() };
+            string[] encuadernacion = { "Encuadernacion", form.stock.Encuadernacion.ToString() };
+
+            form.dataGridView2.Rows.Add(papel);
+            form.dataGridView2.Rows.Add(tinta);
+            form.dataGridView2.Rows.Add(troquel);
+            form.dataGridView2.Rows.Add(encuadernacion);
+        }
+
+        /// <summary>
+        /// Se encarga de Hardcodear el usuario y contrasenia del tipo de usuario seleccionado, para agilizar el ingreso.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <param name="tipoUsuarioDado"></param>
         public static void HardcodearUsuario(FrmLogin form, string tipoUsuarioDado)
         {
             foreach (Usuario usuario in form.listaUsuarios)
@@ -48,26 +93,47 @@ namespace Frms
             }
         }
 
+        /// <summary>
+        /// Se encarga de realizar la compra en el mercado y agregarla al stock.
+        /// </summary>
+        /// <param name="form">Instancia del Frm del supervisor.</param>
+        /// <param name="stock">Instancia del Stock.</param>
         public static void BotonComprarStock(FrmMenuSupervisor form, Stock stock)
         {
+            bool papelConvertido = int.TryParse(form.textBoxPapel.Text, out int papelIngresado);
+            bool tintaConvertida = int.TryParse(form.textBoxTinta.Text, out int tintaIngresada);
+            bool troquelConvertido = int.TryParse(form.textBoxTroquel.Text, out int troquelIngresado);
+            bool encuConvertido = int.TryParse(form.textBoxEncuadernacion.Text, out int encuIngresado);
+
             if ((form.textBoxPapel.Text != string.Empty ||
                 form.textBoxTinta.Text != string.Empty ||
                 form.textBoxTroquel.Text != string.Empty ||
-                form.textBoxEncuadernacion.Text != string.Empty))
+                form.textBoxEncuadernacion.Text != string.Empty) && 
+                (papelConvertido && tintaConvertida && troquelConvertido && encuConvertido))
             {
-                int.TryParse(form.textBoxPapel.Text, out int papelIngresado);
-                int.TryParse(form.textBoxTinta.Text, out int tintaIngresada);
-                int.TryParse(form.textBoxTroquel.Text, out int troquelIngresado);
-                int.TryParse(form.textBoxEncuadernacion.Text, out int encuIngresado);
-
                 form.cantidadPapelAComprar = papelIngresado;
                 form.cantidadTintaAComprar = tintaIngresada;
                 form.cantidadTroquelAComprar = troquelIngresado;
                 form.cantidadEncuadernacionAComprar = encuIngresado;
+
+                form.textBoxPapel.Text = "0";
+                form.textBoxTinta.Text = "0";
+                form.textBoxTroquel.Text = "0";
+                form.textBoxEncuadernacion.Text = "0";
+
                 Operacion.CalcularCompra(form, stock);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese valores numericos", "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
+        /// <summary>
+        /// Calcula que la compra sea posible en relacion al presupuesto.
+        /// </summary>
+        /// <param name="form">Instancia del Frm del operario.</param>
+        /// <param name="stock">Instancia del Stock.</param>
         private static void CalcularCompra(FrmMenuSupervisor form, Stock stock)
         {
             form.cantidadTotalAComprar = (form.cantidadPapelAComprar * stock.PrecioPapelUni)
@@ -94,6 +160,12 @@ namespace Frms
             }
         }
 
+        /// <summary>
+        /// Se encarga de manejear los eventos del DataGridView del Frm del operario, en caso
+        /// de que se seleccione alguna fila.
+        /// </summary>
+        /// <param name="form">Instancia del Frm del operario.</param>
+        /// <param name="e">Eventos sobre el DataGridView.</param>
         public static void ManejoDataGrid(FrmMenuOperario form, DataGridViewCellEventArgs e)
         {
             if (form.dataGridView1.Columns[e.ColumnIndex].Name == "Seleccion")
@@ -121,7 +193,7 @@ namespace Frms
                 if (resultado)
                 {
                     if (Convert.ToInt32(filasPedidos.Cells["Papel"].Value) <= form.stock.Papel &&
-                        Convert.ToInt32(filasPedidos.Cells["Tinta"].Value) <= form.stock.Tinta &&
+                        Convert.ToInt32(filasPedidos.Cells["Tinta"].Value) <= form.stock.Tinta && 
                         Convert.ToInt32(filasPedidos.Cells["Troquel"].Value) <= form.stock.Troquel &&
                         Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value) <= form.stock.Encuadernacion)
                     {
@@ -136,6 +208,8 @@ namespace Frms
                         form.filaPedidoEnProceso = filasPedidos;
 
                         form.stock.ControlStock(form);
+                        
+                        form.dataGridView1.Enabled = false;
                     }
                     else
                     {
@@ -156,14 +230,14 @@ namespace Frms
                 }
                 else
                 {
-                    if (filasPedidos.DefaultCellStyle.BackColor == Color.Green)
-                    {
-                        form.stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
-                        form.stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
-                        form.stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
-                        form.stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
-                        form.stock.CargarStock(form);
-                    }
+                    //if (filasPedidos.DefaultCellStyle.BackColor == Color.Green)
+                    //{
+                    //    form.stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
+                    //    form.stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
+                    //    form.stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
+                    //    form.stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
+                    //    form.stock.CargarStock(form);
+                    //}
 
                     string mensaje = string.Format("Se ha quitado la seleccion n\nPedido: '{0}' \nGanancia: '{1}'",
                                                         filasPedidos.Cells["Pedido"].Value,
@@ -180,6 +254,13 @@ namespace Frms
             }
         }
 
+        /// <summary>
+        /// Controla que no se puedan seleccionar los demas RadioButtons de la linea de produccion, hasta
+        /// que no termine el anterior paso.
+        /// </summary>
+        /// <param name="form">Instancia del Frm del operario</param>
+        /// <param name="troquelado">Indica que tarea es la proxima a realizar</param>
+        /// <param name="encuadernacion">Indica que tarea es la proxima a realizar</param>
         public static void ControlProduccion(FrmMenuOperario form, bool troquelado, bool encuadernacion)
         {
             
@@ -193,48 +274,59 @@ namespace Frms
             }
         }
 
+        /// <summary>
+        /// Se encarga de indicar con MessageBox cuando se termine el producto, y reestablece valores 
+        /// necesarios para seguir con la produccion.
+        /// </summary>
+        /// <param name="form">Instancia del Frm del operario</param>
+        /// <param name="impresionFinalizada">Indica si se finalizo la tarea</param>
+        /// <param name="troqueladoFinalizado">Indica si se finalizo la tarea</param>
+        /// <param name="encuadernacionFinalizada">Indica si se finalizo la tarea</param>
+        /// <param name="usuario">Instancia de un usuario</param>
         public static void ControlProduccion(FrmMenuOperario form, bool impresionFinalizada, bool troqueladoFinalizado, bool encuadernacionFinalizada, Usuario usuario)
         {
             string gananciaEnLimpio = filaPedidoElegido.Cells["Ganancia"].Value.ToString().Remove(0,1);
-            string mensaje;
+            string mensaje = "";
             if (form.contProcesos == 1 && impresionFinalizada)
             {
-                mensaje = String.Format("Impresion de {0} Finalizada!\nHa ganado {1}",
-                    filaPedidoElegido.Cells["Pedido"].Value,
-                    filaPedidoElegido.Cells["Ganancia"].Value.ToString());
-                MessageBox.Show(mensaje, "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                form.stock.PresupuestoTotal = +Convert.ToInt32(gananciaEnLimpio);
-
-                form.dataGridView1.Rows.Remove(form.filaPedidoEnProceso);
-                usuario.TrabajosRealizados = 1;
-
-                MessageBox.Show(usuario.TrabajosRealizados.ToString());
-
+                mensaje = String.Format("Impresion de:\n{0}\nFinalizada!",
+                    filaPedidoElegido.Cells["Pedido"].Value);
             }
             else if (form.contProcesos == 2 && troqueladoFinalizado)
             {
-                mensaje = String.Format("Impresion y troquelado de {0} Finalizada!\nHa ganado {1}",
-                    filaPedidoElegido.Cells["Pedido"].Value,
-                    filaPedidoElegido.Cells["Ganancia"].Value.ToString());
-                MessageBox.Show(mensaje, "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                form.stock.PresupuestoTotal = +Convert.ToInt32(gananciaEnLimpio);
-
-                form.dataGridView1.Rows.Remove(form.filaPedidoEnProceso);
-                usuario.TrabajosRealizados = 1;
+                mensaje = String.Format("Impresion y troquelado de:\n{0}\nFinalizada!",
+                    filaPedidoElegido.Cells["Pedido"].Value);
             }
             else if (form.contProcesos == 3 && encuadernacionFinalizada)
             {
-                mensaje = String.Format("Impresion, troquelado y encuadernacion de {0} Finalizada!\nHa ganado {1}",
-                    filaPedidoElegido.Cells["Pedido"].Value,
-                    filaPedidoElegido.Cells["Ganancia"].Value.ToString());
-                MessageBox.Show(mensaje, "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);               
-                form.stock.PresupuestoTotal = +Convert.ToInt32(gananciaEnLimpio);
+                mensaje = String.Format("Impresion, troquelado y encuadernacion de:\n{0}\nFinalizada!",
+                    filaPedidoElegido.Cells["Pedido"].Value);
+            }
 
+            if ((form.contProcesos == 1 && impresionFinalizada) ||
+                (form.contProcesos == 2 && troqueladoFinalizado) ||
+                (form.contProcesos == 3 && encuadernacionFinalizada))
+            {
+                MessageBox.Show(mensaje, "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                form.stock.PresupuestoTotal = +Convert.ToInt32(gananciaEnLimpio);
                 form.dataGridView1.Rows.Remove(form.filaPedidoEnProceso);
                 usuario.TrabajosRealizados = 1;
+                form.dataGridView1.Enabled = true;
+                form.progressBarImpresora.Value = form.progressBarImpresora.Minimum;
+                form.progressBarTroqueladora.Value = form.progressBarTroqueladora.Minimum;
+                form.progressBarEncuadernadora.Value = form.progressBarEncuadernadora.Minimum;
+
+                form.labelImpresionExitosa.Visible = false;
+                form.labelTroqueladoExitoso.Visible = false;
+                form.labelEncuExitosa.Visible = false;
             }
         }
 
+        /// <summary>
+        /// Se encarga de mostrar en el Frm el detalle del pedido seleccionado.
+        /// </summary>
+        /// <param name="form">Instancia del Frm del operario</param>
+        /// <param name="filasPedidos">Fila elegida por el usuario</param>
         private static void MostrarInfoPedidoElegido(FrmMenuOperario form, DataGridViewRow filasPedidos)
         {
             filasPedidos.DefaultCellStyle.BackColor = Color.Green;
@@ -271,6 +363,10 @@ namespace Frms
             form.labelCantEncu.Text = filasPedidos.Cells["Encuadernacion"].Value.ToString();
         }
 
+        /// <summary>
+        /// Valida que los datos ingresados en el Login sean correctos.
+        /// </summary>
+        /// <param name="form">Instancia del Frm Login</param>
         public static void ValidarUsuario(FrmLogin form)
         {
             string nombre = form.tNombre.Text;
@@ -280,7 +376,6 @@ namespace Frms
             {
                 for (int i = 0; i < form.listaUsuarios.Count; i++)
                 {
-                    //MessageBox.Show(listaUsuarios[0].nombreUsuario);
                     if (nombre != String.Empty)
                     {
                         if (pass != String.Empty)
@@ -297,7 +392,12 @@ namespace Frms
                                     form.tNombre.Text = "";
                                     form.tPass.Text = "";
                                     form.Hide();
-                                    //MessageBox.Show("Logueado Correctamente", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                    //if (form.contIngresos == 0) 
+                                    //{ 
+                                        CargarPedidosDataGridView(form.menuOperario); 
+                                    //    form.contIngresos++;
+                                    //}
                                 }
                                 else
                                 {
@@ -331,6 +431,13 @@ namespace Frms
             }
         }
 
+        /// <summary>
+        /// Se encarga de mover las ProgressBar de cada recurso.
+        /// </summary>
+        /// <param name="impresora">Indica si es la impresora</param>
+        /// <param name="troqueladora">Indica si es la troqueladora</param>
+        /// <param name="encuadernadora">Indica si es la encuadernadora</param>
+        /// <param name="form">Instancia del Frm del operario</param>
         public static void RealizarTarea(bool impresora, bool troqueladora, bool encuadernadora, FrmMenuOperario form)
         {
             if (impresora)
@@ -342,6 +449,7 @@ namespace Frms
                     Thread.Sleep(30);
                 }
                 form.progressBarImpresora.Value = form.progressBarImpresora.Maximum;
+                form.labelImpresionExitosa.Visible = true;
             }
             else if (troqueladora)
             {
@@ -352,6 +460,7 @@ namespace Frms
                     Thread.Sleep(30);
                 }
                 form.progressBarTroqueladora.Value = form.progressBarTroqueladora.Maximum;
+                form.labelTroqueladoExitoso.Visible = true; 
             }
             else if (encuadernadora)
             {
@@ -362,6 +471,7 @@ namespace Frms
                     Thread.Sleep(30);
                 }
                 form.progressBarEncuadernadora.Value = form.progressBarEncuadernadora.Maximum;
+                form.labelEncuExitosa.Visible = true;   
             }
         }
     }

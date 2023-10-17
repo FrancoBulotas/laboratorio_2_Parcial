@@ -9,19 +9,24 @@ namespace Frms
         public FrmMenuOperario menuOperario;
         public FrmMenuSupervisor menuSupervisor;
         internal Stock stock;
+        //internal int contIngresos = 0;
 
         public FrmLogin()
         {
             listaUsuarios = administracion.ListaUsuarios;
             stock = new Stock();
 
-            this.BackgroundImage = Image.FromFile("C:\\Users\\Franco\\Desktop\\UTN FRA\\Tecnicatura Superior en Programacion\\2do Cuatrimestre\\Laboratorio II\\PRIMER-PARCIAL\\posible-fondo-login3.jpg");
+            string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
+            string rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-login.jpg");
+            string rutaIcono = Path.Combine(directorioEjecutable, "icono-sistema.ico");
+            this.BackgroundImage = Image.FromFile(rutaImagenFondo);
+            this.Icon = new Icon(rutaIcono);
 
             InitializeComponent();
         }
 
         private void login_Click(object sender, EventArgs e)
-        {   // METER TODO ESTO EN CALCULOS <----------- Y CAMBIAR NOMBRE A CALCULOS
+        {
             Operacion.ValidarUsuario(this);
         }
 
@@ -37,16 +42,6 @@ namespace Frms
             tPass.Text = string.Empty;
             registro.Show();
         }
-
-        //private void linkLabelVerUsuarios_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        //{
-        //    string mensaje = "";
-        //    for (int i = 0; i < listaUsuarios.Count; i++)
-        //    {
-        //        mensaje += string.Format("{0} | {1} | {2}\n", listaUsuarios[i].nombreUsuario, listaUsuarios[i].contrasenia, listaUsuarios[i].tipoUsuario);
-        //    }
-        //    MessageBox.Show(mensaje);
-        //}
 
         private void linkLabelHardcodeOp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -73,6 +68,6 @@ namespace Frms
 
         }
 
- 
+
     }
 }

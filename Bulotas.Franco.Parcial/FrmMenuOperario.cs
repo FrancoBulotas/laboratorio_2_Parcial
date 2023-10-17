@@ -28,15 +28,21 @@ namespace Frms
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
             this.stock = stock;
-
         }
 
         private void FrmPruebaMenu_Load(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile("C:\\Users\\Franco\\Desktop\\UTN FRA\\Tecnicatura Superior en Programacion\\2do Cuatrimestre\\Laboratorio II\\PRIMER-PARCIAL\\posible-fondo-app-2.jpg");
+            string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
+            string rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-app.jpg");
+            string rutaIcono = Path.Combine(directorioEjecutable, "icono-sistema.ico");
+            this.BackgroundImage = Image.FromFile(rutaImagenFondo);
+            this.Icon = new Icon(rutaIcono);
+
             this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].nombreUsuario;
+
+            //Operacion.CargarPedidosDataGridView(this);
+            Operacion.CargarMaterialesDataGridView(this);
             stock.CargarStock(this);
-            Operacion.CargarPedidosDataGridView(this);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -47,7 +53,7 @@ namespace Frms
         private void botonVolverSup_Click(object sender, EventArgs e)
         {
             stock.CargarStock(login.menuSupervisor);
-            stock.ControlStock(this, filaPedidoEnProceso);
+            //stock.ControlStock(this, filaPedidoEnProceso);
 
             this.Hide();
             login.menuSupervisor.Show();

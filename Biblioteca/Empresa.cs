@@ -15,6 +15,10 @@ namespace Biblioteca
             listaUsuarios = GenerarListaUsuarios();
         }
 
+        /// <summary>
+        /// Se encarga de generar una lista de usuarios con datos random
+        /// </summary>
+        /// <returns>Retorna la lista</returns>
         private static List<Usuario> GenerarListaUsuarios()
         {
             List<Usuario>? lista = new();

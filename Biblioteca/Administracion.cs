@@ -8,7 +8,13 @@ namespace Biblioteca
 {
     public class Administracion : Empresa
     {
-
+        /// <summary>
+        /// Agrega un usuario a la lista de usuarios. Valida que no exista.
+        /// </summary>
+        /// <param name="listaUsuariosExtra"></param>
+        /// <param name="usuario"></param>
+        /// <param name="tipoUsuario"></param>
+        /// <returns>Retorna true si se agrego correctamente, false si ya existe</returns>
         public bool AgregarUsuario(List<Usuario> listaUsuariosExtra, Usuario usuario, string tipoUsuario)
         {
             //if (listaUsuarios == null) { return false; }
@@ -30,6 +36,12 @@ namespace Biblioteca
             return true;
         }
 
+        /// <summary>
+        /// Genera un valor random, puede ser un nombre, tipo de usuario o contrasenia si ambos parametros son falsos
+        /// </summary>
+        /// <param name="nombreUsuario"></param>
+        /// <param name="tipoUsuario"></param>
+        /// <returns>Retorna un string, ya sea de un nombre de usuario, tipo de usuario o contrasenia</returns>
         public static string ValorRandomUsuario(bool nombreUsuario, bool tipoUsuario)
         {
             List<string> listaNombres = new List<string>

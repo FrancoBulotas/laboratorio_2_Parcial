@@ -28,17 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
             label8 = new Label();
-            label9 = new Label();
             botonSalir = new Button();
             label10 = new Label();
             radioButtonImpresora = new RadioButton();
@@ -73,7 +68,14 @@
             panel1 = new Panel();
             panel2 = new Panel();
             panel3 = new Panel();
+            dataGridView2 = new DataGridView();
+            Material = new DataGridViewTextBoxColumn();
+            Cantidad2 = new DataGridViewTextBoxColumn();
+            labelImpresionExitosa = new Label();
+            labelTroqueladoExitoso = new Label();
+            labelEncuExitosa = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -81,92 +83,21 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(8, 26);
+            label1.Location = new Point(8, 21);
             label1.Name = "label1";
             label1.Size = new Size(97, 37);
             label1.TabIndex = 0;
             label1.Text = "STOCK";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Location = new Point(12, 68);
-            label2.Name = "label2";
-            label2.Size = new Size(36, 15);
-            label2.TabIndex = 1;
-            label2.Text = "Papel";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Location = new Point(54, 68);
-            label3.Name = "label3";
-            label3.Size = new Size(13, 15);
-            label3.TabIndex = 2;
-            label3.Text = "0";
-            label3.Click += label3_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Location = new Point(54, 99);
-            label4.Name = "label4";
-            label4.Size = new Size(13, 15);
-            label4.TabIndex = 4;
-            label4.Text = "0";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Location = new Point(12, 99);
-            label5.Name = "label5";
-            label5.Size = new Size(33, 15);
-            label5.TabIndex = 3;
-            label5.Text = "Tinta";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Transparent;
-            label6.Location = new Point(64, 132);
-            label6.Name = "label6";
-            label6.Size = new Size(13, 15);
-            label6.TabIndex = 6;
-            label6.Text = "0";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.Transparent;
-            label7.Location = new Point(12, 132);
-            label7.Name = "label7";
-            label7.Size = new Size(46, 15);
-            label7.TabIndex = 5;
-            label7.Text = "Troquel";
-            // 
             // label8
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
-            label8.Location = new Point(183, 164);
+            label8.Location = new Point(171, 533);
             label8.Name = "label8";
             label8.Size = new Size(13, 15);
             label8.TabIndex = 8;
             label8.Text = "0";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.Transparent;
-            label9.Location = new Point(12, 164);
-            label9.Name = "label9";
-            label9.Size = new Size(165, 15);
-            label9.TabIndex = 7;
-            label9.Text = "Materiales de encuadernación";
             // 
             // botonSalir
             // 
@@ -185,7 +116,7 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.Location = new Point(285, 9);
+            label10.Location = new Point(266, 21);
             label10.Name = "label10";
             label10.Size = new Size(299, 37);
             label10.TabIndex = 10;
@@ -259,25 +190,25 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle6.BackColor = SystemColors.Control;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Pedido, Cantidad, Papel, Tinta, Troquel, Encuadernacion, Ganancia, Seleccion });
-            dataGridView1.Location = new Point(287, 49);
+            dataGridView1.Location = new Point(271, 57);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(713, 136);
+            dataGridView1.Size = new Size(729, 138);
             dataGridView1.TabIndex = 22;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -524,12 +455,91 @@
             panel3.Size = new Size(1050, 2);
             panel3.TabIndex = 59;
             // 
+            // dataGridView2
+            // 
+            dataGridView2.AllowUserToAddRows = false;
+            dataGridView2.AllowUserToDeleteRows = false;
+            dataGridView2.AllowUserToResizeColumns = false;
+            dataGridView2.AllowUserToResizeRows = false;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView2.BackgroundColor = SystemColors.Control;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Material, Cantidad2 });
+            dataGridView2.Location = new Point(5, 57);
+            dataGridView2.MultiSelect = false;
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersVisible = false;
+            dataGridView2.RowTemplate.Height = 25;
+            dataGridView2.Size = new Size(252, 138);
+            dataGridView2.TabIndex = 60;
+            // 
+            // Material
+            // 
+            Material.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Material.HeaderText = "MATERIAL";
+            Material.Name = "Material";
+            // 
+            // Cantidad2
+            // 
+            Cantidad2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Cantidad2.HeaderText = "CANTIDAD";
+            Cantidad2.Name = "Cantidad2";
+            Cantidad2.ReadOnly = true;
+            Cantidad2.Resizable = DataGridViewTriState.False;
+            Cantidad2.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // labelImpresionExitosa
+            // 
+            labelImpresionExitosa.AutoSize = true;
+            labelImpresionExitosa.BackColor = Color.Transparent;
+            labelImpresionExitosa.Location = new Point(162, 422);
+            labelImpresionExitosa.Name = "labelImpresionExitosa";
+            labelImpresionExitosa.Size = new Size(115, 15);
+            labelImpresionExitosa.TabIndex = 61;
+            labelImpresionExitosa.Text = "Impresion Finalizada";
+            labelImpresionExitosa.Visible = false;
+            // 
+            // labelTroqueladoExitoso
+            // 
+            labelTroqueladoExitoso.AutoSize = true;
+            labelTroqueladoExitoso.BackColor = Color.Transparent;
+            labelTroqueladoExitoso.Location = new Point(385, 422);
+            labelTroqueladoExitoso.Name = "labelTroqueladoExitoso";
+            labelTroqueladoExitoso.Size = new Size(122, 15);
+            labelTroqueladoExitoso.TabIndex = 62;
+            labelTroqueladoExitoso.Text = "Troquelado Finalizado";
+            labelTroqueladoExitoso.Visible = false;
+            // 
+            // labelEncuExitosa
+            // 
+            labelEncuExitosa.AutoSize = true;
+            labelEncuExitosa.BackColor = Color.Transparent;
+            labelEncuExitosa.Location = new Point(629, 422);
+            labelEncuExitosa.Name = "labelEncuExitosa";
+            labelEncuExitosa.Size = new Size(148, 15);
+            labelEncuExitosa.TabIndex = 63;
+            labelEncuExitosa.Text = "Encuadernacion Finalizado";
+            labelEncuExitosa.Visible = false;
+            // 
             // FrmMenuOperario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.HighlightText;
             ClientSize = new Size(1012, 461);
+            Controls.Add(labelEncuExitosa);
+            Controls.Add(labelTroqueladoExitoso);
+            Controls.Add(labelImpresionExitosa);
+            Controls.Add(dataGridView2);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -557,13 +567,6 @@
             Controls.Add(label10);
             Controls.Add(botonSalir);
             Controls.Add(label8);
-            Controls.Add(label9);
-            Controls.Add(label6);
-            Controls.Add(label7);
-            Controls.Add(label4);
-            Controls.Add(label5);
-            Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(label1);
             MaximizeBox = false;
             MaximumSize = new Size(1028, 658);
@@ -574,6 +577,7 @@
             Text = "Sispro";
             Load += FrmPruebaMenu_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -581,14 +585,7 @@
         #endregion
 
         private Label label1;
-        private Label label2;
-        internal Label label3;
-        internal Label label4;
-        private Label label5;
-        internal Label label6;
-        private Label label7;
         internal Label label8;
-        private Label label9;
         private Button botonSalir;
         private Label label10;
         internal RadioButton radioButtonImpresora;
@@ -623,5 +620,11 @@
         private Panel panel1;
         private Panel panel2;
         private Panel panel3;
+        internal DataGridView dataGridView2;
+        private DataGridViewTextBoxColumn Material;
+        private DataGridViewTextBoxColumn Cantidad2;
+        internal Label labelImpresionExitosa;
+        internal Label labelTroqueladoExitoso;
+        internal Label labelEncuExitosa;
     }
 }

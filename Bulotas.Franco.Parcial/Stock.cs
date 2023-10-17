@@ -25,7 +25,7 @@ namespace Frms
         private const int CantPapel = 7000;
         private const int CantTinta = 3000;
         private const int CantTroquel = 2000;
-        private const int CantEncuadernacion = 6000;
+        private const int CantEncuadernacion = 2200;
 
         public Stock()
         {
@@ -33,58 +33,84 @@ namespace Frms
             cantTinta = CantTinta;
             cantTroquel = CantTroquel;
             cantEncuadernacion = CantEncuadernacion;
-            presupuesto = 500000;
+            presupuesto = 100000;
             valorPapelUni = 60;
             valorTinta = 80;
             valorTroquel = 150;
             valorEncuadernacion = 65;
         }
 
+        /// <summary>
+        /// Se encarga de cargar el stock al Frm del supervisor y actualizar el presupuesto
+        /// </summary>
+        /// <param name="form"></param>
         internal void CargarStock(FrmMenuSupervisor form)
         {
-            form.label3.Text = Papel.ToString() + " Uni.";
-            form.label4.Text = Tinta.ToString() + " L.";
-            form.label6.Text = Troquel.ToString() + " Uni.";
-            form.label8.Text = Encuadernacion.ToString() + " Uni.";
             form.nombreLogueado.Text = listaUsuarios[form.indexUsuarioLogueado].nombreUsuario;
             form.labelPresupuesto.Text = "$ " + PresupuestoTotal.ToString();
+
+            form.dataGridView2.Rows[0].Cells["Cantidad2"].Value = Papel.ToString();
+            form.dataGridView2.Rows[1].Cells["Cantidad2"].Value = Tinta.ToString();
+            form.dataGridView2.Rows[2].Cells["Cantidad2"].Value = Troquel.ToString();
+            form.dataGridView2.Rows[3].Cells["Cantidad2"].Value = Encuadernacion.ToString();
         }
 
+        /// <summary>
+        /// Se encarga de cargar el stock al Frm del operario
+        /// </summary>
+        /// <param name="form"></param>
         internal void CargarStock(FrmMenuOperario form)
         {
-            form.label3.Text = Papel.ToString() + " Uni.";
-            form.label4.Text = Tinta.ToString() + " L.";
-            form.label6.Text = Troquel.ToString() + " Uni.";
-            form.label8.Text = Encuadernacion.ToString() + " Uni.";
+            form.dataGridView2.Rows[0].Cells["Cantidad2"].Value = Papel.ToString();
+            form.dataGridView2.Rows[1].Cells["Cantidad2"].Value = Tinta.ToString();
+            form.dataGridView2.Rows[2].Cells["Cantidad2"].Value = Troquel.ToString();
+            form.dataGridView2.Rows[3].Cells["Cantidad2"].Value = Encuadernacion.ToString();
         }
 
+        /// <summary>
+        /// Monitorea el stock, en caso de haber poco, notifica pintando de color rojo la fila del DataGridView.
+        /// </summary>
+        /// <param name="form"></param>
         internal void ControlStock(FrmMenuOperario form)
-        {
-            if (Papel < CantPapel*0.2)
-            {
-                form.label3.BackColor = Color.Red;
-            }
-            if (Tinta < CantTinta*0.2)
-            {
-                form.label4.BackColor = Color.Red;
-            }
-            if (Troquel < CantTroquel* 0.2)
-            {
-                form.label6.BackColor = Color.Red;
-            }
-            if (Encuadernacion < CantEncuadernacion * 0.1)
-            {
-                form.label8.BackColor = Color.Red;
-            }
+        {            
+            if (Papel < CantPapel*0.2) { form.dataGridView2.Rows[0].DefaultCellStyle.BackColor = Color.Red; }
+            else { form.dataGridView2.Rows[0].DefaultCellStyle.BackColor = Color.White; }
+
+            if (Tinta < CantTinta*0.2) { form.dataGridView2.Rows[1].DefaultCellStyle.BackColor = Color.Red; }
+            else { form.dataGridView2.Rows[1].DefaultCellStyle.BackColor = Color.White; }
+
+            if (Troquel < CantTroquel* 0.2) { form.dataGridView2.Rows[2].DefaultCellStyle.BackColor = Color.Red; }
+            else { form.dataGridView2.Rows[2].DefaultCellStyle.BackColor = Color.White; }
+
+            if (Encuadernacion < CantEncuadernacion * 0.1) { form.dataGridView2.Rows[3].DefaultCellStyle.BackColor = Color.Red; }
+            else { form.dataGridView2.Rows[3].DefaultCellStyle.BackColor = Color.White; }
         }
-        
+
+        /// <summary>
+        /// Controla que al quedar seleccionada una fila, y el usuario se vaya del menu, se reincorpore lo descontado del stock.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <param name="filasPedidos"></param>
         internal void ControlStock(FrmMenuOperario form, DataGridViewRow filasPedidos)
         {
-            form.stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
-            form.stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
-            form.stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
-            form.stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
-            CargarStock(form);
+            if (filasPedidos != null)
+            {
+                if (filasPedidos.DefaultCellStyle.BackColor == Color.Green)
+                {
+                    try
+                    {
+                        form.stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
+                        form.stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
+                        form.stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
+                        form.stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
+                        CargarStock(form);
+                    }
+                    catch (System.ArgumentException)
+                    {
+
+                    }
+                }
+            }
         }
 
         public int Papel { get { return cantPapel; } set { cantPapel += value; } }

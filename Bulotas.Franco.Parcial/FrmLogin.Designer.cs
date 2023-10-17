@@ -161,7 +161,7 @@
             Controls.Add(login);
             Name = "FrmLogin";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Sispro - Login";
             ResumeLayout(false);
             PerformLayout();
         }

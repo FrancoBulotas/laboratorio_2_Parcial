@@ -181,7 +181,7 @@
             Controls.Add(botonCancelar);
             Name = "FrmRegistro";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Registro";
+            Text = "Sispro - Registro";
             ResumeLayout(false);
             PerformLayout();
         }
