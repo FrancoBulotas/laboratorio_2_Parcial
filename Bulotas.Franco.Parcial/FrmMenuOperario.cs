@@ -38,7 +38,7 @@ namespace Frms
             this.BackgroundImage = Image.FromFile(rutaImagenFondo);
             this.Icon = new Icon(rutaIcono);
 
-            this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].nombreUsuario;
+            this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].NombreUsuario;
 
             //Operacion.CargarPedidosDataGridView(this);
             Operacion.CargarMaterialesDataGridView(this);

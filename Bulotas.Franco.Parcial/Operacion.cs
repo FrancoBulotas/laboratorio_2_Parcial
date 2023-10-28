@@ -26,12 +26,12 @@ namespace Frms
         {
             //List<string[]> pedidos = new List<string[]>();
 
-            string[] pedido1 = { "Libros de matematica", "10000", "5000", "1500", "1250", "0", "$500000" };
-            string[] pedido2 = { "Boletas", "50000", "7500", "1200", "0", "0", "$600000" };
-            string[] pedido3 = { "Cuadernillos", "6000", "5000 ", "1500", "800", "2000", "$450000" };
-            string[] pedido4 = { "Libros de literatura", "3000", "2200", "700", "200", "280", "$260000" };
-            string[] pedido5 = { "Libros de historia", "3400", "2600", "750", "250", "300", "$280000" };
-            string[] pedido6 = { "Envoltorio botellas", "11000", "6200", "3000", "0", "0", "$700000" };
+            string[] pedido1 = { "Libros de matematica", "10000", "5000", "1500", "1250", "0" };
+            string[] pedido2 = { "Boletas", "50000", "7500", "1200", "0", "0" };
+            string[] pedido3 = { "Cuadernillos", "6000", "5000 ", "1500", "800", "2000" };
+            string[] pedido4 = { "Libros de literatura", "3000", "2200", "700", "200", "280" };
+            string[] pedido5 = { "Libros de historia", "3400", "2600", "750", "250", "300" };
+            string[] pedido6 = { "Envoltorio botellas", "11000", "6200", "3000", "0", "0" };
 
             form.dataGridView1.Rows.Add(pedido1);
             form.dataGridView1.Rows.Add(pedido2);
@@ -84,10 +84,10 @@ namespace Frms
         {
             foreach (Usuario usuario in form.listaUsuarios)
             {
-                if (usuario.tipoUsuario == tipoUsuarioDado)
+                if (usuario.TipoUsuario == tipoUsuarioDado)
                 {
-                    form.tNombre.Text = usuario.nombreUsuario;
-                    form.tPass.Text = usuario.contrasenia;
+                    form.tNombre.Text = usuario.NombreUsuario;
+                    form.tPass.Text = usuario.Contrasenia;
                     break;
                 }
             }
@@ -109,7 +109,8 @@ namespace Frms
                 form.textBoxTinta.Text != string.Empty ||
                 form.textBoxTroquel.Text != string.Empty ||
                 form.textBoxEncuadernacion.Text != string.Empty) && 
-                (papelConvertido && tintaConvertida && troquelConvertido && encuConvertido))
+                (papelConvertido && tintaConvertida && troquelConvertido && encuConvertido) &&
+                (papelIngresado >= 0 && tintaIngresada >= 0 && troquelIngresado >= 0 && encuIngresado >= 0))
             {
                 form.cantidadPapelAComprar = papelIngresado;
                 form.cantidadTintaAComprar = tintaIngresada;
@@ -125,7 +126,7 @@ namespace Frms
             }
             else
             {
-                MessageBox.Show("Ingrese valores numericos", "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ingrese valores numericos positivos", "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -141,23 +142,20 @@ namespace Frms
                         + (form.cantidadTintaAComprar * stock.PrecioTintaUni)
                         + (form.cantidadEncuadernacionAComprar * stock.PrecioEncuadernacionUni);
 
-            if (stock.PresupuestoTotal - form.cantidadTotalAComprar >= 0)
-            {
-                if (form.cantidadPapelAComprar >= 0) { stock.Papel = form.cantidadPapelAComprar; }
-                else { form.textBoxPapel.Text = ""; }
-                if (form.cantidadTintaAComprar >= 0) { stock.Tinta = form.cantidadTintaAComprar; }
-                else { form.textBoxTinta.Text = ""; }
-                if (form.cantidadTroquelAComprar >= 0) { stock.Troquel = form.cantidadTroquelAComprar; }
-                else { form.textBoxTroquel.Text = ""; }
-                if (form.cantidadEncuadernacionAComprar >= 0) { stock.Encuadernacion = form.cantidadEncuadernacionAComprar; }
-                else { form.textBoxEncuadernacion.Text = ""; }
+            //if (stock.PresupuestoTotal - form.cantidadTotalAComprar >= 0)
+            //{
+            if (form.cantidadPapelAComprar >= 0) { stock.Papel = form.cantidadPapelAComprar; }
+            else { form.textBoxPapel.Text = ""; }
+            if (form.cantidadTintaAComprar >= 0) { stock.Tinta = form.cantidadTintaAComprar; }
+            else { form.textBoxTinta.Text = ""; }
+            if (form.cantidadTroquelAComprar >= 0) { stock.Troquel = form.cantidadTroquelAComprar; }
+            else { form.textBoxTroquel.Text = ""; }
+            if (form.cantidadEncuadernacionAComprar >= 0) { stock.Encuadernacion = form.cantidadEncuadernacionAComprar; }
+            else { form.textBoxEncuadernacion.Text = ""; }
 
-                stock.PresupuestoTotal = -form.cantidadTotalAComprar;
-            }
-            else
-            {
-                MessageBox.Show("Presupuesto insuficiente");
-            }
+            //    stock.PresupuestoTotal = -form.cantidadTotalAComprar;
+            //}
+            //else { MessageBox.Show("Presupuesto insuficiente"); }
         }
 
         /// <summary>
@@ -213,9 +211,8 @@ namespace Frms
                     }
                     else
                     {
-                        string mensaje = string.Format("NO hay stock suficiente para \n\nPedido: '{0}' \nGanancia: '{1}'",
-                                    filasPedidos.Cells["Pedido"].Value,
-                                    filasPedidos.Cells["Ganancia"].Value);
+                        string mensaje = string.Format("NO hay stock suficiente para \n\nPedido: '{0}''",
+                                    filasPedidos.Cells["Pedido"].Value);
                         MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         filasPedidos.DefaultCellStyle.BackColor = Color.Red;
@@ -239,9 +236,8 @@ namespace Frms
                     //    form.stock.CargarStock(form);
                     //}
 
-                    string mensaje = string.Format("Se ha quitado la seleccion n\nPedido: '{0}' \nGanancia: '{1}'",
-                                                        filasPedidos.Cells["Pedido"].Value,
-                                                        filasPedidos.Cells["Ganancia"].Value);
+                    string mensaje = string.Format("Se ha quitado la seleccion n\nPedido: '{0}'",
+                                                        filasPedidos.Cells["Pedido"].Value);
                     MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     filasPedidos.DefaultCellStyle.BackColor = Color.White;
                     form.labelPedido.Visible = false;
@@ -285,7 +281,7 @@ namespace Frms
         /// <param name="usuario">Instancia de un usuario</param>
         public static void ControlProduccion(FrmMenuOperario form, bool impresionFinalizada, bool troqueladoFinalizado, bool encuadernacionFinalizada, Usuario usuario)
         {
-            string gananciaEnLimpio = filaPedidoElegido.Cells["Ganancia"].Value.ToString().Remove(0,1);
+            //string gananciaEnLimpio = filaPedidoElegido.Cells["Ganancia"].Value.ToString().Remove(0,1);
             string mensaje = "";
             if (form.contProcesos == 1 && impresionFinalizada)
             {
@@ -308,7 +304,7 @@ namespace Frms
                 (form.contProcesos == 3 && encuadernacionFinalizada))
             {
                 MessageBox.Show(mensaje, "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                form.stock.PresupuestoTotal = +Convert.ToInt32(gananciaEnLimpio);
+                //form.stock.PresupuestoTotal = +Convert.ToInt32(gananciaEnLimpio);
                 form.dataGridView1.Rows.Remove(form.filaPedidoEnProceso);
                 usuario.TrabajosRealizados = 1;
                 form.dataGridView1.Enabled = true;
@@ -382,12 +378,12 @@ namespace Frms
                         {
                             if (form.listaUsuarios != null)
                             {
-                                if (nombre == form.listaUsuarios[i].nombreUsuario && pass == form.listaUsuarios[i].contrasenia)
+                                if (nombre == form.listaUsuarios[i].NombreUsuario && pass == form.listaUsuarios[i].Contrasenia)
                                 {
                                     form.menuOperario = new FrmMenuOperario(form.listaUsuarios, i, form, form.stock);
                                     form.menuSupervisor = new FrmMenuSupervisor(form.listaUsuarios, i, form, form.stock);
 
-                                    if (form.listaUsuarios[i].tipoUsuario == "operario") { form.menuOperario.Show(); }
+                                    if (form.listaUsuarios[i].TipoUsuario == "operario") { form.menuOperario.Show(); }
                                     else { form.menuSupervisor.Show(); }
                                     form.tNombre.Text = "";
                                     form.tPass.Text = "";

@@ -195,6 +195,7 @@
             label10.Size = new Size(82, 15);
             label10.TabIndex = 35;
             label10.Text = "PRESUPUESTO";
+            label10.Visible = false;
             // 
             // labelPresupuesto
             // 
@@ -204,6 +205,7 @@
             labelPresupuesto.Name = "labelPresupuesto";
             labelPresupuesto.Size = new Size(0, 15);
             labelPresupuesto.TabIndex = 36;
+            labelPresupuesto.Visible = false;
             // 
             // textBoxPapel
             // 

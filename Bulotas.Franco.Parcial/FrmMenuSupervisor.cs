@@ -42,13 +42,13 @@ namespace Frms
             this.BackgroundImage = Image.FromFile(rutaImagenFondo);
             this.Icon = new Icon(rutaIcono);
 
-            this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].nombreUsuario;
+            this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].NombreUsuario;
 
             for (int i = 0; i < listaUsuarios.Count; i++)
             {
                 if (listaUsuarios != null)
                 {
-                    string[] usuario = { listaUsuarios[i].nombreUsuario, listaUsuarios[i].contrasenia, listaUsuarios[i].tipoUsuario, listaUsuarios[i].TrabajosRealizados.ToString() };
+                    string[] usuario = { listaUsuarios[i].NombreUsuario, listaUsuarios[i].Contrasenia, listaUsuarios[i].TipoUsuario, listaUsuarios[i].TrabajosRealizados.ToString() };
                     this.dataGridView1.Rows.Add(usuario);
                 }
             }

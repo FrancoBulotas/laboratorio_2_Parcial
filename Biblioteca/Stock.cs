@@ -1,13 +1,11 @@
-﻿using Biblioteca;
-using Microsoft.VisualBasic.Devices;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Frms
+namespace Biblioteca
 {
     public class Stock : Administracion
     {
@@ -17,7 +15,6 @@ namespace Frms
         private static int cantTinta;
         private static int cantTroquel;
         private static int cantEncuadernacion;
-        private static int presupuesto;
         private static int valorPapelUni;
         private static int valorTinta;
         private static int valorTroquel;
@@ -33,7 +30,6 @@ namespace Frms
             cantTinta = CantTinta;
             cantTroquel = CantTroquel;
             cantEncuadernacion = CantEncuadernacion;
-            presupuesto = 100000;
             valorPapelUni = 60;
             valorTinta = 80;
             valorTroquel = 150;
@@ -41,31 +37,40 @@ namespace Frms
         }
 
         /// <summary>
-        /// Se encarga de cargar el stock al Frm del supervisor y actualizar el presupuesto
+        /// Se encarga de devolver la cantidad de insumo disponible.
         /// </summary>
         /// <param name="form"></param>
-        internal void CargarStock(FrmMenuSupervisor form)
-        {
-            form.nombreLogueado.Text = listaUsuarios[form.indexUsuarioLogueado].nombreUsuario;
-            form.labelPresupuesto.Text = "$ " + PresupuestoTotal.ToString();
 
-            form.dataGridView2.Rows[0].Cells["Cantidad2"].Value = Papel.ToString();
-            form.dataGridView2.Rows[1].Cells["Cantidad2"].Value = Tinta.ToString();
-            form.dataGridView2.Rows[2].Cells["Cantidad2"].Value = Troquel.ToString();
-            form.dataGridView2.Rows[3].Cells["Cantidad2"].Value = Encuadernacion.ToString();
+        public string ConsultarCantidadInsumo(string insumo)
+        { 
+            if (insumo == "papel") { return Papel.ToString(); }
+            else if (insumo == "tinta") { return Tinta.ToString(); }
+            else if (insumo == "troquel") { return Troquel.ToString(); }
+            else if (insumo == "encuadernacion") { return Encuadernacion.ToString(); }
+            else { return ""; }
         }
+
+        //internal void CargarStock(FrmMenuSupervisor form)
+        //{
+        //    form.nombreLogueado.Text = listaUsuarios[form.indexUsuarioLogueado].NombreUsuario;
+
+        //    form.dataGridView2.Rows[0].Cells["Cantidad2"].Value = Papel.ToString();
+        //    form.dataGridView2.Rows[1].Cells["Cantidad2"].Value = Tinta.ToString();
+        //    form.dataGridView2.Rows[2].Cells["Cantidad2"].Value = Troquel.ToString();
+        //    form.dataGridView2.Rows[3].Cells["Cantidad2"].Value = Encuadernacion.ToString();
+        //}
 
         /// <summary>
         /// Se encarga de cargar el stock al Frm del operario
         /// </summary>
         /// <param name="form"></param>
-        internal void CargarStock(FrmMenuOperario form)
-        {
-            form.dataGridView2.Rows[0].Cells["Cantidad2"].Value = Papel.ToString();
-            form.dataGridView2.Rows[1].Cells["Cantidad2"].Value = Tinta.ToString();
-            form.dataGridView2.Rows[2].Cells["Cantidad2"].Value = Troquel.ToString();
-            form.dataGridView2.Rows[3].Cells["Cantidad2"].Value = Encuadernacion.ToString();
-        }
+        //internal void CargarStock(FrmMenuOperario form)
+        //{
+        //    form.dataGridView2.Rows[0].Cells["Cantidad2"].Value = Papel.ToString();
+        //    form.dataGridView2.Rows[1].Cells["Cantidad2"].Value = Tinta.ToString();
+        //    form.dataGridView2.Rows[2].Cells["Cantidad2"].Value = Troquel.ToString();
+        //    form.dataGridView2.Rows[3].Cells["Cantidad2"].Value = Encuadernacion.ToString();
+        //}
 
         /// <summary>
         /// Monitorea el stock, en caso de haber poco, notifica pintando de color rojo la fila del DataGridView.
@@ -109,7 +114,7 @@ namespace Frms
                     {
 
                     }
-                }
+            }
             }
         }
 
@@ -117,10 +122,9 @@ namespace Frms
         public int Tinta { get { return cantTinta; } set { cantTinta += value; } }
         public int Troquel { get { return cantTroquel; } set { cantTroquel += value; } }
         public int Encuadernacion { get { return cantEncuadernacion; } set { cantEncuadernacion += value; } }
-        public int PresupuestoTotal { get { return presupuesto; } set { presupuesto += value; } }
-        public int PrecioPapelUni { get { return valorPapelUni; } set {; } }
-        public int PrecioTintaUni { get { return valorTinta; } set {; } }
-        public int PrecioTroquelUni { get { return valorTroquel; } set {; } }
-        public int PrecioEncuadernacionUni { get { return valorEncuadernacion; } set {; } }
+        public int PrecioPapelUni { get { return valorPapelUni; } }
+        public int PrecioTintaUni { get { return valorTinta; } }
+        public int PrecioTroquelUni { get { return valorTroquel; } }
+        public int PrecioEncuadernacionUni { get { return valorEncuadernacion; } }
     }
 }

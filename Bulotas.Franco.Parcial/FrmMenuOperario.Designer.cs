@@ -42,14 +42,6 @@
             label15 = new Label();
             nombreLogueado = new Label();
             dataGridView1 = new DataGridView();
-            Pedido = new DataGridViewTextBoxColumn();
-            Cantidad = new DataGridViewTextBoxColumn();
-            Papel = new DataGridViewTextBoxColumn();
-            Tinta = new DataGridViewTextBoxColumn();
-            Troquel = new DataGridViewTextBoxColumn();
-            Encuadernacion = new DataGridViewTextBoxColumn();
-            Ganancia = new DataGridViewTextBoxColumn();
-            Seleccion = new DataGridViewCheckBoxColumn();
             botonVolverSup = new Button();
             radioButtonEncuadernadora = new RadioButton();
             labelPedido = new Label();
@@ -74,6 +66,13 @@
             labelImpresionExitosa = new Label();
             labelTroqueladoExitoso = new Label();
             labelEncuExitosa = new Label();
+            Pedido = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            Papel = new DataGridViewTextBoxColumn();
+            Tinta = new DataGridViewTextBoxColumn();
+            Troquel = new DataGridViewTextBoxColumn();
+            Encuadernacion = new DataGridViewTextBoxColumn();
+            Seleccion = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
@@ -202,7 +201,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Pedido, Cantidad, Papel, Tinta, Troquel, Encuadernacion, Ganancia, Seleccion });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Pedido, Cantidad, Papel, Tinta, Troquel, Encuadernacion, Seleccion });
             dataGridView1.Location = new Point(271, 57);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
@@ -211,67 +210,6 @@
             dataGridView1.Size = new Size(729, 138);
             dataGridView1.TabIndex = 22;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // Pedido
-            // 
-            Pedido.HeaderText = "PEDIDO";
-            Pedido.Name = "Pedido";
-            Pedido.ReadOnly = true;
-            Pedido.Resizable = DataGridViewTriState.False;
-            Pedido.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Pedido.Width = 200;
-            // 
-            // Cantidad
-            // 
-            Cantidad.HeaderText = "CANTIDAD";
-            Cantidad.Name = "Cantidad";
-            Cantidad.ReadOnly = true;
-            Cantidad.Resizable = DataGridViewTriState.False;
-            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Cantidad.Width = 70;
-            // 
-            // Papel
-            // 
-            Papel.HeaderText = "PAPEL";
-            Papel.Name = "Papel";
-            Papel.Resizable = DataGridViewTriState.False;
-            Papel.Width = 70;
-            // 
-            // Tinta
-            // 
-            Tinta.HeaderText = "TINTA";
-            Tinta.Name = "Tinta";
-            Tinta.Resizable = DataGridViewTriState.False;
-            Tinta.Width = 70;
-            // 
-            // Troquel
-            // 
-            Troquel.HeaderText = "TROQUEL";
-            Troquel.Name = "Troquel";
-            Troquel.Resizable = DataGridViewTriState.False;
-            Troquel.Width = 70;
-            // 
-            // Encuadernacion
-            // 
-            Encuadernacion.HeaderText = "ENCUADERNACION";
-            Encuadernacion.Name = "Encuadernacion";
-            Encuadernacion.Resizable = DataGridViewTriState.False;
-            Encuadernacion.Width = 120;
-            // 
-            // Ganancia
-            // 
-            Ganancia.HeaderText = "GANANCIA";
-            Ganancia.Name = "Ganancia";
-            Ganancia.Resizable = DataGridViewTriState.False;
-            Ganancia.Width = 71;
-            // 
-            // Seleccion
-            // 
-            Seleccion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Seleccion.HeaderText = "";
-            Seleccion.Name = "Seleccion";
-            Seleccion.Resizable = DataGridViewTriState.False;
-            Seleccion.TrueValue = "";
             // 
             // botonVolverSup
             // 
@@ -530,6 +468,60 @@
             labelEncuExitosa.Text = "Encuadernacion Finalizado";
             labelEncuExitosa.Visible = false;
             // 
+            // Pedido
+            // 
+            Pedido.HeaderText = "PEDIDO";
+            Pedido.Name = "Pedido";
+            Pedido.ReadOnly = true;
+            Pedido.Resizable = DataGridViewTriState.False;
+            Pedido.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Pedido.Width = 200;
+            // 
+            // Cantidad
+            // 
+            Cantidad.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Cantidad.HeaderText = "CANTIDAD";
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            Cantidad.Resizable = DataGridViewTriState.False;
+            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Papel
+            // 
+            Papel.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Papel.HeaderText = "PAPEL";
+            Papel.Name = "Papel";
+            Papel.Resizable = DataGridViewTriState.False;
+            // 
+            // Tinta
+            // 
+            Tinta.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Tinta.HeaderText = "TINTA";
+            Tinta.Name = "Tinta";
+            Tinta.Resizable = DataGridViewTriState.False;
+            // 
+            // Troquel
+            // 
+            Troquel.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Troquel.HeaderText = "TROQUEL";
+            Troquel.Name = "Troquel";
+            Troquel.Resizable = DataGridViewTriState.False;
+            // 
+            // Encuadernacion
+            // 
+            Encuadernacion.HeaderText = "ENCUADERNACION";
+            Encuadernacion.Name = "Encuadernacion";
+            Encuadernacion.Resizable = DataGridViewTriState.False;
+            Encuadernacion.Width = 120;
+            // 
+            // Seleccion
+            // 
+            Seleccion.HeaderText = "";
+            Seleccion.Name = "Seleccion";
+            Seleccion.Resizable = DataGridViewTriState.False;
+            Seleccion.TrueValue = "";
+            Seleccion.Width = 50;
+            // 
             // FrmMenuOperario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -600,14 +592,6 @@
         internal Label labelPedidoSeleccionado;
         internal Label labelMaquinaria;
         internal Label labelMaquinariaNecesaria;
-        private DataGridViewTextBoxColumn Pedido;
-        private DataGridViewTextBoxColumn Cantidad;
-        private DataGridViewTextBoxColumn Papel;
-        private DataGridViewTextBoxColumn Tinta;
-        private DataGridViewTextBoxColumn Troquel;
-        private DataGridViewTextBoxColumn Encuadernacion;
-        private DataGridViewTextBoxColumn Ganancia;
-        private DataGridViewCheckBoxColumn Seleccion;
         internal ProgressBar progressBarImpresora;
         internal ProgressBar progressBarTroqueladora;
         internal ProgressBar progressBarEncuadernadora;
@@ -626,5 +610,12 @@
         internal Label labelImpresionExitosa;
         internal Label labelTroqueladoExitoso;
         internal Label labelEncuExitosa;
+        private DataGridViewTextBoxColumn Pedido;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn Papel;
+        private DataGridViewTextBoxColumn Tinta;
+        private DataGridViewTextBoxColumn Troquel;
+        private DataGridViewTextBoxColumn Encuadernacion;
+        private DataGridViewCheckBoxColumn Seleccion;
     }
 }
