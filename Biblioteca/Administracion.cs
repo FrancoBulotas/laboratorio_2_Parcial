@@ -26,7 +26,7 @@ namespace Biblioteca
             {
                 if (usr != null)
                 {
-                    if (usr.nombreUsuario == usuario.nombreUsuario)
+                    if (usr.NombreUsuario == usuario.NombreUsuario)
                     {
                         return false;
                     }

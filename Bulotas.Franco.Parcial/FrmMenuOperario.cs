@@ -1,5 +1,6 @@
 ﻿using Biblioteca;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,7 @@ namespace Frms
         internal Stock stock;
         internal DataGridViewRow filaPedidoEnProceso;
         internal int contProcesos = 0;
+        internal ArrayList arrayControlStock = new ArrayList();
 
         public FrmMenuOperario(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login, Stock stock)
         {
@@ -40,9 +42,9 @@ namespace Frms
 
             this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].NombreUsuario;
 
-            //Operacion.CargarPedidosDataGridView(this);
             Operacion.CargarMaterialesDataGridView(this);
-            stock.CargarStock(this);
+
+            Visual.CargarStock(dataGridView2, stock);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -52,8 +54,17 @@ namespace Frms
 
         private void botonVolverSup_Click(object sender, EventArgs e)
         {
-            stock.CargarStock(login.menuSupervisor);
-            //stock.ControlStock(this, filaPedidoEnProceso);
+            Visual.CargarStock(login.menuSupervisor.dataGridView2, stock);
+
+            Visual.ControlStock(stock, dataGridView2, "papel");
+            Visual.ControlStock(stock, dataGridView2, "tinta");
+            Visual.ControlStock(stock, dataGridView2, "troquel");
+            Visual.ControlStock(stock, dataGridView2, "encuadernacion");
+
+            Visual.ControlStock(login.menuSupervisor.stock, login.menuSupervisor.dataGridView2, "papel");
+            Visual.ControlStock(login.menuSupervisor.stock, login.menuSupervisor.dataGridView2, "tinta");
+            Visual.ControlStock(login.menuSupervisor.stock, login.menuSupervisor.dataGridView2, "troquel");
+            Visual.ControlStock(login.menuSupervisor.stock, login.menuSupervisor.dataGridView2, "encuadernacion");
 
             this.Hide();
             login.menuSupervisor.Show();
@@ -62,8 +73,10 @@ namespace Frms
 
         private void botonSalir_Click(object sender, EventArgs e)
         {
-            stock.ControlStock(this, filaPedidoEnProceso);
-
+            Visual.ControlStock(stock, dataGridView2, "papel");
+            Visual.ControlStock(stock, dataGridView2, "tinta");
+            Visual.ControlStock(stock, dataGridView2, "troquel");
+            Visual.ControlStock(stock, dataGridView2, "encuadernacion");
             this.Hide();
             login.Show();
         }

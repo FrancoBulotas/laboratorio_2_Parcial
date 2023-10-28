@@ -1,5 +1,6 @@
 ﻿using Biblioteca;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +24,7 @@ namespace Frms
         internal int cantidadTroquelAComprar;
         internal int cantidadEncuadernacionAComprar;
         internal int cantidadTotalAComprar;
+        internal ArrayList arrayControlStock = new ArrayList();
 
         public FrmMenuSupervisor(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login, Stock stock)
         {
@@ -59,7 +61,7 @@ namespace Frms
             this.labelPrecioEncuadernacion.Text = "$ " + stock.PrecioEncuadernacionUni.ToString();
 
             Operacion.CargarMaterialesDataGridView(this);
-            stock.CargarStock(this);
+            Visual.CargarStock(dataGridView2, stock);
 
         }
 
@@ -74,13 +76,23 @@ namespace Frms
             this.Hide();
             login.menuOperario.botonVolverSup.Visible = true;
             login.menuOperario.Show();
-            stock.CargarStock(login.menuOperario);
+            Visual.CargarStock(login.menuOperario.dataGridView2, login.menuOperario.stock);
+
+            Visual.ControlStock(login.menuOperario.stock, login.menuOperario.dataGridView2, "papel");
+            Visual.ControlStock(login.menuOperario.stock, login.menuOperario.dataGridView2, "tinta");
+            Visual.ControlStock(login.menuOperario.stock, login.menuOperario.dataGridView2, "troquel");
+            Visual.ControlStock(login.menuOperario.stock, login.menuOperario.dataGridView2, "encuadernacion");
         }
 
         private void buttonComprar_Click(object sender, EventArgs e)
         {
             Operacion.BotonComprarStock(this, stock);
-            stock.CargarStock(this);
+            Visual.CargarStock(dataGridView2, stock);
+
+            Visual.ControlStock(stock, dataGridView2, "papel");
+            Visual.ControlStock(stock, dataGridView2, "tinta");
+            Visual.ControlStock(stock, dataGridView2, "troquel");
+            Visual.ControlStock(stock, dataGridView2, "encuadernacion");
         }
 
         private void labelPrecioTinta_Click(object sender, EventArgs e)

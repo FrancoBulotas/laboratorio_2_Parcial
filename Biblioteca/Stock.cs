@@ -73,22 +73,90 @@ namespace Biblioteca
         //}
 
         /// <summary>
-        /// Monitorea el stock, en caso de haber poco, notifica pintando de color rojo la fila del DataGridView.
+        /// Monitorea el stock, en caso de haber poco, retorna el indice de la fila que tiene poco y el indice de que color 
+        /// tiene que ser pintado (1 en caso de ser rojo, 0 en caso de ser blanco), si hay suficiente retorna -1 en ambos valores.
         /// </summary>
         /// <param name="form"></param>
-        internal void ControlStock(FrmMenuOperario form)
-        {            
-            if (Papel < CantPapel*0.2) { form.dataGridView2.Rows[0].DefaultCellStyle.BackColor = Color.Red; }
-            else { form.dataGridView2.Rows[0].DefaultCellStyle.BackColor = Color.White; }
+        public ArrayList ControlStock(string insumo)
+        {
+            ArrayList valores = new ArrayList(); 
 
-            if (Tinta < CantTinta*0.2) { form.dataGridView2.Rows[1].DefaultCellStyle.BackColor = Color.Red; }
-            else { form.dataGridView2.Rows[1].DefaultCellStyle.BackColor = Color.White; }
+            if (insumo == "papel")
+            {
+                if (Papel < CantPapel * 0.2) 
+                {
+                    valores.Add(0);
+                    valores.Add(1);
+                    return valores; 
+                }
+                if (Papel >= CantPapel * 0.2) 
+                {
+                    valores.Add(0);
+                    valores.Add(0);
+                    return valores; 
+                }
+            }
+            if (insumo == "tinta")
+            {
+                if (Tinta < CantTinta * 0.2) 
+                {
+                    valores.Add(1);
+                    valores.Add(1);
+                    return valores;
+                }
+                if (Tinta >= CantTinta * 0.2) 
+                {
+                    valores.Add(1);
+                    valores.Add(0);
+                    return valores;
+                }
+            }
+            if (insumo == "troquel")
+            {
+                if (Troquel < CantTroquel * 0.2) 
+                {
+                    valores.Add(2);
+                    valores.Add(1);
+                    return valores;
+                }
+                if (Troquel >= CantTroquel * 0.2) 
+                {
+                    valores.Add(2);
+                    valores.Add(0);
+                    return valores;
+                }
+            }
+            if (insumo == "encuadernacion")
+            {
+                if (Encuadernacion < CantEncuadernacion * 0.2) 
+                {
+                    valores.Add(3);
+                    valores.Add(1);
+                    return valores;
+                }
+                if (Encuadernacion >= CantEncuadernacion * 0.2) 
+                {
+                    valores.Add(3);
+                    valores.Add(0);
+                    return valores;
+                }
+            }
+            valores.Add(-1);
+            valores.Add(-1);
+            return valores;
 
-            if (Troquel < CantTroquel* 0.2) { form.dataGridView2.Rows[2].DefaultCellStyle.BackColor = Color.Red; }
-            else { form.dataGridView2.Rows[2].DefaultCellStyle.BackColor = Color.White; }
 
-            if (Encuadernacion < CantEncuadernacion * 0.1) { form.dataGridView2.Rows[3].DefaultCellStyle.BackColor = Color.Red; }
-            else { form.dataGridView2.Rows[3].DefaultCellStyle.BackColor = Color.White; }
+            //if (Papel < CantPapel*0.2) { form.dataGridView2.Rows[0].DefaultCellStyle.BackColor = Color.Red; }
+            //else { form.dataGridView2.Rows[0].DefaultCellStyle.BackColor = Color.White; }
+
+            //if (Tinta < CantTinta*0.2) { form.dataGridView2.Rows[1].DefaultCellStyle.BackColor = Color.Red; }
+            //else { form.dataGridView2.Rows[1].DefaultCellStyle.BackColor = Color.White; }
+
+            //if (Troquel < CantTroquel* 0.2) { form.dataGridView2.Rows[2].DefaultCellStyle.BackColor = Color.Red; }
+            //else { form.dataGridView2.Rows[2].DefaultCellStyle.BackColor = Color.White; }
+
+            //if (Encuadernacion < CantEncuadernacion * 0.1) { form.dataGridView2.Rows[3].DefaultCellStyle.BackColor = Color.Red; }
+            //else { form.dataGridView2.Rows[3].DefaultCellStyle.BackColor = Color.White; }
         }
 
         /// <summary>
@@ -96,27 +164,27 @@ namespace Biblioteca
         /// </summary>
         /// <param name="form"></param>
         /// <param name="filasPedidos"></param>
-        internal void ControlStock(FrmMenuOperario form, DataGridViewRow filasPedidos)
-        {
-            if (filasPedidos != null)
-            {
-                if (filasPedidos.DefaultCellStyle.BackColor == Color.Green)
-                {
-                    try
-                    {
-                        form.stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
-                        form.stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
-                        form.stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
-                        form.stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
-                        CargarStock(form);
-                    }
-                    catch (System.ArgumentException)
-                    {
+        //internal void ControlStock(FrmMenuOperario form, DataGridViewRow filasPedidos)
+        //{
+        //    if (filasPedidos != null)
+        //    {
+        //        if (filasPedidos.DefaultCellStyle.BackColor == Color.Green)
+        //        {
+        //            try
+        //            {
+        //                form.stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
+        //                form.stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
+        //                form.stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
+        //                form.stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
+        //                CargarStock(form);
+        //            }
+        //            catch (System.ArgumentException)
+        //            {
 
-                    }
-            }
-            }
-        }
+        //            }
+        //    }
+        //    }
+        //}
 
         public int Papel { get { return cantPapel; } set { cantPapel += value; } }
         public int Tinta { get { return cantTinta; } set { cantTinta += value; } }

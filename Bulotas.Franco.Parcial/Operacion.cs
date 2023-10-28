@@ -199,14 +199,18 @@ namespace Frms
                         form.stock.Tinta = -Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
                         form.stock.Troquel = -Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
                         form.stock.Encuadernacion = -Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
-                        form.stock.CargarStock(form);
+                        
+                        Visual.CargarStock(form.dataGridView2, form.stock); 
 
                         MostrarInfoPedidoElegido(form, filasPedidos);
 
                         form.filaPedidoEnProceso = filasPedidos;
 
-                        form.stock.ControlStock(form);
-                        
+                        Visual.ControlStock(form.stock, form.dataGridView2, "papel");
+                        Visual.ControlStock(form.stock, form.dataGridView2, "tinta");
+                        Visual.ControlStock(form.stock, form.dataGridView2, "troquel");
+                        Visual.ControlStock(form.stock, form.dataGridView2, "encuadernacion");
+
                         form.dataGridView1.Enabled = false;
                     }
                     else
@@ -337,7 +341,6 @@ namespace Frms
             {
                 maquinarias = "IMPRESORA ";
                 form.radioButtonImpresora.Enabled = true;
-                impresionRequerida = true;
                 form.contProcesos++;
             }
             if (Convert.ToInt32(filasPedidos.Cells["Troquel"].Value) > 0)
