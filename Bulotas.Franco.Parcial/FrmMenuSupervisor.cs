@@ -16,24 +16,18 @@ namespace Frms
     public partial class FrmMenuSupervisor : Form
     {
         private List<Usuario> listaUsuarios;
-        public FrmLogin login;
-        internal Stock stock;
+        internal FrmLogin login;
         internal int indexUsuarioLogueado;
-        internal int cantidadPapelAComprar;
-        internal int cantidadTintaAComprar;
-        internal int cantidadTroquelAComprar;
-        internal int cantidadEncuadernacionAComprar;
-        internal int cantidadTotalAComprar;
         internal ArrayList arrayControlStock = new ArrayList();
+        internal Dictionary<string, int> materialesComprados = new Dictionary<string, int>();
 
-        public FrmMenuSupervisor(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login, Stock stock)
+
+        public FrmMenuSupervisor(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login)
         {
             InitializeComponent();
             this.listaUsuarios = listaUsuarios;
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
-            this.stock = stock;
-
         }
 
         private void FrmMenu_Load(object sender, EventArgs e)
@@ -55,13 +49,13 @@ namespace Frms
                 }
             }
 
-            this.labelPrecioPapel.Text = "$ " + stock.PrecioPapelUni.ToString();
-            this.labelPrecioTinta.Text = "$ " + stock.PrecioTintaUni.ToString();
-            this.labelPrecioTroquel.Text = "$ " + stock.PrecioTroquelUni.ToString();
-            this.labelPrecioEncuadernacion.Text = "$ " + stock.PrecioEncuadernacionUni.ToString();
+            this.labelPrecioPapel.Text = "$ " + login.stock.PrecioPapelUni.ToString();
+            this.labelPrecioTinta.Text = "$ " + login.stock.PrecioTintaUni.ToString();
+            this.labelPrecioTroquel.Text = "$ " + login.stock.PrecioTroquelUni.ToString();
+            this.labelPrecioEncuadernacion.Text = "$ " + login.stock.PrecioEncuadernacionUni.ToString();
 
-            Operacion.CargarMaterialesDataGridView(this);
-            Visual.CargarStock(dataGridView2, stock);
+            Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
+            Visual.CargarStockDg(dataGridView2, login.stock);
 
         }
 
@@ -76,23 +70,17 @@ namespace Frms
             this.Hide();
             login.menuOperario.botonVolverSup.Visible = true;
             login.menuOperario.Show();
-            Visual.CargarStock(login.menuOperario.dataGridView2, login.menuOperario.stock);
-
-            Visual.ControlStock(login.menuOperario.stock, login.menuOperario.dataGridView2, "papel");
-            Visual.ControlStock(login.menuOperario.stock, login.menuOperario.dataGridView2, "tinta");
-            Visual.ControlStock(login.menuOperario.stock, login.menuOperario.dataGridView2, "troquel");
-            Visual.ControlStock(login.menuOperario.stock, login.menuOperario.dataGridView2, "encuadernacion");
+            Visual.CargarStockDg(login.menuOperario.dataGridView2, login.stock);
+            Visual.ControlDataGridStock(login.stock, login.menuOperario.dataGridView2, false);
         }
 
         private void buttonComprar_Click(object sender, EventArgs e)
         {
-            Operacion.BotonComprarStock(this, stock);
-            Visual.CargarStock(dataGridView2, stock);
+            materialesComprados = login.stock.BotonComprarStock(textBoxPapel.Text, textBoxTinta.Text, textBoxTroquel.Text, textBoxEncuadernacion.Text, login.stock);
 
-            Visual.ControlStock(stock, dataGridView2, "papel");
-            Visual.ControlStock(stock, dataGridView2, "tinta");
-            Visual.ControlStock(stock, dataGridView2, "troquel");
-            Visual.ControlStock(stock, dataGridView2, "encuadernacion");
+            Visual.MostrarStockComprado(this, materialesComprados);
+            Visual.CargarStockDg(dataGridView2, login.stock);
+            Visual.ControlDataGridStock(login.stock, dataGridView2, false);
         }
 
         private void labelPrecioTinta_Click(object sender, EventArgs e)

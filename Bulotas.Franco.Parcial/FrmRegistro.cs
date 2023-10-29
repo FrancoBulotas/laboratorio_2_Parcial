@@ -17,13 +17,13 @@ namespace Frms
     {
         private List<Usuario> listaUsuarios;
         public FrmLogin login;
-        private Administracion RRHH;
+        private Administracion administracion;
 
         public FrmRegistro(List<Usuario> listaUsuarios, FrmLogin login, Administracion rrhh)
         {
             InitializeComponent();
 
-            this.RRHH = rrhh;
+            this.administracion = rrhh;
             this.listaUsuarios = listaUsuarios;
             this.login = login;
             login.Hide();
@@ -63,7 +63,7 @@ namespace Frms
 
                     Usuario user = new Usuario(nombre, contra, tipoUsuario);
 
-                    if (RRHH.AgregarUsuario(this.listaUsuarios, user, tipoUsuario))
+                    if (administracion.AgregarUsuario(this.listaUsuarios, user, tipoUsuario))
                     {
                         this.Hide();
                         login.Show();
@@ -119,21 +119,21 @@ namespace Frms
 
         private void linkLabelRandom_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.tbNombreUsuario.Text = Administracion.ValorRandomUsuario(true, false);
-            string contra = Administracion.ValorRandomUsuario(false, false);
-            this.tbContraseña.Text = contra;
-            this.tbRepContraseña.Text = contra;
+            //this.tbNombreUsuario.Text = Administracion.ValorRandomUsuario(true, false);
+            //string contra = Administracion.ValorRandomUsuario(false, false);
+            //this.tbContraseña.Text = contra;
+            //this.tbRepContraseña.Text = contra;
 
-            if (Administracion.ValorRandomUsuario(false, true) == "0")
-            {
-                this.checkBoxOperario.Checked = true;
-                this.checkBoxSupervisor.Checked = false;
-            }
-            else
-            {
-                this.checkBoxOperario.Checked = false;
-                this.checkBoxSupervisor.Checked = true;
-            }
+            //if (Administracion.ValorRandomUsuario(false, true) == "0")
+            //{
+            //    this.checkBoxOperario.Checked = true;
+            //    this.checkBoxSupervisor.Checked = false;
+            //}
+            //else
+            //{
+            //    this.checkBoxOperario.Checked = false;
+            //    this.checkBoxSupervisor.Checked = true;
+            //}
         }
     }
 }

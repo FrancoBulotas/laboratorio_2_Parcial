@@ -11,6 +11,8 @@ namespace Biblioteca
     {
         // son static para que en caso de que se inicialice otro Stock,
         // estos atributos se mantengan iguales (van por clase no por instancia), y evitar que se pisen
+        private static Stock stock;
+
         private static int cantPapel;
         private static int cantTinta;
         private static int cantTroquel;
@@ -23,8 +25,8 @@ namespace Biblioteca
         private const int CantTinta = 3000;
         private const int CantTroquel = 2000;
         private const int CantEncuadernacion = 2200;
-
-        public Stock()
+             
+        private Stock()
         {
             cantPapel = CantPapel;
             cantTinta = CantTinta;
@@ -50,28 +52,6 @@ namespace Biblioteca
             else { return ""; }
         }
 
-        //internal void CargarStock(FrmMenuSupervisor form)
-        //{
-        //    form.nombreLogueado.Text = listaUsuarios[form.indexUsuarioLogueado].NombreUsuario;
-
-        //    form.dataGridView2.Rows[0].Cells["Cantidad2"].Value = Papel.ToString();
-        //    form.dataGridView2.Rows[1].Cells["Cantidad2"].Value = Tinta.ToString();
-        //    form.dataGridView2.Rows[2].Cells["Cantidad2"].Value = Troquel.ToString();
-        //    form.dataGridView2.Rows[3].Cells["Cantidad2"].Value = Encuadernacion.ToString();
-        //}
-
-        /// <summary>
-        /// Se encarga de cargar el stock al Frm del operario
-        /// </summary>
-        /// <param name="form"></param>
-        //internal void CargarStock(FrmMenuOperario form)
-        //{
-        //    form.dataGridView2.Rows[0].Cells["Cantidad2"].Value = Papel.ToString();
-        //    form.dataGridView2.Rows[1].Cells["Cantidad2"].Value = Tinta.ToString();
-        //    form.dataGridView2.Rows[2].Cells["Cantidad2"].Value = Troquel.ToString();
-        //    form.dataGridView2.Rows[3].Cells["Cantidad2"].Value = Encuadernacion.ToString();
-        //}
-
         /// <summary>
         /// Monitorea el stock, en caso de haber poco, retorna el indice de la fila que tiene poco y el indice de que color 
         /// tiene que ser pintado (1 en caso de ser rojo, 0 en caso de ser blanco), si hay suficiente retorna -1 en ambos valores.
@@ -79,32 +59,32 @@ namespace Biblioteca
         /// <param name="form"></param>
         public ArrayList ControlStock(string insumo)
         {
-            ArrayList valores = new ArrayList(); 
+            ArrayList valores = new ArrayList();
 
             if (insumo == "papel")
             {
-                if (Papel < CantPapel * 0.2) 
+                if (Papel < CantPapel * 0.2)
                 {
                     valores.Add(0);
                     valores.Add(1);
-                    return valores; 
+                    return valores;
                 }
-                if (Papel >= CantPapel * 0.2) 
+                if (Papel >= CantPapel * 0.2)
                 {
                     valores.Add(0);
                     valores.Add(0);
-                    return valores; 
+                    return valores;
                 }
             }
             if (insumo == "tinta")
             {
-                if (Tinta < CantTinta * 0.2) 
+                if (Tinta < CantTinta * 0.2)
                 {
                     valores.Add(1);
                     valores.Add(1);
                     return valores;
                 }
-                if (Tinta >= CantTinta * 0.2) 
+                if (Tinta >= CantTinta * 0.2)
                 {
                     valores.Add(1);
                     valores.Add(0);
@@ -113,13 +93,13 @@ namespace Biblioteca
             }
             if (insumo == "troquel")
             {
-                if (Troquel < CantTroquel * 0.2) 
+                if (Troquel < CantTroquel * 0.2)
                 {
                     valores.Add(2);
                     valores.Add(1);
                     return valores;
                 }
-                if (Troquel >= CantTroquel * 0.2) 
+                if (Troquel >= CantTroquel * 0.2)
                 {
                     valores.Add(2);
                     valores.Add(0);
@@ -128,13 +108,13 @@ namespace Biblioteca
             }
             if (insumo == "encuadernacion")
             {
-                if (Encuadernacion < CantEncuadernacion * 0.2) 
+                if (Encuadernacion < CantEncuadernacion * 0.2)
                 {
                     valores.Add(3);
                     valores.Add(1);
                     return valores;
                 }
-                if (Encuadernacion >= CantEncuadernacion * 0.2) 
+                if (Encuadernacion >= CantEncuadernacion * 0.2)
                 {
                     valores.Add(3);
                     valores.Add(0);
@@ -144,47 +124,41 @@ namespace Biblioteca
             valores.Add(-1);
             valores.Add(-1);
             return valores;
-
-
-            //if (Papel < CantPapel*0.2) { form.dataGridView2.Rows[0].DefaultCellStyle.BackColor = Color.Red; }
-            //else { form.dataGridView2.Rows[0].DefaultCellStyle.BackColor = Color.White; }
-
-            //if (Tinta < CantTinta*0.2) { form.dataGridView2.Rows[1].DefaultCellStyle.BackColor = Color.Red; }
-            //else { form.dataGridView2.Rows[1].DefaultCellStyle.BackColor = Color.White; }
-
-            //if (Troquel < CantTroquel* 0.2) { form.dataGridView2.Rows[2].DefaultCellStyle.BackColor = Color.Red; }
-            //else { form.dataGridView2.Rows[2].DefaultCellStyle.BackColor = Color.White; }
-
-            //if (Encuadernacion < CantEncuadernacion * 0.1) { form.dataGridView2.Rows[3].DefaultCellStyle.BackColor = Color.Red; }
-            //else { form.dataGridView2.Rows[3].DefaultCellStyle.BackColor = Color.White; }
         }
 
         /// <summary>
-        /// Controla que al quedar seleccionada una fila, y el usuario se vaya del menu, se reincorpore lo descontado del stock.
+        /// Se encarga de realizar la compra en el mercado y agregarla al stock.
         /// </summary>
-        /// <param name="form"></param>
-        /// <param name="filasPedidos"></param>
-        //internal void ControlStock(FrmMenuOperario form, DataGridViewRow filasPedidos)
-        //{
-        //    if (filasPedidos != null)
-        //    {
-        //        if (filasPedidos.DefaultCellStyle.BackColor == Color.Green)
-        //        {
-        //            try
-        //            {
-        //                form.stock.Papel = +Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
-        //                form.stock.Tinta = +Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
-        //                form.stock.Troquel = +Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
-        //                form.stock.Encuadernacion = +Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
-        //                CargarStock(form);
-        //            }
-        //            catch (System.ArgumentException)
-        //            {
+        /// <param name="form">Instancia del Frm del supervisor.</param>
+        /// <param name="stock">Instancia del Stock.</param>
+        public Dictionary<string, int> BotonComprarStock(string papelIngresadoStr, string tintaIngresadaStr, string troquelIngresadoStr, string encuIngresadoStr, Stock stock)
+        {
+            Dictionary<string, int> materiales = new Dictionary<string, int>();
 
-        //            }
-        //    }
-        //    }
-        //}
+            bool papelConvertido = int.TryParse(papelIngresadoStr, out int papelIngresado);
+            bool tintaConvertida = int.TryParse(tintaIngresadaStr, out int tintaIngresada);
+            bool troquelConvertido = int.TryParse(troquelIngresadoStr, out int troquelIngresado);
+            bool encuConvertido = int.TryParse(encuIngresadoStr, out int encuIngresado);
+
+            if ((papelIngresadoStr != string.Empty ||
+                tintaIngresadaStr != string.Empty ||
+                troquelIngresadoStr != string.Empty ||
+                encuIngresadoStr != string.Empty) &&
+                (papelConvertido && tintaConvertida && troquelConvertido && encuConvertido) &&
+                (papelIngresado >= 0 && tintaIngresada >= 0 && troquelIngresado >= 0 && encuIngresado >= 0))
+            {
+                materiales.Add("Papel", papelIngresado);
+                materiales.Add("Tinta", tintaIngresada);
+                materiales.Add("Troquel", troquelIngresado);
+                materiales.Add("Encuadernacion", encuIngresado);
+
+                return materiales;
+            }
+            else
+            {
+                return materiales;
+            }
+        }
 
         public int Papel { get { return cantPapel; } set { cantPapel += value; } }
         public int Tinta { get { return cantTinta; } set { cantTinta += value; } }
@@ -194,5 +168,17 @@ namespace Biblioteca
         public int PrecioTintaUni { get { return valorTinta; } }
         public int PrecioTroquelUni { get { return valorTroquel; } }
         public int PrecioEncuadernacionUni { get { return valorEncuadernacion; } }
+
+        public static Stock InstanciaStock
+        {
+            get
+            {
+                if (stock == null)
+                {
+                    stock = new Stock();
+                }
+                return stock;
+            }
+        }
     }
 }

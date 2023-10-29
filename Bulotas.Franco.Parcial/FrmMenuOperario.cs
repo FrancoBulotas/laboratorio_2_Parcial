@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,18 +19,16 @@ namespace Frms
         private List<Usuario> listaUsuarios;
         private int indexUsuarioLogueado;
         internal FrmLogin login;
-        internal Stock stock;
         internal DataGridViewRow filaPedidoEnProceso;
         internal int contProcesos = 0;
         internal ArrayList arrayControlStock = new ArrayList();
 
-        public FrmMenuOperario(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login, Stock stock)
+        public FrmMenuOperario(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login)
         {
             InitializeComponent();
             this.listaUsuarios = listaUsuarios;
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
-            this.stock = stock;
         }
 
         private void FrmPruebaMenu_Load(object sender, EventArgs e)
@@ -42,29 +41,23 @@ namespace Frms
 
             this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].NombreUsuario;
 
-            Operacion.CargarMaterialesDataGridView(this);
+            Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
 
-            Visual.CargarStock(dataGridView2, stock);
+            Visual.CargarStockDg(dataGridView2, login.stock);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Operacion.ManejoDataGrid(this, e);
+            Visual.ManejoDataGrid(this, e);
         }
 
         private void botonVolverSup_Click(object sender, EventArgs e)
         {
-            Visual.CargarStock(login.menuSupervisor.dataGridView2, stock);
+            Visual.CargarStockDg(login.menuSupervisor.dataGridView2, login.stock);
 
-            Visual.ControlStock(stock, dataGridView2, "papel");
-            Visual.ControlStock(stock, dataGridView2, "tinta");
-            Visual.ControlStock(stock, dataGridView2, "troquel");
-            Visual.ControlStock(stock, dataGridView2, "encuadernacion");
+            Visual.ControlDataGridStock(login.stock, dataGridView2, false);
 
-            Visual.ControlStock(login.menuSupervisor.stock, login.menuSupervisor.dataGridView2, "papel");
-            Visual.ControlStock(login.menuSupervisor.stock, login.menuSupervisor.dataGridView2, "tinta");
-            Visual.ControlStock(login.menuSupervisor.stock, login.menuSupervisor.dataGridView2, "troquel");
-            Visual.ControlStock(login.menuSupervisor.stock, login.menuSupervisor.dataGridView2, "encuadernacion");
+            Visual.ControlDataGridStock(login.stock, login.menuSupervisor.dataGridView2, false);
 
             this.Hide();
             login.menuSupervisor.Show();
@@ -73,10 +66,7 @@ namespace Frms
 
         private void botonSalir_Click(object sender, EventArgs e)
         {
-            Visual.ControlStock(stock, dataGridView2, "papel");
-            Visual.ControlStock(stock, dataGridView2, "tinta");
-            Visual.ControlStock(stock, dataGridView2, "troquel");
-            Visual.ControlStock(stock, dataGridView2, "encuadernacion");
+            Visual.ControlDataGridStock(login.stock, dataGridView2, true);
             this.Hide();
             login.Show();
         }
@@ -87,10 +77,12 @@ namespace Frms
             if (radioButtonImpresora.Checked)
             {
                 radioButtonImpresora.Enabled = false;
-                Operacion.RealizarTarea(true, false, false, this);
+                Visual.ModificarProgressBar(progressBarImpresora);
 
-                Operacion.ControlProduccion(this, true, false);
-                Operacion.ControlProduccion(this, true, false, false, listaUsuarios[indexUsuarioLogueado]);
+                labelImpresionExitosa.Visible = true;
+
+                Visual.ControlSeleccionProduccion(this, true, false);
+                Visual.InfoProcesoProduccion(this, true, false, false, listaUsuarios[indexUsuarioLogueado]);
 
                 login.menuSupervisor.dataGridView1.Refresh();
                 login.menuSupervisor.dataGridView1.Update();
@@ -101,10 +93,12 @@ namespace Frms
             if (radioButtonTroqueladora.Checked)
             {
                 radioButtonTroqueladora.Enabled = false;
-                Operacion.RealizarTarea(false, true, false, this);
+                          
+                Visual.ModificarProgressBar(progressBarTroqueladora);
+                labelTroqueladoExitoso.Visible = true;
 
-                Operacion.ControlProduccion(this, false, true);
-                Operacion.ControlProduccion(this, true, true, false, listaUsuarios[indexUsuarioLogueado]);
+                Visual.ControlSeleccionProduccion(this, false, true);
+                Visual.InfoProcesoProduccion(this, true, true, false, listaUsuarios[indexUsuarioLogueado]);
 
                 login.menuSupervisor.dataGridView1.Refresh();
                 login.menuSupervisor.dataGridView1.Update();
@@ -115,9 +109,11 @@ namespace Frms
             if (radioButtonEncuadernadora.Checked)
             {
                 radioButtonEncuadernadora.Enabled = false;
-                Operacion.RealizarTarea(false, false, true, this);
+                
+                Visual.ModificarProgressBar(progressBarEncuadernadora);
+                labelEncuExitosa.Visible = true;
 
-                Operacion.ControlProduccion(this, true, true, true, listaUsuarios[indexUsuarioLogueado]);
+                Visual.InfoProcesoProduccion(this, true, true, true, listaUsuarios[indexUsuarioLogueado]);
 
                 login.menuSupervisor.dataGridView1.Refresh();
                 login.menuSupervisor.dataGridView1.Update();

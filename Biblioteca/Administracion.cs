@@ -8,6 +8,41 @@ namespace Biblioteca
 {
     public class Administracion : Empresa
     {
+        private Dictionary<string, string> dictResultado = new Dictionary<string, string>();
+
+
+        public Administracion()
+        {
+            dictResultado.Add("Tipo Usuario", "");
+            dictResultado.Add("Indice", "");
+            dictResultado.Add("Error", "");
+        }
+
+
+        /// <summary>
+        /// Carga los pedidos pendientes al DataGridView del Frm del operario.
+        /// </summary>
+        /// <param name="form"></param>
+        public static void CargarPedidosDataGridView(FrmMenuOperario form) 
+        {
+            //List<string[]> pedidos = new List<string[]>();
+
+            string[] pedido1 = { "Libros de matematica", "10000", "5000", "1500", "1250", "0" };
+            string[] pedido2 = { "Boletas", "50000", "7500", "1200", "0", "0" };
+            string[] pedido3 = { "Cuadernillos", "6000", "5000 ", "1500", "800", "2000" };
+            string[] pedido4 = { "Libros de literatura", "3000", "2200", "700", "200", "280" };
+            string[] pedido5 = { "Libros de historia", "3400", "2600", "750", "250", "300" };
+            string[] pedido6 = { "Envoltorio botellas", "11000", "6200", "3000", "0", "0" };
+
+            form.dataGridView1.Rows.Add(pedido1);
+            form.dataGridView1.Rows.Add(pedido2);
+            form.dataGridView1.Rows.Add(pedido3);
+            form.dataGridView1.Rows.Add(pedido4);
+            form.dataGridView1.Rows.Add(pedido5);
+            form.dataGridView1.Rows.Add(pedido6);
+        }
+
+
         /// <summary>
         /// Agrega un usuario a la lista de usuarios. Valida que no exista.
         /// </summary>
@@ -37,49 +72,88 @@ namespace Biblioteca
         }
 
         /// <summary>
-        /// Genera un valor random, puede ser un nombre, tipo de usuario o contrasenia si ambos parametros son falsos
+        /// Se encarga de Hardcodear el usuario y contrasenia del tipo de usuario seleccionado, para agilizar el ingreso.
         /// </summary>
-        /// <param name="nombreUsuario"></param>
-        /// <param name="tipoUsuario"></param>
-        /// <returns>Retorna un string, ya sea de un nombre de usuario, tipo de usuario o contrasenia</returns>
-        public static string ValorRandomUsuario(bool nombreUsuario, bool tipoUsuario)
+        /// <param name="form"></param>
+        /// <param name="tipoUsuarioDado"></param>
+        public Dictionary<string,string> HardcodearUsuario(string tipoUsuarioDado)
         {
-            List<string> listaNombres = new List<string>
-            {
-                "Franco","Pedro","Juan","Fausto","Adriana","Agustina","Joaquin","Malena","Juana","Enrique",
-                "Nicolas","Ignacio","Joel"
-            };
+            Dictionary<string, string> datosUsuario = new Dictionary<string, string>();
 
-            List<string> tiposUsuarios = new List<string> { "operario", "supervisor" };
-
-            string caracteres = "abcdefghijlmnopqrstuv";
-            char[] arrayContra = new char[2];
-            Random random = new();
-
-            if (tipoUsuario)
+            foreach (Usuario usuario in listaUsuarios)
             {
-                return tiposUsuarios[random.Next(tiposUsuarios.Count)];
-            }
-            else
-            {
-                if (!nombreUsuario)
+                if (usuario.TipoUsuario == tipoUsuarioDado)
                 {
-                    for (int i = 0; i < arrayContra.Length; i++)
+                    datosUsuario.Add("Nombre", usuario.NombreUsuario);
+                    datosUsuario.Add("Contrasenia", usuario.Contrasenia);
+                    return  datosUsuario;
+                }
+            }
+            return datosUsuario;
+        }
+
+        /// <summary>
+        /// Valida que los datos ingresados en el Login sean correctos.
+        /// </summary>
+        /// <param name="form">Instancia del Frm Login</param>
+        public Dictionary<string, string> ValidarUsuario(string nombreIngresado, string contraseniaIngresada)
+        {
+            int cont = 0;
+
+            if (ListaUsuarios.Count >= 1)
+            {
+                if (nombreIngresado != string.Empty)
+                {
+                    if (contraseniaIngresada != string.Empty)
                     {
-                        arrayContra[i] = caracteres[random.Next(caracteres.Length)];
+                        for (int i = 0; i < ListaUsuarios.Count; i++)
+                        {
+                            if (nombreIngresado == ListaUsuarios[i].NombreUsuario && contraseniaIngresada == ListaUsuarios[i].Contrasenia)
+                            {
+                                if (ListaUsuarios[i].TipoUsuario == "operario")
+                                {
+                                    dictResultado["Tipo Usuario"] = "operario";
+                                }
+                                else
+                                {
+                                    dictResultado["Tipo Usuario"] = "supervisor";
+                                }
+
+                                dictResultado["Indice"] = i.ToString();
+                                dictResultado["veces en for"] = cont.ToString();
+
+                                return dictResultado;
+                            }
+                            else
+                            {
+                                dictResultado["Error"] = "Los datos no coinciden.";
+                            }
+
+                            cont++;
+                        }
                     }
-                    return new String(arrayContra);
+                    else
+                    {
+                        dictResultado["Error"] = "Contraseña vacia.";
+                    }
                 }
                 else
                 {
-                    return listaNombres[random.Next(listaNombres.Count)];
+                    dictResultado["Error"] = "Nombre de usuario vacio.";
                 }
             }
+            else
+            {
+                dictResultado["Error"] = " No hay usuarios creados.";
+            }
+
+            return dictResultado;
         }
+
 
         //public override void ControlProduccion()
         //{
-            
+
         //}
     }
 }
