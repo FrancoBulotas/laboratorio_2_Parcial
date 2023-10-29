@@ -12,6 +12,7 @@ namespace Frms
         internal Stock stock;
         private Dictionary<string, string> datosUsuario = new Dictionary<string, string>();
         private Dictionary<string, string> resultadoValidez = new Dictionary<string, string>();
+        private List<string> pedidos = new List<string>();  
 
         public FrmLogin()
         {
@@ -48,7 +49,10 @@ namespace Frms
                 tPass.Text = "";
                 this.Hide();
 
-                //CargarPedidosDataGridView(form.menuOperario);
+                pedidos = administracion.GenerarPedidosDataGridView();
+
+                Visual.CargarPedidosDataGridView(menuOperario.dataGridView1, pedidos);
+
                 resultadoValidez["Tipo Usuario"] = "";
                 resultadoValidez["Indice"] = "";
             }

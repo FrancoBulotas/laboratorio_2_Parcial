@@ -86,6 +86,16 @@ namespace Frms
             dg.Rows.Add("Encuadernacion", stock.Encuadernacion.ToString());
         }
 
+
+        public static void CargarPedidosDataGridView(DataGridView dg, List<string> pedidos) 
+        {
+            for (int i = 0; i < pedidos.Count(); i++)
+            {
+                string[] pedido = pedidos[i].Split("-");
+                dg.Rows.Add(pedido);
+            }
+        }
+
         /// <summary>
         /// Se encarga de manejear los eventos del DataGridView del Frm del operario, en caso
         /// de que se seleccione alguna fila.
@@ -94,6 +104,7 @@ namespace Frms
         /// <param name="e">Eventos sobre el DataGridView.</param>
         public static void ManejoDataGrid(FrmMenuOperario form, DataGridViewCellEventArgs e)
         {
+            Dictionary<string, string> dictInfo = new Dictionary<string, string>();
             if (form.dataGridView1.Columns[e.ColumnIndex].Name == "Seleccion")
             {
                 bool resultado;
@@ -130,7 +141,23 @@ namespace Frms
 
                         CargarStockDg(form.dataGridView2, form.login.stock);
 
-                        MostrarInfoPedidoElegido(form, filasPedidos);
+                        filasPedidos.DefaultCellStyle.BackColor = Color.Green;
+                        form.labelPedido.Visible = true;
+                        form.labelPedidoSeleccionado.Text = filasPedidos.Cells["Pedido"].Value.ToString();
+                        form.labelPedidoSeleccionado.Visible = true;
+                        form.labelMaquinaria.Visible = true;
+                        form.labelMaquinariaNecesaria.Visible = true;
+                        form.radioButtonImpresora.Enabled = true;
+
+                        dictInfo = form.login.administracion.MostrarInfoPedido(Convert.ToInt32(filasPedidos.Cells["Papel"].Value), Convert.ToInt32(filasPedidos.Cells["Troquel"].Value), Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value));
+                        form.labelMaquinariaNecesaria.Text += dictInfo["Maquinas"];
+                        form.contProcesos = Convert.ToInt32(dictInfo["Contador Procesos"]);
+                        troqueladoRequerido = bool.Parse(dictInfo["Troquelado Requerido"]);
+                        encuadernacionRequerida = bool.Parse(dictInfo["Encuadernacion Requerida"]);
+
+                        form.labelCantImp.Text = filasPedidos.Cells["Papel"].Value.ToString();
+                        form.labelCantTroq.Text = filasPedidos.Cells["Troquel"].Value.ToString();
+                        form.labelCantEncu.Text = filasPedidos.Cells["Encuadernacion"].Value.ToString();
 
                         form.filaPedidoEnProceso = filasPedidos;
 
@@ -187,16 +214,19 @@ namespace Frms
             {
                 mensaje = String.Format("Impresion de:\n{0}\nFinalizada!",
                                         filaPedidoElegido.Cells["Pedido"].Value);
+                form.radioButtonImpresora.Checked = false;
             }
             else if (form.contProcesos == 2 && troqueladoFinalizado)
             {
                 mensaje = String.Format("Impresion y troquelado de:\n{0}\nFinalizada!",
                                         filaPedidoElegido.Cells["Pedido"].Value);
+                form.radioButtonTroqueladora.Checked = false;
             }
             else if (form.contProcesos == 3 && encuadernacionFinalizada)
             {
                 mensaje = String.Format("Impresion, troquelado y encuadernacion de:\n{0}\nFinalizada!",
                                         filaPedidoElegido.Cells["Pedido"].Value);
+                form.radioButtonEncuadernadora.Checked = false;
             }
 
             if ((form.contProcesos == 1 && impresionFinalizada) ||
@@ -219,45 +249,10 @@ namespace Frms
         }
 
         /// <summary>
-        /// Se encarga de mostrar en el Frm el detalle del pedido seleccionado.
+        /// 
         /// </summary>
-        /// <param name="form">Instancia del Frm del operario</param>
-        /// <param name="filasPedidos">Fila elegida por el usuario</param>
-        private static void MostrarInfoPedidoElegido(FrmMenuOperario form, DataGridViewRow filasPedidos)
-        {
-            filasPedidos.DefaultCellStyle.BackColor = Color.Green;
-            form.labelPedido.Visible = true;
-            form.labelPedidoSeleccionado.Text = filasPedidos.Cells["Pedido"].Value.ToString();
-            form.labelPedidoSeleccionado.Visible = true;
-            form.labelMaquinaria.Visible = true;
-            form.labelMaquinariaNecesaria.Visible = true;
-
-            string maquinarias = "";
-            if (Convert.ToInt32(filasPedidos.Cells["Papel"].Value) > 0)
-            {
-                maquinarias = "IMPRESORA ";
-                form.radioButtonImpresora.Enabled = true;
-                form.contProcesos++;
-            }
-            if (Convert.ToInt32(filasPedidos.Cells["Troquel"].Value) > 0)
-            {
-                maquinarias += "| TROQUELADORA ";
-                troqueladoRequerido = true;
-                form.contProcesos++;
-            }
-            if (Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value) > 0)
-            {
-                maquinarias += "| ENCUADERNADORA ";
-                encuadernacionRequerida = true;
-                form.contProcesos++;
-            }
-            form.labelMaquinariaNecesaria.Text += maquinarias;
-
-            form.labelCantImp.Text = filasPedidos.Cells["Papel"].Value.ToString();
-            form.labelCantTroq.Text = filasPedidos.Cells["Troquel"].Value.ToString();
-            form.labelCantEncu.Text = filasPedidos.Cells["Encuadernacion"].Value.ToString();
-        }
-
+        /// <param name="form"></param>
+        /// <param name="materiales"></param>
         public static void MostrarStockComprado(FrmMenuSupervisor form, Dictionary<string, int> materiales)
         {
             if (materiales.Count() == 0)

@@ -9,6 +9,7 @@ namespace Biblioteca
     public class Administracion : Empresa
     {
         private Dictionary<string, string> dictResultado = new Dictionary<string, string>();
+        private Dictionary<string, string> dictInfo = new Dictionary<string, string>();
 
 
         public Administracion()
@@ -16,32 +17,109 @@ namespace Biblioteca
             dictResultado.Add("Tipo Usuario", "");
             dictResultado.Add("Indice", "");
             dictResultado.Add("Error", "");
+
+            dictInfo.Add("Maquinas", "");
+            dictInfo.Add("Contador Procesos", "");
+            dictInfo.Add("Troquelado Requerido", "");
+            dictInfo.Add("Encuadernacion Requerida", "");
         }
 
+
+        /// <summary>
+        /// Se encarga de mostrar en el Frm el detalle del pedido seleccionado.
+        /// </summary>
+        /// <param name="form">Instancia del Frm del operario</param>
+        /// <param name="filasPedidos">Fila elegida por el usuario</param>
+        public virtual Dictionary<string, string> MostrarInfoPedido(int cantPapel, int cantTroquel, int cantEncu)
+        {
+            string maquinasNecesarias = "";
+            int contProcesos = 0;
+            bool troqueladoRequerido = false;
+            bool encuadernacionRequerida = false;
+
+            if (Convert.ToInt32(cantPapel) > 0)
+            {
+                maquinasNecesarias = "IMPRESORA ";
+                contProcesos++;
+            }
+            if (Convert.ToInt32(cantTroquel) > 0)
+            {
+                maquinasNecesarias += "| TROQUELADORA ";
+                troqueladoRequerido = true;
+                contProcesos++;
+            }
+            if (Convert.ToInt32(cantEncu) > 0)
+            {
+                maquinasNecesarias += "| ENCUADERNADORA ";
+                encuadernacionRequerida = true;
+                contProcesos++;
+            }
+
+            dictInfo["Maquinas"] = maquinasNecesarias;
+            dictInfo["Contador Procesos"] = contProcesos.ToString();
+            dictInfo["Troquelado Requerido"] = troqueladoRequerido.ToString();
+            dictInfo["Encuadernacion Requerida"] = encuadernacionRequerida.ToString();
+
+            return dictInfo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tipoUsuario"></param>
+        /// <param name="cantInsumo"></param>
+        /// <returns></returns>
+        public string ValorRandomProducto(bool cantInsumo)
+        {
+            List<string> tiposLibros = new List<string> { "Matematica", "Literatura", "Historia" };
+            Random random = new();
+
+            if (cantInsumo)
+            {
+                return (random.Next(10000) + 100).ToString();
+            }
+            else
+            {
+                return tiposLibros[random.Next(tiposLibros.Count)];
+            }
+        }
 
         /// <summary>
         /// Carga los pedidos pendientes al DataGridView del Frm del operario.
         /// </summary>
         /// <param name="form"></param>
-        public static void CargarPedidosDataGridView(FrmMenuOperario form) 
+        public List<string> GenerarPedidosDataGridView()
         {
-            //List<string[]> pedidos = new List<string[]>();
+            List<string> productosTotales = new List<string>();
+            List<string> nombresProductos = new List<string> { "boleta", "libro", "cuadernillo" };
+            Random random = new();
+            string nombreProducto;
 
-            string[] pedido1 = { "Libros de matematica", "10000", "5000", "1500", "1250", "0" };
-            string[] pedido2 = { "Boletas", "50000", "7500", "1200", "0", "0" };
-            string[] pedido3 = { "Cuadernillos", "6000", "5000 ", "1500", "800", "2000" };
-            string[] pedido4 = { "Libros de literatura", "3000", "2200", "700", "200", "280" };
-            string[] pedido5 = { "Libros de historia", "3400", "2600", "750", "250", "300" };
-            string[] pedido6 = { "Envoltorio botellas", "11000", "6200", "3000", "0", "0" };
+            for (int i = 0; i < 20; i++)
+            {
+                string detallesProducto = "";
 
-            form.dataGridView1.Rows.Add(pedido1);
-            form.dataGridView1.Rows.Add(pedido2);
-            form.dataGridView1.Rows.Add(pedido3);
-            form.dataGridView1.Rows.Add(pedido4);
-            form.dataGridView1.Rows.Add(pedido5);
-            form.dataGridView1.Rows.Add(pedido6);
+                nombreProducto = nombresProductos[random.Next(nombresProductos.Count)];
+
+                if (nombreProducto == "boleta")
+                {
+                    Boleta boleta = new Boleta();
+                    detallesProducto = boleta.MostrarInfoPedido(0, 0, 0)["Info"];
+                }
+                else if (nombreProducto == "libro")
+                {
+                    Libro libro = new Libro();
+                    detallesProducto = libro.MostrarInfoPedido(0, 0, 0)["Info"];
+                }
+                else if (nombreProducto == "cuadernillo")
+                {
+                    Cuadernillo cuadernillo = new Cuadernillo();
+                    detallesProducto = cuadernillo.MostrarInfoPedido(0, 0, 0)["Info"];
+                }
+                productosTotales.Add(detallesProducto);
+            }
+            return productosTotales;
         }
-
 
         /// <summary>
         /// Agrega un usuario a la lista de usuarios. Valida que no exista.
@@ -86,7 +164,7 @@ namespace Biblioteca
                 {
                     datosUsuario.Add("Nombre", usuario.NombreUsuario);
                     datosUsuario.Add("Contrasenia", usuario.Contrasenia);
-                    return  datosUsuario;
+                    return datosUsuario;
                 }
             }
             return datosUsuario;
@@ -149,11 +227,5 @@ namespace Biblioteca
 
             return dictResultado;
         }
-
-
-        //public override void ControlProduccion()
-        //{
-
-        //}
     }
 }

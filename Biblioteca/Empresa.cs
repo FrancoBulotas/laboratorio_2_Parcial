@@ -31,7 +31,7 @@ namespace Biblioteca
             for(int i = 0; i < listaNombres.Count() ; i++)
             {
                 string nombreUsuario = listaNombres[i];
-                string contrasenia = ValorRandomUsuario(false);
+                string contrasenia = ValorRandomUsuario(false);;
                 string tipoUsuario = ValorRandomUsuario(true);
                 Usuario usuario = new(nombreUsuario, contrasenia, tipoUsuario);
                 lista.Add(usuario);
@@ -40,12 +40,11 @@ namespace Biblioteca
         }
 
         /// <summary>
-        /// Genera un valor random, puede ser un nombre, tipo de usuario o contrasenia si ambos parametros son falsos
+        /// Genera un valor random, puede ser una cantidad de insumo, tipo de usuario o contrasenia si ambos parametros son falsos
         /// </summary>
-        /// <param name="nombreUsuario"></param>
         /// <param name="tipoUsuario"></param>
-        /// <returns>Retorna un string, ya sea de un nombre de usuario, tipo de usuario o contrasenia</returns>
-        private string ValorRandomUsuario(bool tipoUsuario)
+        /// <returns>Retorna un string, ya sea de una cantidad de insumo, tipo de usuario o contrasenia</returns>
+        public string ValorRandomUsuario( bool tipoUsuario)
         {
             List<string> tiposUsuarios = new List<string> { "operario", "supervisor" };
 
@@ -65,9 +64,8 @@ namespace Biblioteca
                 }
                 return new String(arrayContra);
             }
-        }
 
-        //public abstract void ControlProduccion();
+        }
 
         public List<Usuario> ListaUsuarios { get { return listaUsuarios; } }
     }
