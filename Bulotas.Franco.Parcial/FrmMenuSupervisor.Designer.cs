@@ -96,7 +96,6 @@
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(312, 359);
             dataGridView1.TabIndex = 9;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // USUARIO
             // 
@@ -245,7 +244,6 @@
             labelPrecioTinta.Name = "labelPrecioTinta";
             labelPrecioTinta.Size = new Size(0, 15);
             labelPrecioTinta.TabIndex = 44;
-            labelPrecioTinta.Click += labelPrecioTinta_Click;
             // 
             // labelPrecioTroquel
             // 

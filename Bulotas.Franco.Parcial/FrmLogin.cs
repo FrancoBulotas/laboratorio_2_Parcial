@@ -93,22 +93,5 @@ namespace Frms
             tNombre.Text = datosUsuario["Nombre"];
             tPass.Text = datosUsuario["Contrasenia"];
         }
-
-        private void tPass_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }

@@ -108,38 +108,5 @@ namespace Frms
                 Visual.InfoProcesoProduccion(this, true, true, true, listaUsuarios[indexUsuarioLogueado]);
             }
         }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label15_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nombreLogueado_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void progressBarTroqueladora_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }

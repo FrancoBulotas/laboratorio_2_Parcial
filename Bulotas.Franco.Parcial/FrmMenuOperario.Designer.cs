@@ -170,7 +170,6 @@
             label15.Size = new Size(81, 12);
             label15.TabIndex = 20;
             label15.Text = "Logueado como:";
-            label15.Click += label15_Click_1;
             // 
             // nombreLogueado
             // 
@@ -181,7 +180,6 @@
             nombreLogueado.Name = "nombreLogueado";
             nombreLogueado.Size = new Size(0, 12);
             nombreLogueado.TabIndex = 21;
-            nombreLogueado.Click += nombreLogueado_Click;
             // 
             // dataGridView1
             // 
@@ -351,7 +349,6 @@
             progressBarTroqueladora.Name = "progressBarTroqueladora";
             progressBarTroqueladora.Size = new Size(227, 23);
             progressBarTroqueladora.TabIndex = 30;
-            progressBarTroqueladora.Click += progressBarTroqueladora_Click;
             // 
             // progressBarEncuadernadora
             // 

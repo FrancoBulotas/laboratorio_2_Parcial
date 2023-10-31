@@ -58,7 +58,6 @@
             tPass.PlaceholderText = "Contraseña";
             tPass.Size = new Size(251, 23);
             tPass.TabIndex = 2;
-            tPass.TextChanged += tPass_TextChanged;
             // 
             // tNombre
             // 
@@ -68,7 +67,6 @@
             tNombre.PlaceholderText = "Nombre de usuario";
             tNombre.Size = new Size(251, 23);
             tNombre.TabIndex = 3;
-            tNombre.TextChanged += tNombre_TextChanged;
             // 
             // labelError
             // 
@@ -81,7 +79,6 @@
             labelError.TabIndex = 4;
             labelError.Text = "ERROR";
             labelError.Visible = false;
-            labelError.Click += label1_Click;
             // 
             // registro
             // 

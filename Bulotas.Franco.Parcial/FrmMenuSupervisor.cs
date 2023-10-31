@@ -82,16 +82,6 @@ namespace Frms
             Visual.CargarStockDg(dataGridView2, login.stock);
             Visual.ControlDataGridStock(login.stock, dataGridView2, false);
         }
-
-        private void labelPrecioTinta_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }
 
