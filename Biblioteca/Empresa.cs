@@ -16,9 +16,9 @@ namespace Biblioteca
         }
 
         /// <summary>
-        /// Se encarga de generar una lista de usuarios con datos random
+        /// Se encarga de generar una lista de usuarios con datos random.
         /// </summary>
-        /// <returns>Retorna la lista</returns>
+        /// <returns>Retorna la lista.</returns>
         private List<Usuario> GenerarListaUsuarios()
         {
             List<string> listaNombres = new List<string>
@@ -40,10 +40,10 @@ namespace Biblioteca
         }
 
         /// <summary>
-        /// Genera un valor random, puede ser una cantidad de insumo, tipo de usuario o contrasenia si ambos parametros son falsos
+        /// Genera un valor random, tipo de usuario o contrasenia.
         /// </summary>
         /// <param name="tipoUsuario"></param>
-        /// <returns>Retorna un string, ya sea de una cantidad de insumo, tipo de usuario o contrasenia</returns>
+        /// <returns>Retorna un string con el valor random de un tipo de usuario o contrasenia</returns>
         public string ValorRandomUsuario( bool tipoUsuario)
         {
             List<string> tiposUsuarios = new List<string> { "operario", "supervisor" };

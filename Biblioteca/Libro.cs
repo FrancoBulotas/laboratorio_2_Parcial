@@ -30,6 +30,13 @@ namespace Biblioteca
             dictInfo.Add("Info", "");
         }
 
+        /// <summary>
+        /// Concatena separados por '-' las propiedades de la clase.
+        /// </summary>
+        /// <param name="cantPapel"></param>
+        /// <param name="cantTroquel"></param>
+        /// <param name="cantEncu"></param>
+        /// <returns>Retorna un diccionario con clave='Info' y valor='Propiedades de la clase separados por -'</returns>
         public override Dictionary<string, string> MostrarInfoPedido(int cantPapel, int cantTroquel, int cantEncu)
         {
             dictInfo["Info"] = Nombre + "-" + Cantidad + "-" + PapelNecesario + "-" + TintaNecesaria + "-" + TroquelNecesario + "-" + EncuadernacionNecesario;

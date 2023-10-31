@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             botonSalir = new Button();
             dataGridView1 = new DataGridView();
             USUARIO = new DataGridViewTextBoxColumn();
@@ -41,8 +41,6 @@
             botonMenuOperarios = new Button();
             label1 = new Label();
             buttonComprar = new Button();
-            label10 = new Label();
-            labelPresupuesto = new Label();
             textBoxPapel = new TextBox();
             textBoxTinta = new TextBox();
             textBoxTroquel = new TextBox();
@@ -178,34 +176,13 @@
             // 
             buttonComprar.BackColor = SystemColors.Control;
             buttonComprar.ForeColor = SystemColors.ControlText;
-            buttonComprar.Location = new Point(359, 370);
+            buttonComprar.Location = new Point(393, 373);
             buttonComprar.Name = "buttonComprar";
             buttonComprar.Size = new Size(71, 32);
             buttonComprar.TabIndex = 34;
-            buttonComprar.Text = "Comprar";
+            buttonComprar.Text = "Agregar";
             buttonComprar.UseVisualStyleBackColor = false;
             buttonComprar.Click += buttonComprar_Click;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.BackColor = Color.Transparent;
-            label10.Location = new Point(510, 196);
-            label10.Name = "label10";
-            label10.Size = new Size(82, 15);
-            label10.TabIndex = 35;
-            label10.Text = "PRESUPUESTO";
-            label10.Visible = false;
-            // 
-            // labelPresupuesto
-            // 
-            labelPresupuesto.AutoSize = true;
-            labelPresupuesto.BackColor = Color.Transparent;
-            labelPresupuesto.Location = new Point(608, 196);
-            labelPresupuesto.Name = "labelPresupuesto";
-            labelPresupuesto.Size = new Size(0, 15);
-            labelPresupuesto.TabIndex = 36;
-            labelPresupuesto.Visible = false;
             // 
             // textBoxPapel
             // 
@@ -255,7 +232,7 @@
             // 
             labelPrecioPapel.AutoSize = true;
             labelPrecioPapel.BackColor = Color.Transparent;
-            labelPrecioPapel.Location = new Point(465, 239);
+            labelPrecioPapel.Location = new Point(429, 239);
             labelPrecioPapel.Name = "labelPrecioPapel";
             labelPrecioPapel.Size = new Size(0, 15);
             labelPrecioPapel.TabIndex = 43;
@@ -264,7 +241,7 @@
             // 
             labelPrecioTinta.AutoSize = true;
             labelPrecioTinta.BackColor = Color.Transparent;
-            labelPrecioTinta.Location = new Point(465, 273);
+            labelPrecioTinta.Location = new Point(429, 273);
             labelPrecioTinta.Name = "labelPrecioTinta";
             labelPrecioTinta.Size = new Size(0, 15);
             labelPrecioTinta.TabIndex = 44;
@@ -274,7 +251,7 @@
             // 
             labelPrecioTroquel.AutoSize = true;
             labelPrecioTroquel.BackColor = Color.Transparent;
-            labelPrecioTroquel.Location = new Point(465, 306);
+            labelPrecioTroquel.Location = new Point(429, 306);
             labelPrecioTroquel.Name = "labelPrecioTroquel";
             labelPrecioTroquel.Size = new Size(0, 15);
             labelPrecioTroquel.TabIndex = 45;
@@ -283,7 +260,7 @@
             // 
             labelPrecioEncuadernacion.AutoSize = true;
             labelPrecioEncuadernacion.BackColor = Color.Transparent;
-            labelPrecioEncuadernacion.Location = new Point(465, 337);
+            labelPrecioEncuadernacion.Location = new Point(429, 337);
             labelPrecioEncuadernacion.Name = "labelPrecioEncuadernacion";
             labelPrecioEncuadernacion.Size = new Size(0, 15);
             labelPrecioEncuadernacion.TabIndex = 46;
@@ -303,7 +280,7 @@
             // 
             label12.AutoSize = true;
             label12.BackColor = Color.Transparent;
-            label12.Location = new Point(510, 239);
+            label12.Location = new Point(593, 239);
             label12.Name = "label12";
             label12.Size = new Size(36, 15);
             label12.TabIndex = 49;
@@ -313,7 +290,7 @@
             // 
             label13.AutoSize = true;
             label13.BackColor = Color.Transparent;
-            label13.Location = new Point(510, 338);
+            label13.Location = new Point(593, 338);
             label13.Name = "label13";
             label13.Size = new Size(36, 15);
             label13.TabIndex = 50;
@@ -323,7 +300,7 @@
             // 
             label14.AutoSize = true;
             label14.BackColor = Color.Transparent;
-            label14.Location = new Point(510, 306);
+            label14.Location = new Point(593, 306);
             label14.Name = "label14";
             label14.Size = new Size(36, 15);
             label14.TabIndex = 51;
@@ -333,7 +310,7 @@
             // 
             label16.AutoSize = true;
             label16.BackColor = Color.Transparent;
-            label16.Location = new Point(510, 273);
+            label16.Location = new Point(593, 273);
             label16.Name = "label16";
             label16.Size = new Size(24, 15);
             label16.TabIndex = 52;
@@ -359,7 +336,7 @@
             // 
             label17.AutoSize = true;
             label17.BackColor = Color.Transparent;
-            label17.Location = new Point(359, 240);
+            label17.Location = new Point(393, 239);
             label17.Name = "label17";
             label17.Size = new Size(36, 15);
             label17.TabIndex = 58;
@@ -369,7 +346,7 @@
             // 
             label18.AutoSize = true;
             label18.BackColor = Color.Transparent;
-            label18.Location = new Point(359, 273);
+            label18.Location = new Point(393, 272);
             label18.Name = "label18";
             label18.Size = new Size(33, 15);
             label18.TabIndex = 59;
@@ -379,7 +356,7 @@
             // 
             label19.AutoSize = true;
             label19.BackColor = Color.Transparent;
-            label19.Location = new Point(359, 305);
+            label19.Location = new Point(393, 304);
             label19.Name = "label19";
             label19.Size = new Size(46, 15);
             label19.TabIndex = 60;
@@ -389,7 +366,7 @@
             // 
             label20.AutoSize = true;
             label20.BackColor = Color.Transparent;
-            label20.Location = new Point(359, 339);
+            label20.Location = new Point(393, 338);
             label20.Name = "label20";
             label20.Size = new Size(92, 15);
             label20.TabIndex = 61;
@@ -401,17 +378,17 @@
             dataGridView2.AllowUserToDeleteRows = false;
             dataGridView2.AllowUserToResizeColumns = false;
             dataGridView2.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView2.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Material, Cantidad2 });
             dataGridView2.Location = new Point(451, 32);
@@ -462,8 +439,6 @@
             Controls.Add(textBoxTroquel);
             Controls.Add(textBoxTinta);
             Controls.Add(textBoxPapel);
-            Controls.Add(labelPresupuesto);
-            Controls.Add(label10);
             Controls.Add(buttonComprar);
             Controls.Add(label1);
             Controls.Add(botonMenuOperarios);
@@ -489,8 +464,6 @@
         private Button botonMenuOperarios;
         private Label label1;
         private Button buttonComprar;
-        private Label label10;
-        internal Label labelPresupuesto;
         internal TextBox textBoxPapel;
         internal TextBox textBoxTinta;
         internal TextBox textBoxTroquel;

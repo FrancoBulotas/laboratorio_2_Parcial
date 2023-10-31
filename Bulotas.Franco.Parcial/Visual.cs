@@ -1,4 +1,5 @@
 ﻿using Biblioteca;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,10 +17,10 @@ namespace Frms
         private static DataGridViewRow filaPedidoElegido;
 
         /// <summary>
-        /// 
+        /// Carga el stock en las filas del DataGridView pasado como parametro.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="dg"></param>
+        /// <param name="stock"></param>
         internal static void CargarStockDg(DataGridView dg, Stock stock)
         {
             dg.Rows[0].Cells["Cantidad2"].Value = stock.ConsultarCantidadInsumo("papel");
@@ -29,13 +30,14 @@ namespace Frms
         }
 
         /// <summary>
-        /// 
+        /// Controla que el stock no este bajo, en caso de estarlo pinta la fila en rojo.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="stock"></param>
+        /// <param name="dg"></param>
+        /// <param name="insumo"></param>
         private static void ControlColorCantidadStock(Stock stock, DataGridView dg, string insumo)
         {
-            ArrayList arrayControlStock = new ArrayList();
+            ArrayList arrayControlStock;
             arrayControlStock = stock.ControlStock(insumo);
 
             if ((int)arrayControlStock[0] >= 0)
@@ -44,40 +46,27 @@ namespace Frms
 
                 else if ((int)arrayControlStock[1] == 0) { dg.Rows[(int)arrayControlStock[0]].DefaultCellStyle.BackColor = Color.White; }
             }
-
-
         }
 
         /// <summary>
-        /// 
+        /// Controla el DataGridView del stock, llama al metodo ControlColorCantidadStock() para ello.
         /// </summary>
         /// <param name="stock"></param>
         /// <param name="dg"></param>
+        /// <param name="salir"></param>
         internal static void ControlDataGridStock(Stock stock, DataGridView dg, bool salir)
         {
             ControlColorCantidadStock(stock, dg, "papel");
             ControlColorCantidadStock(stock, dg, "tinta");
             ControlColorCantidadStock(stock, dg, "troquel");
             ControlColorCantidadStock(stock, dg, "encuadernacion");
-
-            //if (salir)
-            //{
-            //    if (filaPedidoElegido.Index >= 0)
-            //    {
-            //        stock.Papel = +Convert.ToInt32(filaPedidoElegido.Cells["Papel"].Value);
-            //        stock.Tinta = +Convert.ToInt32(filaPedidoElegido.Cells["Tinta"].Value);
-            //        stock.Troquel = +Convert.ToInt32(filaPedidoElegido.Cells["Troquel"].Value);
-            //        stock.Encuadernacion = +Convert.ToInt32(filaPedidoElegido.Cells["Encuadernacion"].Value);
-            //        CargarStockDg(dg, stock);
-            //    }
-            //}
         }
 
-
         /// <summary>
-        /// Carga los materiales con su respectivo stock al DataGridView del Frm del supervisor.
+        /// Agrega los insumos disponibles en el stock al DataGridView dado.
         /// </summary>
-        /// <param name="form"></param>
+        /// <param name="dg"></param>
+        /// <param name="stock"></param>
         public static void CargarMaterialesDataGridView(DataGridView dg, Stock stock)
         {
             dg.Rows.Add("Papel", stock.Papel.ToString());
@@ -86,7 +75,11 @@ namespace Frms
             dg.Rows.Add("Encuadernacion", stock.Encuadernacion.ToString());
         }
 
-
+        /// <summary>
+        /// Ingresa en el DataGridView los pedidos pasados como parametro en List<string> siendo que estas cadenas separan cada columna por '-'.
+        /// </summary>
+        /// <param name="dg"></param>
+        /// <param name="pedidos"></param>
         public static void CargarPedidosDataGridView(DataGridView dg, List<string> pedidos) 
         {
             for (int i = 0; i < pedidos.Count(); i++)
@@ -117,7 +110,7 @@ namespace Frms
                 DataGridViewCheckBoxCell celdaSeleccion = filasPedidos.Cells["Seleccion"] as DataGridViewCheckBoxCell;
 
                 // Tuve que hacer esto porque sino al seleccionar por segunda vez un elemento rompia (como que celdaSeleccion.Value cambiaba
-                // y no podia convertirlo)
+                // y no podia convertirlo) NO LO PUDE SOLUCIONAR DE OTRA MANERA
                 try
                 {
                     resultado = !Convert.ToBoolean(celdaSeleccion.Value);
@@ -134,19 +127,14 @@ namespace Frms
                         Convert.ToInt32(filasPedidos.Cells["Troquel"].Value) <= form.login.stock.Troquel &&
                         Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value) <= form.login.stock.Encuadernacion)
                     {
-                        form.login.stock.Papel = -Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
-                        form.login.stock.Tinta = -Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
-                        form.login.stock.Troquel = -Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
-                        form.login.stock.Encuadernacion = -Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
-
-                        CargarStockDg(form.dataGridView2, form.login.stock);
+                        form.cantPapelAConsumir = Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
+                        form.cantTintaAConsumir = Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
+                        form.cantTroquelAConsumir = Convert.ToInt32(filasPedidos.Cells["Troquel"].Value);
+                        form.cantEncuAConsumir = Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value);
 
                         filasPedidos.DefaultCellStyle.BackColor = Color.Green;
-                        form.labelPedido.Visible = true;
                         form.labelPedidoSeleccionado.Text = filasPedidos.Cells["Pedido"].Value.ToString();
-                        form.labelPedidoSeleccionado.Visible = true;
-                        form.labelMaquinaria.Visible = true;
-                        form.labelMaquinariaNecesaria.Visible = true;
+                        ModificarVisibilidadLabels(form, true);
                         form.radioButtonImpresora.Enabled = true;
 
                         dictInfo = form.login.administracion.MostrarInfoPedido(Convert.ToInt32(filasPedidos.Cells["Papel"].Value), Convert.ToInt32(filasPedidos.Cells["Troquel"].Value), Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value));
@@ -161,8 +149,6 @@ namespace Frms
 
                         form.filaPedidoEnProceso = filasPedidos;
 
-                        ControlDataGridStock(form.login.stock, form.dataGridView2, false);
-
                         form.dataGridView1.Enabled = false;
                     }
                     else
@@ -172,14 +158,9 @@ namespace Frms
                         MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         filasPedidos.DefaultCellStyle.BackColor = Color.Red;
-                        form.labelPedido.Visible = false;
-                        form.labelPedidoSeleccionado.Visible = false;
-                        form.labelMaquinaria.Visible = false;
-                        form.labelMaquinariaNecesaria.Visible = false;
-                        form.labelMaquinariaNecesaria.Text = "";
+                        ModificarVisibilidadLabels(form, false);
                     }
                     celdaSeleccion.Value = true;
-
                 }
                 else
                 {
@@ -187,15 +168,25 @@ namespace Frms
                                                         filasPedidos.Cells["Pedido"].Value);
                     MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     filasPedidos.DefaultCellStyle.BackColor = Color.White;
-                    form.labelPedido.Visible = false;
-                    form.labelPedidoSeleccionado.Visible = false;
-                    form.labelMaquinaria.Visible = false;
-                    form.labelMaquinariaNecesaria.Visible = false;
-                    form.labelMaquinariaNecesaria.Text = "";
+                    ModificarVisibilidadLabels(form, false);
                     celdaSeleccion.Value = false;
                 }
             }
         }
+
+        /// <summary>
+        /// Modifica la visibilidad de los labels que indican el pedido seleccionado.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <param name="valor"></param>
+        private static void ModificarVisibilidadLabels(FrmMenuOperario form, bool valor)
+        {
+            form.labelPedido.Visible = valor;
+            form.labelPedidoSeleccionado.Visible = valor;
+            form.labelMaquinaria.Visible = valor;
+            form.labelMaquinariaNecesaria.Visible = valor;
+        }
+
 
         /// <summary>
         /// Se encarga de indicar con MessageBox cuando se termine el producto, y reestablece valores 
@@ -215,18 +206,24 @@ namespace Frms
                 mensaje = String.Format("Impresion de:\n{0}\nFinalizada!",
                                         filaPedidoElegido.Cells["Pedido"].Value);
                 form.radioButtonImpresora.Checked = false;
+                form.labelMaquinariaNecesaria.Text = "";
+                form.labelPedidoSeleccionado.Text = "";
             }
             else if (form.contProcesos == 2 && troqueladoFinalizado)
             {
                 mensaje = String.Format("Impresion y troquelado de:\n{0}\nFinalizada!",
                                         filaPedidoElegido.Cells["Pedido"].Value);
                 form.radioButtonTroqueladora.Checked = false;
+                form.labelMaquinariaNecesaria.Text = "";
+                form.labelPedidoSeleccionado.Text = "";
             }
             else if (form.contProcesos == 3 && encuadernacionFinalizada)
             {
                 mensaje = String.Format("Impresion, troquelado y encuadernacion de:\n{0}\nFinalizada!",
                                         filaPedidoElegido.Cells["Pedido"].Value);
                 form.radioButtonEncuadernadora.Checked = false;
+                form.labelMaquinariaNecesaria.Text = "";
+                form.labelPedidoSeleccionado.Text = "";
             }
 
             if ((form.contProcesos == 1 && impresionFinalizada) ||
@@ -234,9 +231,9 @@ namespace Frms
                 (form.contProcesos == 3 && encuadernacionFinalizada))
             {
                 MessageBox.Show(mensaje, "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                 form.dataGridView1.Rows.Remove(form.filaPedidoEnProceso);
-                usuario.TrabajosRealizados = 1;
+                usuario.TrabajosRealizados += 1;
                 form.dataGridView1.Enabled = true;
                 form.progressBarImpresora.Value = form.progressBarImpresora.Minimum;
                 form.progressBarTroqueladora.Value = form.progressBarTroqueladora.Minimum;
@@ -245,11 +242,15 @@ namespace Frms
                 form.labelImpresionExitosa.Visible = false;
                 form.labelTroqueladoExitoso.Visible = false;
                 form.labelEncuExitosa.Visible = false;
+
+                form.labelCantEncu.Text = "0";
+                form.labelCantImp.Text = "0";
+                form.labelCantTroq.Text = "0";
             }
         }
 
         /// <summary>
-        /// 
+        /// Se encarga de cargar en la instancia del stock, la cantidad de insumos comprados previamente.
         /// </summary>
         /// <param name="form"></param>
         /// <param name="materiales"></param>
@@ -293,7 +294,7 @@ namespace Frms
         }
 
         /// <summary>
-        /// 
+        /// Se encarga de aumentar el progeso de la barra.
         /// </summary>
         /// <param name="label"></param>
         /// <param name="barraProgeso"></param>
@@ -307,5 +308,48 @@ namespace Frms
             }
             barraProgeso.Value = barraProgeso.Maximum;
         }
+
+        /// <summary>
+        /// Actualiza el stock, labels y avisa cuando termina de producir.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <param name="boton"></param>
+        /// <param name="label"></param>
+        /// <param name="barra"></param>
+        /// <param name="impresora"></param>
+        /// <param name="troqueladora"></param>
+        public static void ActualizarFormAlChequear(FrmMenuOperario form, RadioButton boton, Label label, ProgressBar barra, bool impresora, bool troqueladora)
+        {
+            boton.Enabled = false;
+            ModificarProgressBar(barra);
+            label.Visible = true;
+
+            if (impresora)
+            {
+                form.login.stock.Papel = -form.cantPapelAConsumir;
+                form.login.stock.Tinta = -form.cantTintaAConsumir;
+                form.cantPapelAConsumir = 0;
+                form.cantTintaAConsumir = 0;
+            }
+            else if (troqueladora)
+            {
+                form.login.stock.Troquel = -form.cantTroquelAConsumir;
+                form.cantTroquelAConsumir = 0;
+            }
+            else
+            {
+                form.login.stock.Encuadernacion = -form.cantEncuAConsumir;
+                form.cantEncuAConsumir = 0;
+            }
+
+            CargarStockDg(form.dataGridView2, form.login.stock);
+            ControlDataGridStock(form.login.stock, form.dataGridView2, false);
+
+            if (impresora || troqueladora)
+            {
+                ControlSeleccionProduccion(form, impresora, troqueladora);
+            }
+        }
+
     }
 }

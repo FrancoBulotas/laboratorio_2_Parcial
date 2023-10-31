@@ -26,10 +26,11 @@ namespace Biblioteca
 
 
         /// <summary>
-        /// Se encarga de mostrar en el Frm el detalle del pedido seleccionado.
+        /// Se encarga de validar el detalle del pedido seleccionado y que maquinarias hacen falta para su uso.
         /// </summary>
         /// <param name="form">Instancia del Frm del operario</param>
         /// <param name="filasPedidos">Fila elegida por el usuario</param>
+        /// <returns>Retorna un Dict con info del pedido</returns>
         public virtual Dictionary<string, string> MostrarInfoPedido(int cantPapel, int cantTroquel, int cantEncu)
         {
             string maquinasNecesarias = "";
@@ -64,11 +65,11 @@ namespace Biblioteca
         }
 
         /// <summary>
-        /// 
+        /// Genera un valor random, de un tipo de libro o de un numero entre el 100 y 10000.
         /// </summary>
         /// <param name="tipoUsuario"></param>
         /// <param name="cantInsumo"></param>
-        /// <returns></returns>
+        /// <returns>Retorna una string con el valor random generado.</returns>
         public string ValorRandomProducto(bool cantInsumo)
         {
             List<string> tiposLibros = new List<string> { "Matematica", "Literatura", "Historia" };
@@ -85,9 +86,10 @@ namespace Biblioteca
         }
 
         /// <summary>
-        /// Carga los pedidos pendientes al DataGridView del Frm del operario.
+        /// Genera aleatoriamente los pedidos en el formato adecuado para un DataGridView.
         /// </summary>
         /// <param name="form"></param>
+        /// <returns>Retorna una lista de string con los pedidos.</returns>
         public List<string> GenerarPedidosDataGridView()
         {
             List<string> productosTotales = new List<string>();

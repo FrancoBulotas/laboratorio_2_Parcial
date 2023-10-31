@@ -16,12 +16,16 @@ namespace Frms
 {
     public partial class FrmMenuOperario : Form
     {
-        private List<Usuario> listaUsuarios;
-        private int indexUsuarioLogueado;
+        internal List<Usuario> listaUsuarios;
+        internal int indexUsuarioLogueado;
         internal FrmLogin login;
         internal DataGridViewRow filaPedidoEnProceso;
         internal int contProcesos = 0;
         internal ArrayList arrayControlStock = new ArrayList();
+        internal int cantPapelAConsumir;
+        internal int cantTintaAConsumir;
+        internal int cantTroquelAConsumir;
+        internal int cantEncuAConsumir;
 
         public FrmMenuOperario(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login)
         {
@@ -29,9 +33,13 @@ namespace Frms
             this.listaUsuarios = listaUsuarios;
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
+            cantPapelAConsumir = 0;
+            cantTintaAConsumir = 0;
+            cantTroquelAConsumir = 0;
+            cantEncuAConsumir = 0;
         }
 
-        private void FrmPruebaMenu_Load(object sender, EventArgs e)
+    private void FrmPruebaMenu_Load(object sender, EventArgs e)
         {
             string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
             string rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-app.jpg");
@@ -73,50 +81,28 @@ namespace Frms
 
         private void radioButtonImpresora_CheckedChanged(object sender, EventArgs e)
         {
-            // Deshabilitar el botón mientras se realiza la tarea
             if (radioButtonImpresora.Checked)
             {
-                radioButtonImpresora.Enabled = false;
-                Visual.ModificarProgressBar(progressBarImpresora);
-
-                labelImpresionExitosa.Visible = true;
-
-                Visual.ControlSeleccionProduccion(this, true, false);
+                Visual.ActualizarFormAlChequear(this, radioButtonImpresora, labelImpresionExitosa, progressBarImpresora, true, false);
                 Visual.InfoProcesoProduccion(this, true, false, false, listaUsuarios[indexUsuarioLogueado]);
-
-                login.menuSupervisor.dataGridView1.Refresh();
-                login.menuSupervisor.dataGridView1.Update();
             }
         }
+
         private void radioButtonTroqueladora_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonTroqueladora.Checked)
             {
-                radioButtonTroqueladora.Enabled = false;
-                          
-                Visual.ModificarProgressBar(progressBarTroqueladora);
-                labelTroqueladoExitoso.Visible = true;
-
-                Visual.ControlSeleccionProduccion(this, false, true);
+                Visual.ActualizarFormAlChequear(this, radioButtonTroqueladora, labelTroqueladoExitoso, progressBarTroqueladora, false, true);
                 Visual.InfoProcesoProduccion(this, true, true, false, listaUsuarios[indexUsuarioLogueado]);
-
-                login.menuSupervisor.dataGridView1.Refresh();
-                login.menuSupervisor.dataGridView1.Update();
             }
         }
+
         private void radioButtonEncuadernadora_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonEncuadernadora.Checked)
             {
-                radioButtonEncuadernadora.Enabled = false;
-                
-                Visual.ModificarProgressBar(progressBarEncuadernadora);
-                labelEncuExitosa.Visible = true;
-
+                Visual.ActualizarFormAlChequear(this, radioButtonEncuadernadora, labelEncuExitosa, progressBarEncuadernadora, false, false);
                 Visual.InfoProcesoProduccion(this, true, true, true, listaUsuarios[indexUsuarioLogueado]);
-
-                login.menuSupervisor.dataGridView1.Refresh();
-                login.menuSupervisor.dataGridView1.Update();
             }
         }
 

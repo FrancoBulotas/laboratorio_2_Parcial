@@ -49,11 +49,6 @@ namespace Frms
                 }
             }
 
-            this.labelPrecioPapel.Text = "$ " + login.stock.PrecioPapelUni.ToString();
-            this.labelPrecioTinta.Text = "$ " + login.stock.PrecioTintaUni.ToString();
-            this.labelPrecioTroquel.Text = "$ " + login.stock.PrecioTroquelUni.ToString();
-            this.labelPrecioEncuadernacion.Text = "$ " + login.stock.PrecioEncuadernacionUni.ToString();
-
             Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
             Visual.CargarStockDg(dataGridView2, login.stock);
 

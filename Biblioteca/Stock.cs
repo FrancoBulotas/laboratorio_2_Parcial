@@ -7,20 +7,13 @@ using System.Threading.Tasks;
 
 namespace Biblioteca
 {
-    public class Stock : Administracion
+    public class Stock 
     {
-        // son static para que en caso de que se inicialice otro Stock,
-        // estos atributos se mantengan iguales (van por clase no por instancia), y evitar que se pisen
         private static Stock stock;
-
         private static int cantPapel;
         private static int cantTinta;
         private static int cantTroquel;
         private static int cantEncuadernacion;
-        private static int valorPapelUni;
-        private static int valorTinta;
-        private static int valorTroquel;
-        private static int valorEncuadernacion;
         private const int CantPapel = 7000;
         private const int CantTinta = 3000;
         private const int CantTroquel = 2000;
@@ -32,17 +25,13 @@ namespace Biblioteca
             cantTinta = CantTinta;
             cantTroquel = CantTroquel;
             cantEncuadernacion = CantEncuadernacion;
-            valorPapelUni = 60;
-            valorTinta = 80;
-            valorTroquel = 150;
-            valorEncuadernacion = 65;
         }
 
         /// <summary>
-        /// Se encarga de devolver la cantidad de insumo disponible.
+        /// Se encarga de consultar la cantidad de insumo disponible.
         /// </summary>
         /// <param name="form"></param>
-
+        /// <returns>Retorna un string con la cantidad de insumo solicitado</returns>
         public string ConsultarCantidadInsumo(string insumo)
         { 
             if (insumo == "papel") { return Papel.ToString(); }
@@ -57,6 +46,7 @@ namespace Biblioteca
         /// tiene que ser pintado (1 en caso de ser rojo, 0 en caso de ser blanco), si hay suficiente retorna -1 en ambos valores.
         /// </summary>
         /// <param name="form"></param>
+        /// <returns>Un ArrayList con dos numeros enteros. </returns>
         public ArrayList ControlStock(string insumo)
         {
             ArrayList valores = new ArrayList();
@@ -127,10 +117,14 @@ namespace Biblioteca
         }
 
         /// <summary>
-        /// Se encarga de realizar la compra en el mercado y agregarla al stock.
+        /// Se encarga de validar una compra, que los datos pasados como parametro sean validos.
         /// </summary>
-        /// <param name="form">Instancia del Frm del supervisor.</param>
-        /// <param name="stock">Instancia del Stock.</param>
+        /// <param name="papelIngresadoStr"></param>
+        /// <param name="tintaIngresadaStr"></param>
+        /// <param name="troquelIngresadoStr"></param>
+        /// <param name="encuIngresadoStr"></param>
+        /// <param name="stock"></param>
+        /// <returns>Un Dictionary vacio en caso de fallar la compra, y con los elementos a comprar en caso de ser correcta.</returns>
         public Dictionary<string, int> BotonComprarStock(string papelIngresadoStr, string tintaIngresadaStr, string troquelIngresadoStr, string encuIngresadoStr, Stock stock)
         {
             Dictionary<string, int> materiales = new Dictionary<string, int>();
@@ -164,11 +158,10 @@ namespace Biblioteca
         public int Tinta { get { return cantTinta; } set { cantTinta += value; } }
         public int Troquel { get { return cantTroquel; } set { cantTroquel += value; } }
         public int Encuadernacion { get { return cantEncuadernacion; } set { cantEncuadernacion += value; } }
-        public int PrecioPapelUni { get { return valorPapelUni; } }
-        public int PrecioTintaUni { get { return valorTinta; } }
-        public int PrecioTroquelUni { get { return valorTroquel; } }
-        public int PrecioEncuadernacionUni { get { return valorEncuadernacion; } }
 
+        /// <summary>
+        /// Para el singleton, solo se puede generar una vez.
+        /// </summary>
         public static Stock InstanciaStock
         {
             get
