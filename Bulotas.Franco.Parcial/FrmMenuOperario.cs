@@ -39,7 +39,7 @@ namespace Frms
             cantEncuAConsumir = 0;
         }
 
-    private void FrmPruebaMenu_Load(object sender, EventArgs e)
+        private void FrmPruebaMenu_Load(object sender, EventArgs e)
         {
             string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
             string rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-app.jpg");
@@ -54,6 +54,11 @@ namespace Frms
             Visual.CargarStockDg(dataGridView2, login.stock);
         }
 
+        private void FrmPruebaMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             Visual.ManejoDataGrid(this, e);
@@ -62,9 +67,7 @@ namespace Frms
         private void botonVolverSup_Click(object sender, EventArgs e)
         {
             Visual.CargarStockDg(login.menuSupervisor.dataGridView2, login.stock);
-
             Visual.ControlDataGridStock(login.stock, dataGridView2, false);
-
             Visual.ControlDataGridStock(login.stock, login.menuSupervisor.dataGridView2, false);
 
             this.Hide();

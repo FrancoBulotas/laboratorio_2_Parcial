@@ -42,6 +42,13 @@
             label15 = new Label();
             nombreLogueado = new Label();
             dataGridView1 = new DataGridView();
+            Pedido = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            Papel = new DataGridViewTextBoxColumn();
+            Tinta = new DataGridViewTextBoxColumn();
+            Troquel = new DataGridViewTextBoxColumn();
+            Encuadernacion = new DataGridViewTextBoxColumn();
+            Seleccion = new DataGridViewCheckBoxColumn();
             botonVolverSup = new Button();
             radioButtonEncuadernadora = new RadioButton();
             labelPedido = new Label();
@@ -66,13 +73,6 @@
             labelImpresionExitosa = new Label();
             labelTroqueladoExitoso = new Label();
             labelEncuExitosa = new Label();
-            Pedido = new DataGridViewTextBoxColumn();
-            Cantidad = new DataGridViewTextBoxColumn();
-            Papel = new DataGridViewTextBoxColumn();
-            Tinta = new DataGridViewTextBoxColumn();
-            Troquel = new DataGridViewTextBoxColumn();
-            Encuadernacion = new DataGridViewTextBoxColumn();
-            Seleccion = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
@@ -210,6 +210,60 @@
             dataGridView1.Size = new Size(729, 138);
             dataGridView1.TabIndex = 22;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // Pedido
+            // 
+            Pedido.HeaderText = "PEDIDO";
+            Pedido.Name = "Pedido";
+            Pedido.ReadOnly = true;
+            Pedido.Resizable = DataGridViewTriState.False;
+            Pedido.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Pedido.Width = 200;
+            // 
+            // Cantidad
+            // 
+            Cantidad.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Cantidad.HeaderText = "CANTIDAD";
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            Cantidad.Resizable = DataGridViewTriState.False;
+            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Papel
+            // 
+            Papel.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Papel.HeaderText = "PAPEL";
+            Papel.Name = "Papel";
+            Papel.Resizable = DataGridViewTriState.False;
+            // 
+            // Tinta
+            // 
+            Tinta.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Tinta.HeaderText = "TINTA";
+            Tinta.Name = "Tinta";
+            Tinta.Resizable = DataGridViewTriState.False;
+            // 
+            // Troquel
+            // 
+            Troquel.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Troquel.HeaderText = "TROQUEL";
+            Troquel.Name = "Troquel";
+            Troquel.Resizable = DataGridViewTriState.False;
+            // 
+            // Encuadernacion
+            // 
+            Encuadernacion.HeaderText = "ENCUADERNACION";
+            Encuadernacion.Name = "Encuadernacion";
+            Encuadernacion.Resizable = DataGridViewTriState.False;
+            Encuadernacion.Width = 120;
+            // 
+            // Seleccion
+            // 
+            Seleccion.HeaderText = "";
+            Seleccion.Name = "Seleccion";
+            Seleccion.Resizable = DataGridViewTriState.False;
+            Seleccion.TrueValue = "";
+            Seleccion.Width = 50;
             // 
             // botonVolverSup
             // 
@@ -468,60 +522,6 @@
             labelEncuExitosa.Text = "Encuadernacion Finalizado";
             labelEncuExitosa.Visible = false;
             // 
-            // Pedido
-            // 
-            Pedido.HeaderText = "PEDIDO";
-            Pedido.Name = "Pedido";
-            Pedido.ReadOnly = true;
-            Pedido.Resizable = DataGridViewTriState.False;
-            Pedido.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Pedido.Width = 200;
-            // 
-            // Cantidad
-            // 
-            Cantidad.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Cantidad.HeaderText = "CANTIDAD";
-            Cantidad.Name = "Cantidad";
-            Cantidad.ReadOnly = true;
-            Cantidad.Resizable = DataGridViewTriState.False;
-            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Papel
-            // 
-            Papel.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Papel.HeaderText = "PAPEL";
-            Papel.Name = "Papel";
-            Papel.Resizable = DataGridViewTriState.False;
-            // 
-            // Tinta
-            // 
-            Tinta.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Tinta.HeaderText = "TINTA";
-            Tinta.Name = "Tinta";
-            Tinta.Resizable = DataGridViewTriState.False;
-            // 
-            // Troquel
-            // 
-            Troquel.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Troquel.HeaderText = "TROQUEL";
-            Troquel.Name = "Troquel";
-            Troquel.Resizable = DataGridViewTriState.False;
-            // 
-            // Encuadernacion
-            // 
-            Encuadernacion.HeaderText = "ENCUADERNACION";
-            Encuadernacion.Name = "Encuadernacion";
-            Encuadernacion.Resizable = DataGridViewTriState.False;
-            Encuadernacion.Width = 120;
-            // 
-            // Seleccion
-            // 
-            Seleccion.HeaderText = "";
-            Seleccion.Name = "Seleccion";
-            Seleccion.Resizable = DataGridViewTriState.False;
-            Seleccion.TrueValue = "";
-            Seleccion.Width = 50;
-            // 
             // FrmMenuOperario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -560,14 +560,15 @@
             Controls.Add(botonSalir);
             Controls.Add(label8);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MaximumSize = new Size(1028, 658);
-            MinimizeBox = false;
             MinimumSize = new Size(400, 400);
             Name = "FrmMenuOperario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sispro";
             Load += FrmPruebaMenu_Load;
+            FormClosing += FrmPruebaMenu_FormClosing;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);

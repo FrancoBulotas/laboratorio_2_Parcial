@@ -23,6 +23,6 @@ namespace Biblioteca
         public string NombreUsuario { get { return nombreUsuario; } }
         public string Contrasenia { get { return contrasenia; } }
         public string TipoUsuario { get { return tipoUsuario; } }
-        public int TrabajosRealizados{ get { return cantidadTrabajosRealizados; } set { cantidadTrabajosRealizados += value; } }
+        public int TrabajosRealizados { get { return cantidadTrabajosRealizados; } set { cantidadTrabajosRealizados += value; } }
     }
 }

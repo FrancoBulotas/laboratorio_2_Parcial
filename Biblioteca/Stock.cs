@@ -15,9 +15,9 @@ namespace Biblioteca
         private static int cantTroquel;
         private static int cantEncuadernacion;
         private const int CantPapel = 7000;
-        private const int CantTinta = 3000;
-        private const int CantTroquel = 2000;
-        private const int CantEncuadernacion = 2200;
+        private const int CantTinta = 7000;
+        private const int CantTroquel = 7000;
+        private const int CantEncuadernacion = 7000;
              
         private Stock()
         {

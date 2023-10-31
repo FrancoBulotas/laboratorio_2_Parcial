@@ -233,7 +233,10 @@ namespace Frms
                 MessageBox.Show(mensaje, "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 form.dataGridView1.Rows.Remove(form.filaPedidoEnProceso);
-                usuario.TrabajosRealizados += 1;
+                usuario.TrabajosRealizados = 1;
+                
+                if (form.login.menuSupervisor != null) { form.login.menuSupervisor.dataGridView1.Rows[form.indexUsuarioLogueado].Cells["Trabajos"].Value = usuario.TrabajosRealizados.ToString(); }
+
                 form.dataGridView1.Enabled = true;
                 form.progressBarImpresora.Value = form.progressBarImpresora.Minimum;
                 form.progressBarTroqueladora.Value = form.progressBarTroqueladora.Minimum;

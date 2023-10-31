@@ -34,15 +34,15 @@ namespace Frms
 
             if (resultadoValidez["Tipo Usuario"].Length > 0)
             {
-                menuOperario = new FrmMenuOperario(administracion.ListaUsuarios, Convert.ToInt32(resultadoValidez["Indice"]), this);
-                menuSupervisor = new FrmMenuSupervisor(administracion.ListaUsuarios, Convert.ToInt32(resultadoValidez["Indice"]), this);
-
                 if (resultadoValidez["Tipo Usuario"] == "operario")
                 {
+                    menuOperario = new FrmMenuOperario(administracion.ListaUsuarios, Convert.ToInt32(resultadoValidez["Indice"]), this);
                     menuOperario.Show();
                 }
                 else if (resultadoValidez["Tipo Usuario"] == "supervisor")
                 {
+                    menuOperario = new FrmMenuOperario(administracion.ListaUsuarios, Convert.ToInt32(resultadoValidez["Indice"]), this);
+                    menuSupervisor = new FrmMenuSupervisor(administracion.ListaUsuarios, Convert.ToInt32(resultadoValidez["Indice"]), this);
                     menuSupervisor.Show();
                 }
                 tNombre.Text = "";

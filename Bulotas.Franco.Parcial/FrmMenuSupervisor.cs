@@ -54,6 +54,11 @@ namespace Frms
 
         }
 
+        private void FrmMenuSupervisor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void botonSalir_Click(object sender, EventArgs e)
         {
             this.Hide();
