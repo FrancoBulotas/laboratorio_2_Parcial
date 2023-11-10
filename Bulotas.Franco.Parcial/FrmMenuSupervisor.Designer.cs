@@ -32,6 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             botonSalir = new Button();
             dataGridView1 = new DataGridView();
+            ID = new DataGridViewTextBoxColumn();
             USUARIO = new DataGridViewTextBoxColumn();
             CONTRASEÑA = new DataGridViewTextBoxColumn();
             TIPO = new DataGridViewTextBoxColumn();
@@ -63,6 +64,7 @@
             dataGridView2 = new DataGridView();
             Material = new DataGridViewTextBoxColumn();
             Cantidad2 = new DataGridViewTextBoxColumn();
+            buttonEditarUsr = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
@@ -87,15 +89,23 @@
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { USUARIO, CONTRASEÑA, TIPO, Trabajos });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, USUARIO, CONTRASEÑA, TIPO, Trabajos });
             dataGridView1.GridColor = Color.Black;
             dataGridView1.Location = new Point(7, 46);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(312, 359);
+            dataGridView1.Size = new Size(328, 307);
             dataGridView1.TabIndex = 9;
+            // 
+            // ID
+            // 
+            ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            ID.FillWeight = 105.329971F;
+            ID.HeaderText = "ID";
+            ID.Name = "ID";
+            ID.Width = 30;
             // 
             // USUARIO
             // 
@@ -109,21 +119,21 @@
             // 
             // CONTRASEÑA
             // 
-            CONTRASEÑA.FillWeight = 121.827423F;
+            CONTRASEÑA.FillWeight = 119.714211F;
             CONTRASEÑA.HeaderText = "CONTRASEÑA";
             CONTRASEÑA.Name = "CONTRASEÑA";
             CONTRASEÑA.ReadOnly = true;
             // 
             // TIPO
             // 
-            TIPO.FillWeight = 92.724205F;
+            TIPO.FillWeight = 91.11583F;
             TIPO.HeaderText = "TIPO";
             TIPO.Name = "TIPO";
             TIPO.ReadOnly = true;
             // 
             // Trabajos
             // 
-            Trabajos.FillWeight = 92.724205F;
+            Trabajos.FillWeight = 91.11583F;
             Trabajos.HeaderText = "TRABAJOS HECHOS";
             Trabajos.Name = "Trabajos";
             // 
@@ -173,7 +183,7 @@
             // 
             // buttonComprar
             // 
-            buttonComprar.BackColor = SystemColors.Control;
+            buttonComprar.BackColor = SystemColors.ScrollBar;
             buttonComprar.ForeColor = SystemColors.ControlText;
             buttonComprar.Location = new Point(393, 373);
             buttonComprar.Name = "buttonComprar";
@@ -325,7 +335,7 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.InfoText;
-            panel2.Location = new Point(325, 178);
+            panel2.Location = new Point(341, 178);
             panel2.Name = "panel2";
             panel2.Size = new Size(420, 2);
             panel2.TabIndex = 57;
@@ -412,11 +422,23 @@
             Cantidad2.Resizable = DataGridViewTriState.False;
             Cantidad2.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
+            // buttonEditarUsr
+            // 
+            buttonEditarUsr.BackColor = SystemColors.ScrollBar;
+            buttonEditarUsr.Location = new Point(7, 373);
+            buttonEditarUsr.Name = "buttonEditarUsr";
+            buttonEditarUsr.Size = new Size(100, 32);
+            buttonEditarUsr.TabIndex = 63;
+            buttonEditarUsr.Text = "Editar Usuarios";
+            buttonEditarUsr.UseVisualStyleBackColor = false;
+            buttonEditarUsr.Click += buttonEditarUsr_Click;
+            // 
             // FrmMenuSupervisor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(712, 414);
+            Controls.Add(buttonEditarUsr);
             Controls.Add(dataGridView2);
             Controls.Add(label20);
             Controls.Add(label19);
@@ -449,8 +471,8 @@
             Name = "FrmMenuSupervisor";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sispro";
-            Load += FrmMenu_Load;
             FormClosing += FrmMenuSupervisor_FormClosing;
+            Load += FrmMenu_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
@@ -484,12 +506,14 @@
         private Label label18;
         private Label label19;
         private Label label20;
+        internal DataGridView dataGridView2;
+        private DataGridViewTextBoxColumn Material;
+        private DataGridViewTextBoxColumn Cantidad2;
+        private Button buttonEditarUsr;
+        private DataGridViewTextBoxColumn ID;
         private DataGridViewTextBoxColumn USUARIO;
         private DataGridViewTextBoxColumn CONTRASEÑA;
         private DataGridViewTextBoxColumn TIPO;
         private DataGridViewTextBoxColumn Trabajos;
-        internal DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn Material;
-        private DataGridViewTextBoxColumn Cantidad2;
     }
 }

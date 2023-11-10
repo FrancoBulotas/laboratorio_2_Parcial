@@ -1,3 +1,4 @@
+using Biblioteca;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 
@@ -13,9 +14,9 @@ namespace Frms
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new FrmLogin());
 
+            ApplicationConfiguration.Initialize();
+            Application.Run(new FrmLogin());                      
         }
     }
 }

@@ -16,7 +16,8 @@ namespace Frms
 {
     public partial class FrmMenuOperario : Form
     {
-        internal List<Usuario> listaUsuarios;
+        //internal List<Usuario> listaUsuarios;
+        internal Administracion administracion;
         internal int indexUsuarioLogueado;
         internal FrmLogin login;
         internal DataGridViewRow filaPedidoEnProceso;
@@ -27,10 +28,11 @@ namespace Frms
         internal int cantTroquelAConsumir;
         internal int cantEncuAConsumir;
 
-        public FrmMenuOperario(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login)
+        public FrmMenuOperario(Administracion administracion, int indexUsuario, FrmLogin login)
         {
             InitializeComponent();
-            this.listaUsuarios = listaUsuarios;
+            this.administracion = administracion;
+            //this.listaUsuarios = listaUsuarios;
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
             cantPapelAConsumir = 0;
@@ -41,13 +43,10 @@ namespace Frms
 
         private void FrmPruebaMenu_Load(object sender, EventArgs e)
         {
-            string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
-            string rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-app.jpg");
-            string rutaIcono = Path.Combine(directorioEjecutable, "icono-sistema.ico");
-            this.BackgroundImage = Image.FromFile(rutaImagenFondo);
-            this.Icon = new Icon(rutaIcono);
+            this.BackgroundImage = Visual.CargarFondo(false);
+            this.Icon = Visual.CargarIcono();
 
-            this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].NombreUsuario;
+            this.nombreLogueado.Text = administracion.ListaUsuarios[indexUsuarioLogueado].NombreUsuario;
 
             Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
 
@@ -61,7 +60,7 @@ namespace Frms
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Visual.ManejoDataGrid(this, e);
+            Visual.ManejoDataGridOperario(this, e);
         }
 
         private void botonVolverSup_Click(object sender, EventArgs e)
@@ -69,6 +68,8 @@ namespace Frms
             Visual.CargarStockDg(login.menuSupervisor.dataGridView2, login.stock);
             Visual.ControlDataGridStock(login.stock, dataGridView2, false);
             Visual.ControlDataGridStock(login.stock, login.menuSupervisor.dataGridView2, false);
+
+            Visual.CargarUsuariosDataGrid(login.menuSupervisor.dataGridView1, administracion, administracion.ListaUsuarios[indexUsuarioLogueado].ID);
 
             this.Hide();
             login.menuSupervisor.Show();
@@ -87,7 +88,7 @@ namespace Frms
             if (radioButtonImpresora.Checked)
             {
                 Visual.ActualizarFormAlChequear(this, radioButtonImpresora, labelImpresionExitosa, progressBarImpresora, true, false);
-                Visual.InfoProcesoProduccion(this, true, false, false, listaUsuarios[indexUsuarioLogueado]);
+                Visual.InfoProcesoProduccion(this, true, false, false, administracion.ListaUsuarios[indexUsuarioLogueado]);
             }
         }
 
@@ -96,7 +97,7 @@ namespace Frms
             if (radioButtonTroqueladora.Checked)
             {
                 Visual.ActualizarFormAlChequear(this, radioButtonTroqueladora, labelTroqueladoExitoso, progressBarTroqueladora, false, true);
-                Visual.InfoProcesoProduccion(this, true, true, false, listaUsuarios[indexUsuarioLogueado]);
+                Visual.InfoProcesoProduccion(this, true, true, false, administracion.ListaUsuarios[indexUsuarioLogueado]);
             }
         }
 
@@ -105,7 +106,7 @@ namespace Frms
             if (radioButtonEncuadernadora.Checked)
             {
                 Visual.ActualizarFormAlChequear(this, radioButtonEncuadernadora, labelEncuExitosa, progressBarEncuadernadora, false, false);
-                Visual.InfoProcesoProduccion(this, true, true, true, listaUsuarios[indexUsuarioLogueado]);
+                Visual.InfoProcesoProduccion(this, true, true, true, administracion.ListaUsuarios[indexUsuarioLogueado]);
             }
         }
     }

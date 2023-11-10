@@ -15,40 +15,31 @@ namespace Frms
 {
     public partial class FrmMenuSupervisor : Form
     {
-        private List<Usuario> listaUsuarios;
+        internal Administracion administracion;
+        //private List<Usuario> listaUsuarios;
         internal FrmLogin login;
         internal int indexUsuarioLogueado;
         internal ArrayList arrayControlStock = new ArrayList();
         internal Dictionary<string, int> materialesComprados = new Dictionary<string, int>();
+        private FrmMenuSupervisorCRUD menuCRUD;
 
-
-        public FrmMenuSupervisor(List<Usuario> listaUsuarios, int indexUsuario, FrmLogin login)
+        public FrmMenuSupervisor(Administracion administracion, int indexUsuario, FrmLogin login)
         {
             InitializeComponent();
-            this.listaUsuarios = listaUsuarios;
+            this.administracion = administracion;
+            //this.listaUsuarios = listaUsuarios;
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
         }
 
         private void FrmMenu_Load(object sender, EventArgs e)
         {
-            string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
-            string rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-app.jpg");
-            string rutaIcono = Path.Combine(directorioEjecutable, "icono-sistema.ico");
-            this.BackgroundImage = Image.FromFile(rutaImagenFondo);
-            this.Icon = new Icon(rutaIcono);
+            this.BackgroundImage = Visual.CargarFondo(false);
+            this.Icon = Visual.CargarIcono();
 
-            this.nombreLogueado.Text = listaUsuarios[indexUsuarioLogueado].NombreUsuario;
+            this.nombreLogueado.Text = administracion.ListaUsuarios[indexUsuarioLogueado].NombreUsuario;
 
-            for (int i = 0; i < listaUsuarios.Count; i++)
-            {
-                if (listaUsuarios != null)
-                {
-                    string[] usuario = { listaUsuarios[i].NombreUsuario, listaUsuarios[i].Contrasenia, listaUsuarios[i].TipoUsuario, listaUsuarios[i].TrabajosRealizados.ToString() };
-                    this.dataGridView1.Rows.Add(usuario);
-                }
-            }
-
+            Visual.CargarUsuariosDataGrid(dataGridView1, administracion);
             Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
             Visual.CargarStockDg(dataGridView2, login.stock);
 
@@ -61,6 +52,7 @@ namespace Frms
 
         private void botonSalir_Click(object sender, EventArgs e)
         {
+            administracion.ListaUsuarios = UsuarioDAO.LeerTodo();
             this.Hide();
             login.Show();
         }
@@ -81,6 +73,12 @@ namespace Frms
             Visual.MostrarStockComprado(this, materialesComprados);
             Visual.CargarStockDg(dataGridView2, login.stock);
             Visual.ControlDataGridStock(login.stock, dataGridView2, false);
+        }
+
+        private void buttonEditarUsr_Click(object sender, EventArgs e)
+        {
+            menuCRUD = new FrmMenuSupervisorCRUD(administracion, this);
+            menuCRUD.Show();
         }
     }
 }

@@ -3,7 +3,10 @@ using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -80,7 +83,7 @@ namespace Frms
         /// </summary>
         /// <param name="dg"></param>
         /// <param name="pedidos"></param>
-        public static void CargarPedidosDataGridView(DataGridView dg, List<string> pedidos) 
+        public static void CargarPedidosDataGridView(DataGridView dg, List<string> pedidos)
         {
             for (int i = 0; i < pedidos.Count(); i++)
             {
@@ -95,9 +98,10 @@ namespace Frms
         /// </summary>
         /// <param name="form">Instancia del Frm del operario.</param>
         /// <param name="e">Eventos sobre el DataGridView.</param>
-        public static void ManejoDataGrid(FrmMenuOperario form, DataGridViewCellEventArgs e)
+        public static void ManejoDataGridOperario(FrmMenuOperario form, DataGridViewCellEventArgs e)
         {
             Dictionary<string, string> dictInfo = new Dictionary<string, string>();
+
             if (form.dataGridView1.Columns[e.ColumnIndex].Name == "Seleccion")
             {
                 bool resultado;
@@ -233,8 +237,11 @@ namespace Frms
                 MessageBox.Show(mensaje, "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 form.dataGridView1.Rows.Remove(form.filaPedidoEnProceso);
+
                 usuario.TrabajosRealizados = 1;
-                
+                UsuarioDAO.ModificarTrabajos(usuario.ID);
+
+
                 if (form.login.menuSupervisor != null) { form.login.menuSupervisor.dataGridView1.Rows[form.indexUsuarioLogueado].Cells["Trabajos"].Value = usuario.TrabajosRealizados.ToString(); }
 
                 form.dataGridView1.Enabled = true;
@@ -353,6 +360,223 @@ namespace Frms
                 ControlSeleccionProduccion(form, impresora, troqueladora);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dg"></param>
+        /// <param name="administracion"></param>
+        /// <param name="idUsuario"></param>
+        public static void CargarUsuariosDataGrid(DataGridView dg, Administracion administracion, int idUsuario = -1)
+        {
+            if (idUsuario > 0)
+            {
+                for (int i = 0; i < dg.Rows.Count; i++)
+                {
+                    if (idUsuario == Convert.ToInt32(dg.Rows[i].Cells["ID"].Value))
+                    {
+                        dg.Rows[i].Cells["Trabajos"].Value = administracion.ListaUsuarios[i].TrabajosRealizados.ToString();
+                    }
+                }
+            }
+            else if (idUsuario == 0)
+            {
+                if (administracion.ListaUsuarios != null)
+                {
+                    for (int i = 0; i < administracion.ListaUsuarios.Count; i++)
+                    {
+                        string[] usuario =
+                            { administracion.ListaUsuarios[i].ID.ToString(),
+                              administracion.ListaUsuarios[i].NombreUsuario };
+
+                        dg.Rows.Add(usuario);
+                    }
+                }
+            }
+            else
+            {
+                if (administracion.ListaUsuarios != null)
+                {
+                    for (int i = 0; i < administracion.ListaUsuarios.Count; i++)
+                    {
+                        string[] usuario =
+                            { administracion.ListaUsuarios[i].ID.ToString(),
+                          administracion.ListaUsuarios[i].NombreUsuario,
+                          administracion.ListaUsuarios[i].Contrasenia,
+                          administracion.ListaUsuarios[i].TipoUsuario,
+                          administracion.ListaUsuarios[i].TrabajosRealizados.ToString() };
+
+                        dg.Rows.Add(usuario);
+                    }
+                }
+            }
+        }
+
+        public static Image CargarFondo(bool login)
+        {
+            string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
+            string rutaImagenFondo = "";
+
+            if (login)
+            {
+                rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-login.jpg");
+            }
+            else
+            {
+                rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-app.jpg");
+
+            }
+
+            return Image.FromFile(rutaImagenFondo);
+        }
+
+        public static Icon CargarIcono()
+        {
+            string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
+            string rutaIcono = Path.Combine(directorioEjecutable, "icono-sistema.ico");
+            return  new Icon(rutaIcono);
+        }
+
+        public static void ManejoDataGridCRUD(FrmMenuSupervisorCRUD form, DataGridViewCellEventArgs e)
+        {
+            if (form.dataGridViewUsr.Columns[e.ColumnIndex].Name == "Seleccion")
+            {
+                bool resultado;
+                
+                DataGridViewRow filaElegida = form.dataGridViewUsr.Rows[e.RowIndex];
+                               
+                DataGridViewCheckBoxCell celdaSeleccion = filaElegida.Cells["Seleccion"] as DataGridViewCheckBoxCell;
+
+                try
+                {
+                    resultado = !Convert.ToBoolean(celdaSeleccion.Value);
+                }
+                catch (FormatException)
+                {
+                    resultado = false;
+                }
+
+                if (resultado)
+                {
+                    form.buttoneliminarUsr.Enabled = true;
+                    form.idUsuarioSeleccionado = Convert.ToInt32(filaElegida.Cells["ID"].Value);
+                    form.indiceUsuarioSeleccionado = form.administracion.ObtenerIndiceListaUsuarios(form.idUsuarioSeleccionado);
+
+                    if (form.botonModClickeado)
+                    {
+                        form.labelNombreActual.Text = form.administracion.ListaUsuarios[form.indiceUsuarioSeleccionado].NombreUsuario;
+                        form.labelNombreActual.Visible = true;
+
+                        form.labelContraActual.Text = form.administracion.ListaUsuarios[form.indiceUsuarioSeleccionado].Contrasenia;
+                        form.labelContraActual.Visible = true;
+
+                        form.labelTipoUsuarioActual.Text = form.administracion.ListaUsuarios[form.indiceUsuarioSeleccionado].TipoUsuario;
+                        form.labelTipoUsuarioActual.Visible = true;
+
+                        form.botonModClickeado = false;
+                    }
+
+                    celdaSeleccion.Value = true;
+                }
+                else
+                {
+                    MessageBox.Show("Se ha quitado la seleccion", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    form.labelNombreActual.Visible = false;
+                    form.labelContraActual.Visible = false;
+
+                    celdaSeleccion.Value = false;
+                }
+            }
+        }
+
+        public static void MostrarMenuModificar(FrmMenuSupervisorCRUD form)
+        {
+            form.labelActual.Visible = true;
+            form.labelContra.Visible = true;
+            form.labelNombre.Visible = true;
+            form.labelTipoDeUsuario.Visible = true;
+            form.textBoxNuevaContra.Visible = true;
+            form.textBoxNuevaContra.PlaceholderText = "Nueva contraseña";
+            form.textBoxRepetirNuevaContra.Visible = false;
+            form.textBoxNuevoNombre.Visible = true;
+            form.textBoxTipoDeUsuario.Visible = true;
+            form.buttonAplicarModificacion.Visible = true;
+            form.buttonAplicarCreacion.Visible = false;
+        }
+
+        public static void MostrarMenuCrear(FrmMenuSupervisorCRUD form)
+        {
+            form.labelActual.Visible = false;
+            form.labelContra.Visible = true;
+            form.labelNombre.Visible = true;
+            form.labelNombreActual.Visible = false;
+            form.labelTipoDeUsuario.Visible = true;
+            form.labelTipoUsuarioActual.Visible = false;
+            form.textBoxNuevaContra.Visible = true;
+            form.textBoxNuevaContra.PlaceholderText = "Repetir contraseña";
+            form.textBoxRepetirNuevaContra.Visible = true;
+            form.textBoxNuevoNombre.Visible = true;
+            form.textBoxTipoDeUsuario.Visible = true;
+            form.buttonAplicarCreacion.Visible = true;
+            form.buttonAplicarModificacion.Visible = false;
+        }
+
+        public static void EjecutarSolicitado(FrmMenuSupervisorCRUD form, bool modificar)
+        {
+            string mensaje;
+
+            if (modificar)
+            {
+                form.dictResultadoRegistro = form.administracion.ValidarUsuarioRegistro(form.textBoxNuevoNombre.Text, form.textBoxNuevaContra.Text, "", form.textBoxTipoDeUsuario.Text, form.administracion.ListaUsuarios[form.indiceUsuarioSeleccionado].ID);
+                mensaje = "Modificado Correctamente";
+            }
+            else
+            {
+                form.dictResultadoRegistro = form.administracion.ValidarUsuarioRegistro(form.textBoxNuevoNombre.Text, form.textBoxNuevaContra.Text, form.textBoxRepetirNuevaContra.Text, form.textBoxTipoDeUsuario.Text);
+                mensaje = "Creado Correctamente";
+            }
+
+            if (form.dictResultadoRegistro["Error"].Length > 0)
+            {
+                form.labelErrorRegistro.Text = form.dictResultadoRegistro["Error"];
+                form.labelErrorRegistro.Visible = true;
+            }
+            else
+            {
+                form.labelErrorRegistro.Visible = false;
+                form.textBoxNuevoNombre.Text = "";
+                form.textBoxNuevaContra.Text = "";
+                form.textBoxRepetirNuevaContra.Text = "";
+                form.textBoxTipoDeUsuario.Text = "";
+
+                ActualizarDataGrid(form.formSupervisor.dataGridView1, form.administracion, true);
+                ActualizarDataGrid(form.dataGridViewUsr, form.administracion, false);
+
+                MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            mensaje = "";
+            form.dictResultadoRegistro["Error"] = "";
+
+        }
+
+        public static void ActualizarDataGrid(DataGridView dg, Administracion administracion, bool supervisor)
+        {
+            dg.Rows.Clear();
+            administracion.ListaUsuarios = UsuarioDAO.LeerTodo();
+
+            if (supervisor)
+            {
+                CargarUsuariosDataGrid(dg, administracion);
+            }
+            else
+            {
+                CargarUsuariosDataGrid(dg, administracion, 0);
+            }
+
+        }
+
 
     }
 }

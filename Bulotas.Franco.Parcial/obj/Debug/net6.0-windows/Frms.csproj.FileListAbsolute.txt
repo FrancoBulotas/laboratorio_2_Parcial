@@ -67,3 +67,33 @@ C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrim
 C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.pdb
 C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.genruntimeconfig.cache
 C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\ref\Frms.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\Frms.exe
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\Frms.deps.json
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\Frms.runtimeconfig.json
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\Frms.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\Frms.pdb
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\Biblioteca.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\Biblioteca.pdb
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.csproj.AssemblyReference.cache
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmLogin.resources
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmMenuOperario.resources
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmMenuSupervisor.resources
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmRegistro.resources
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.csproj.GenerateResource.cache
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.GeneratedMSBuildEditorConfig.editorconfig
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.AssemblyInfoInputs.cache
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.AssemblyInfo.cs
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.csproj.CoreCompileInputs.cache
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.csproj.CopyComplete
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\refint\Frms.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.pdb
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.genruntimeconfig.cache
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\ref\Frms.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmMenuSupervisorCRUD.resources

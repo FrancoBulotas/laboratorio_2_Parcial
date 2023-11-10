@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,15 +9,18 @@ namespace Biblioteca
 {
     public class Administracion : Empresa
     {
-        private Dictionary<string, string> dictResultado = new Dictionary<string, string>();
+        private Dictionary<string, string> dictResultadoLogin = new Dictionary<string, string>();
+        private Dictionary<string, string> dictResultadoRegistro = new Dictionary<string, string>();
         private Dictionary<string, string> dictInfo = new Dictionary<string, string>();
 
 
         public Administracion()
         {
-            dictResultado.Add("Tipo Usuario", "");
-            dictResultado.Add("Indice", "");
-            dictResultado.Add("Error", "");
+            dictResultadoLogin.Add("Tipo Usuario", "");
+            dictResultadoLogin.Add("Indice", "");
+            dictResultadoLogin.Add("Error", "");
+
+            dictResultadoRegistro.Add("Error", "");
 
             dictInfo.Add("Maquinas", "");
             dictInfo.Add("Contador Procesos", "");
@@ -130,26 +134,26 @@ namespace Biblioteca
         /// <param name="usuario"></param>
         /// <param name="tipoUsuario"></param>
         /// <returns>Retorna true si se agrego correctamente, false si ya existe</returns>
-        public bool AgregarUsuario(List<Usuario> listaUsuariosExtra, Usuario usuario, string tipoUsuario)
-        {
-            //if (listaUsuarios == null) { return false; }
-            listaUsuarios = listaUsuariosExtra;
+        //public bool AgregarUsuario(List<Usuario> listaUsuariosExtra, Usuario usuario, string tipoUsuario)
+        //{
+        //    listaUsuarios = listaUsuariosExtra;
 
-            if (tipoUsuario == string.Empty) { return false; }
+        //    if (tipoUsuario == string.Empty) { return false; }
 
-            foreach (Usuario usr in listaUsuarios)
-            {
-                if (usr != null)
-                {
-                    if (usr.NombreUsuario == usuario.NombreUsuario)
-                    {
-                        return false;
-                    }
-                }
-            }
-            listaUsuarios.Add(usuario);
-            return true;
-        }
+        //    foreach (Usuario usr in listaUsuarios)
+        //    {
+        //        if (usr != null)
+        //        {
+        //            if (usr.NombreUsuario == usuario.NombreUsuario)
+        //            {
+        //                return false;
+        //            }
+        //        }
+        //    }
+        //    listaUsuarios.Add(usuario);
+        //    return true;
+        //}
+
 
         /// <summary>
         /// Se encarga de Hardcodear el usuario y contrasenia del tipo de usuario seleccionado, para agilizar el ingreso.
@@ -173,13 +177,13 @@ namespace Biblioteca
         }
 
         /// <summary>
-        /// Valida que los datos ingresados en el Login sean correctos.
+        /// Valida que los datos ingresados en el Login sean correctos para el login.
         /// </summary>
-        /// <param name="form">Instancia del Frm Login</param>
-        public Dictionary<string, string> ValidarUsuario(string nombreIngresado, string contraseniaIngresada)
+        /// <param name="nombreIngresado"></param>
+        /// <param name="contraseniaIngresada"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> ValidarUsuarioLogin(string nombreIngresado, string contraseniaIngresada)
         {
-            int cont = 0;
-
             if (ListaUsuarios.Count >= 1)
             {
                 if (nombreIngresado != string.Empty)
@@ -192,42 +196,115 @@ namespace Biblioteca
                             {
                                 if (ListaUsuarios[i].TipoUsuario == "operario")
                                 {
-                                    dictResultado["Tipo Usuario"] = "operario";
+                                    dictResultadoLogin["Tipo Usuario"] = "operario";
                                 }
                                 else
                                 {
-                                    dictResultado["Tipo Usuario"] = "supervisor";
+                                    dictResultadoLogin["Tipo Usuario"] = "supervisor";
                                 }
 
-                                dictResultado["Indice"] = i.ToString();
-                                dictResultado["veces en for"] = cont.ToString();
-
-                                return dictResultado;
+                                dictResultadoLogin["Indice"] = i.ToString();
+                                return dictResultadoLogin;
                             }
                             else
                             {
-                                dictResultado["Error"] = "Los datos no coinciden.";
+                                dictResultadoLogin["Error"] = "Los datos no coinciden.";
                             }
-
-                            cont++;
                         }
                     }
                     else
                     {
-                        dictResultado["Error"] = "Contraseña vacia.";
+                        dictResultadoLogin["Error"] = "Contraseña vacia.";
                     }
                 }
                 else
                 {
-                    dictResultado["Error"] = "Nombre de usuario vacio.";
+                    dictResultadoLogin["Error"] = "Nombre de usuario vacio.";
                 }
             }
             else
             {
-                dictResultado["Error"] = " No hay usuarios creados.";
+                dictResultadoLogin["Error"] = "No hay usuarios creados.";
             }
 
-            return dictResultado;
+            return dictResultadoLogin;
+        }
+
+
+        public Dictionary<string, string> ValidarUsuarioRegistro(string nombre, string contra, string repContra, string tipoUsuario, int id=-1)
+        {
+            if (nombre != String.Empty)
+            {
+                if (tipoUsuario != string.Empty && (tipoUsuario.ToLower() == "operario" || tipoUsuario.ToLower() == "supervisor"))
+                {
+                    if (id <= 0)
+                    {
+                        if (contra != String.Empty && contra == repContra)
+                        {
+
+                            if (UsuarioDAO.Guardar(nombre, contra, tipoUsuario))
+                            {
+                                ListaUsuarios = UsuarioDAO.LeerTodo();
+                                return dictResultadoRegistro;
+                            }
+                            else
+                            {
+                                dictResultadoRegistro["Error"] = "Error al registrar usuario.";
+                            }
+                        }
+                        else
+                        {
+                            if (contra != repContra)
+                            {
+                                dictResultadoRegistro["Error"] = "Las contraseñas no coinciden.";
+                            }
+                            else
+                            {
+                                dictResultadoRegistro["Error"] = "Contraseña vacia.";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (contra != String.Empty)
+                        {
+                            UsuarioDAO.Modificar(nombre, id, "nombre");
+                            UsuarioDAO.Modificar(contra, id, "contrasenia");
+                            UsuarioDAO.Modificar(tipoUsuario, id, "tipo_usuario");
+                        }
+                        else
+                        {
+                            dictResultadoRegistro["Error"] = "Contraseña vacia.";
+                        }
+                    }
+                }
+                else
+                {
+                    dictResultadoRegistro["Error"] = "Seleccionar un tipo de usuario valido.";
+
+                }
+            }
+            else
+            {
+                dictResultadoRegistro["Error"] = "Nombre de usuario vacio.";
+            }
+
+            return dictResultadoRegistro;
+        }
+
+
+        public int ObtenerIndiceListaUsuarios(int id)
+        {
+            int indice = -1;
+
+            for (int i=0 ; i < ListaUsuarios.Count; i++)
+            {
+                if (id == ListaUsuarios[i].ID)
+                {
+                    indice = i;
+                }
+            }
+            return indice;
         }
     }
 }

@@ -37,8 +37,8 @@
             labelErrorRegistro = new Label();
             linkLabelVaciar = new LinkLabel();
             checkBoxOperario = new CheckBox();
-            checkBoxSupervisor = new CheckBox();
             linkLabelRandom = new LinkLabel();
+            checkBoxSupervisor = new CheckBox();
             SuspendLayout();
             // 
             // botonCancelar
@@ -139,17 +139,6 @@
             checkBoxOperario.Text = "Operario";
             checkBoxOperario.UseVisualStyleBackColor = false;
             // 
-            // checkBoxSupervisor
-            // 
-            checkBoxSupervisor.AutoSize = true;
-            checkBoxSupervisor.BackColor = Color.Transparent;
-            checkBoxSupervisor.Location = new Point(101, 204);
-            checkBoxSupervisor.Name = "checkBoxSupervisor";
-            checkBoxSupervisor.Size = new Size(81, 19);
-            checkBoxSupervisor.TabIndex = 9;
-            checkBoxSupervisor.Text = "Supervisor";
-            checkBoxSupervisor.UseVisualStyleBackColor = false;
-            // 
             // linkLabelRandom
             // 
             linkLabelRandom.AutoSize = true;
@@ -162,6 +151,17 @@
             linkLabelRandom.TabStop = true;
             linkLabelRandom.Text = "Datos Random";
             linkLabelRandom.LinkClicked += linkLabelRandom_LinkClicked;
+            // 
+            // checkBoxSupervisor
+            // 
+            checkBoxSupervisor.AutoSize = true;
+            checkBoxSupervisor.BackColor = Color.Transparent;
+            checkBoxSupervisor.Location = new Point(101, 204);
+            checkBoxSupervisor.Name = "checkBoxSupervisor";
+            checkBoxSupervisor.Size = new Size(81, 19);
+            checkBoxSupervisor.TabIndex = 9;
+            checkBoxSupervisor.Text = "Supervisor";
+            checkBoxSupervisor.UseVisualStyleBackColor = false;
             // 
             // FrmRegistro
             // 
@@ -197,7 +197,7 @@
         private Label labelErrorRegistro;
         private LinkLabel linkLabelVaciar;
         private CheckBox checkBoxOperario;
-        private CheckBox checkBoxSupervisor;
         private LinkLabel linkLabelRandom;
+        private CheckBox checkBoxSupervisor;
     }
 }

@@ -20,3 +20,15 @@ C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrim
 C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\refint\Biblioteca.dll
 C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\Biblioteca.pdb
 C:\Users\Franco\Desktop\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\ref\Biblioteca.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\bin\Debug\net6.0\Biblioteca.deps.json
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\bin\Debug\net6.0\Biblioteca.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\bin\Debug\net6.0\Biblioteca.pdb
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\Biblioteca.csproj.AssemblyReference.cache
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\Biblioteca.GeneratedMSBuildEditorConfig.editorconfig
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\Biblioteca.AssemblyInfoInputs.cache
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\Biblioteca.AssemblyInfo.cs
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\Biblioteca.csproj.CoreCompileInputs.cache
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\Biblioteca.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\refint\Biblioteca.dll
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\Biblioteca.pdb
+D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Biblioteca\obj\Debug\net6.0\ref\Biblioteca.dll

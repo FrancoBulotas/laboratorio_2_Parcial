@@ -12,14 +12,40 @@ namespace Biblioteca
 
         public Empresa()
         {
-            listaUsuarios = GenerarListaUsuarios();
+            //listaUsuarios = GenerarListaUsuarios();
+            listaUsuarios = UsuarioDAO.LeerTodo();
         }
 
         /// <summary>
         /// Se encarga de generar una lista de usuarios con datos random.
         /// </summary>
         /// <returns>Retorna la lista.</returns>
-        private List<Usuario> GenerarListaUsuarios()
+        //private List<Usuario> GenerarListaUsuarios()
+        //{
+        //    List<string> listaNombres = new List<string>
+        //    {
+        //        "Franco","Pedro","Juan","Fausto","Adriana","Agustina","Joaquin","Malena","Juana","Enrique",
+        //        "Nicolas","Ignacio","Joel"
+        //    };
+
+        //    List<Usuario>? lista = new();
+        //    for(int i = 0; i < listaNombres.Count() ; i++)
+        //    {
+        //        string nombreUsuario = listaNombres[i];
+        //        string contrasenia = ValorRandomUsuario(false);;
+        //        string tipoUsuario = ValorRandomUsuario(true);
+        //        Usuario usuario = new(nombreUsuario, contrasenia, tipoUsuario);
+        //        lista.Add(usuario);
+        //    }
+        //    return lista;
+        //}
+
+        /// <summary>
+        /// Genera un valor random, tipo de usuario o contrasenia.
+        /// </summary>
+        /// <param name="tipoUsuario"></param>
+        /// <returns>Retorna un string con el valor random de un tipo de usuario o contrasenia</returns>
+        public string ValorRandomUsuario(bool tipoUsuario, bool nombreUsuario)
         {
             List<string> listaNombres = new List<string>
             {
@@ -27,25 +53,6 @@ namespace Biblioteca
                 "Nicolas","Ignacio","Joel"
             };
 
-            List<Usuario>? lista = new();
-            for(int i = 0; i < listaNombres.Count() ; i++)
-            {
-                string nombreUsuario = listaNombres[i];
-                string contrasenia = ValorRandomUsuario(false);;
-                string tipoUsuario = ValorRandomUsuario(true);
-                Usuario usuario = new(nombreUsuario, contrasenia, tipoUsuario);
-                lista.Add(usuario);
-            }
-            return lista;
-        }
-
-        /// <summary>
-        /// Genera un valor random, tipo de usuario o contrasenia.
-        /// </summary>
-        /// <param name="tipoUsuario"></param>
-        /// <returns>Retorna un string con el valor random de un tipo de usuario o contrasenia</returns>
-        public string ValorRandomUsuario( bool tipoUsuario)
-        {
             List<string> tiposUsuarios = new List<string> { "operario", "supervisor" };
 
             string caracteres = "abcdefghijlmnopqrstuv";
@@ -55,6 +62,10 @@ namespace Biblioteca
             if (tipoUsuario)
             {
                 return tiposUsuarios[random.Next(tiposUsuarios.Count)];
+            }
+            else if (nombreUsuario)
+            {
+                return listaNombres[random.Next(listaNombres.Count)];
             }
             else
             {
@@ -67,6 +78,6 @@ namespace Biblioteca
 
         }
 
-        public List<Usuario> ListaUsuarios { get { return listaUsuarios; } }
+        public List<Usuario> ListaUsuarios { get { return listaUsuarios; } set { listaUsuarios = value; } }
     }
 }
