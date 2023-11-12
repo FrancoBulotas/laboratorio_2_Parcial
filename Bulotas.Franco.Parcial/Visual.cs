@@ -1,15 +1,5 @@
 ﻿using Biblioteca;
-using Microsoft.VisualBasic.Logging;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Frms
 {
@@ -24,7 +14,7 @@ namespace Frms
         /// </summary>
         /// <param name="dg"></param>
         /// <param name="stock"></param>
-        internal static void CargarStockDg(DataGridView dg, Stock stock)
+        internal static void CargarStockDataGrid(DataGridView dg, Stock stock)
         {
             dg.Rows[0].Cells["Cantidad2"].Value = stock.ConsultarCantidadInsumo("papel");
             dg.Rows[1].Cells["Cantidad2"].Value = stock.ConsultarCantidadInsumo("tinta");
@@ -106,6 +96,7 @@ namespace Frms
             {
                 bool resultado;
                 form.contProcesos = 0;
+                string msjError;
                 // Se toma la fila seleccionada
                 DataGridViewRow filasPedidos = form.dataGridView1.Rows[e.RowIndex];
                 filaPedidoElegido = filasPedidos;
@@ -119,9 +110,11 @@ namespace Frms
                 {
                     resultado = !Convert.ToBoolean(celdaSeleccion.Value);
                 }
-                catch (FormatException)
+                catch (FormatException error)
                 {
                     resultado = false;
+                    msjError = $"{DateTime.Now} | {error.Message} | Origen: {error.Source} | Metodo: {error.TargetSite}";
+                    form.administracion.CargarErrorLog(msjError);
                 }
 
                 if (resultado)
@@ -264,18 +257,18 @@ namespace Frms
         /// </summary>
         /// <param name="form"></param>
         /// <param name="materiales"></param>
-        public static void MostrarStockComprado(FrmMenuSupervisor form, Dictionary<string, int> materiales)
+        public static void ValidarStockComprado(FrmMenuSupervisor form, bool insumosComprados)//, Dictionary<string, int> materiales)
         {
-            if (materiales.Count() == 0)
+            if (!insumosComprados)
             {
                 MessageBox.Show("Ingrese valores numericos positivos", "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                form.login.stock.Papel = materiales["Papel"];
-                form.login.stock.Tinta = materiales["Tinta"];
-                form.login.stock.Troquel = materiales["Troquel"];
-                form.login.stock.Encuadernacion = materiales["Encuadernacion"];
+                //form.login.stock.Papel = materiales["Papel"];
+                //form.login.stock.Tinta = materiales["Tinta"];
+                //form.login.stock.Troquel = materiales["Troquel"];
+                //form.login.stock.Encuadernacion = materiales["Encuadernacion"];
 
                 form.textBoxPapel.Text = "0";
                 form.textBoxTinta.Text = "0";
@@ -352,7 +345,7 @@ namespace Frms
                 form.cantEncuAConsumir = 0;
             }
 
-            CargarStockDg(form.dataGridView2, form.login.stock);
+            CargarStockDataGrid(form.dataGridView2, form.login.stock);
             ControlDataGridStock(form.login.stock, form.dataGridView2, false);
 
             if (impresora || troqueladora)
@@ -412,18 +405,19 @@ namespace Frms
             }
         }
 
+
         public static Image CargarFondo(bool login)
         {
             string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
-            string rutaImagenFondo = "";
+            string rutaImagenFondo;
 
             if (login)
             {
-                rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-login.jpg");
+                rutaImagenFondo = Path.Combine(directorioEjecutable, Administracion.DeserializarJSON()["FondoLogin"]);
             }
             else
             {
-                rutaImagenFondo = Path.Combine(directorioEjecutable, "fondo-app.jpg");
+                rutaImagenFondo = Path.Combine(directorioEjecutable, Administracion.DeserializarJSON()["FondoApp"]);
 
             }
 
@@ -433,9 +427,10 @@ namespace Frms
         public static Icon CargarIcono()
         {
             string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
-            string rutaIcono = Path.Combine(directorioEjecutable, "icono-sistema.ico");
+            string rutaIcono = Path.Combine(directorioEjecutable, Administracion.DeserializarJSON()["Icono"]);
             return  new Icon(rutaIcono);
         }
+
 
         public static void ManejoDataGridCRUD(FrmMenuSupervisorCRUD form, DataGridViewCellEventArgs e)
         {
@@ -525,6 +520,7 @@ namespace Frms
         public static void EjecutarSolicitado(FrmMenuSupervisorCRUD form, bool modificar)
         {
             string mensaje;
+            string msjError;
 
             if (modificar)
             {
@@ -541,6 +537,11 @@ namespace Frms
             {
                 form.labelErrorRegistro.Text = form.dictResultadoRegistro["Error"];
                 form.labelErrorRegistro.Visible = true;
+
+                if(mensaje == "Modificado Correctamente") { msjError = $"{DateTime.Now} | Modificacion Usuario: {form.dictResultadoRegistro["Error"]}"; }
+                else { msjError = $"{DateTime.Now} | Creacion Usuario: {form.dictResultadoRegistro["Error"]}"; }
+
+                form.administracion.CargarErrorLog(msjError);
             }
             else
             {

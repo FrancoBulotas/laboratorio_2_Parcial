@@ -1,0 +1,12 @@
+11/11/2023 20:44:40 | String '' was not recognized as a valid Boolean. | Origen: System.Private.CoreLib | Metodo: Boolean Parse(System.ReadOnlySpan`1[System.Char])
+11/11/2023 20:44:41 | String '' was not recognized as a valid Boolean. | Origen: System.Private.CoreLib | Metodo: Boolean Parse(System.ReadOnlySpan`1[System.Char])
+11/11/2023 20:55:18 | Loguin: Nombre de usuario vacio.
+11/11/2023 20:55:20 | Loguin: Contraseña vacia.
+11/11/2023 20:55:32 | Registro: Nombre de usuario vacio.
+11/11/2023 20:55:37 | Registro: Seleccionar un tipo de usuario valido.
+11/11/2023 20:55:43 | Registro: Seleccionar un tipo de usuario valido.
+11/11/2023 20:55:44 | Registro: Las contraseñas no coinciden.
+11/11/2023 20:55:57 | Creacion Usuario: Seleccionar un tipo de usuario valido.
+11/11/2023 20:56:01 | Creacion Usuario: Seleccionar un tipo de usuario valido.
+11/11/2023 20:56:12 | Creacion Usuario: Las contraseñas no coinciden.
+11/11/2023 20:56:49 | Modificacion Usuario: Seleccionar un tipo de usuario valido.

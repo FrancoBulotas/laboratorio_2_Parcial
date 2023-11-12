@@ -39,6 +39,7 @@ namespace Frms
             cantTintaAConsumir = 0;
             cantTroquelAConsumir = 0;
             cantEncuAConsumir = 0;
+            administracion.SerializarXMLStock(login.stock);
         }
 
         private void FrmPruebaMenu_Load(object sender, EventArgs e)
@@ -50,7 +51,7 @@ namespace Frms
 
             Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
 
-            Visual.CargarStockDg(dataGridView2, login.stock);
+            Visual.CargarStockDataGrid(dataGridView2, login.stock);
         }
 
         private void FrmPruebaMenu_FormClosing(object sender, FormClosingEventArgs e)
@@ -65,11 +66,13 @@ namespace Frms
 
         private void botonVolverSup_Click(object sender, EventArgs e)
         {
-            Visual.CargarStockDg(login.menuSupervisor.dataGridView2, login.stock);
+            Visual.CargarStockDataGrid(login.menuSupervisor.dataGridView2, login.stock);
             Visual.ControlDataGridStock(login.stock, dataGridView2, false);
             Visual.ControlDataGridStock(login.stock, login.menuSupervisor.dataGridView2, false);
 
             Visual.CargarUsuariosDataGrid(login.menuSupervisor.dataGridView1, administracion, administracion.ListaUsuarios[indexUsuarioLogueado].ID);
+
+            administracion.SerializarXMLStock(login.stock);
 
             this.Hide();
             login.menuSupervisor.Show();
@@ -78,6 +81,8 @@ namespace Frms
 
         private void botonSalir_Click(object sender, EventArgs e)
         {
+            administracion.SerializarXMLStock(login.stock);
+
             Visual.ControlDataGridStock(login.stock, dataGridView2, true);
             this.Hide();
             login.Show();

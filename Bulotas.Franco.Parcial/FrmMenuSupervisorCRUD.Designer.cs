@@ -67,15 +67,18 @@
             // 
             // dataGridViewUsr
             // 
+            dataGridViewUsr.AllowUserToAddRows = false;
+            dataGridViewUsr.AllowUserToDeleteRows = false;
+            dataGridViewUsr.AllowUserToResizeColumns = false;
+            dataGridViewUsr.AllowUserToResizeRows = false;
             dataGridViewUsr.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewUsr.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             dataGridViewUsr.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridViewUsr.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
-            dataGridViewUsr.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewUsr.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewUsr.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Seleccion });
             dataGridViewUsr.GridColor = Color.Black;
             dataGridViewUsr.Location = new Point(12, 12);
+            dataGridViewUsr.MultiSelect = false;
             dataGridViewUsr.Name = "dataGridViewUsr";
             dataGridViewUsr.RowHeadersVisible = false;
             dataGridViewUsr.RowTemplate.Height = 25;

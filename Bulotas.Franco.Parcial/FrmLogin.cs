@@ -1,5 +1,6 @@
 using Biblioteca;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Frms
 {
@@ -12,10 +13,13 @@ namespace Frms
         private Dictionary<string, string> datosUsuario = new Dictionary<string, string>();
         private Dictionary<string, string> resultadoValidez = new Dictionary<string, string>();
         private List<string> pedidos = new List<string>();
+        private string msjError;
 
         public FrmLogin()
         {
             stock = Stock.InstanciaStock;
+
+            administracion.SerializarXMLStock(stock);
 
             this.BackgroundImage = Visual.CargarFondo(true);
             this.Icon = Visual.CargarIcono();
@@ -55,6 +59,9 @@ namespace Frms
             {
                 labelError.Text = resultadoValidez["Error"];
                 labelError.Visible = true;
+
+                msjError = $"{DateTime.Now} | Loguin: {resultadoValidez["Error"]}";
+                administracion.CargarErrorLog(msjError);
 
                 resultadoValidez["Error"] = "";
             }      

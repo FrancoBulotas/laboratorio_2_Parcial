@@ -19,7 +19,7 @@ namespace Frms
         public FrmLogin login;
         private Administracion administracion;
         private Dictionary<string, string> dictResultadoRegistro = new Dictionary<string, string>();
-
+        private string msjError;
 
         //public FrmRegistro(List<Usuario> listaUsuarios, FrmLogin login, Administracion rrhh)
         public FrmRegistro(FrmLogin login, Administracion administracion)
@@ -63,6 +63,9 @@ namespace Frms
             {
                 labelErrorRegistro.Text = dictResultadoRegistro["Error"];
                 labelErrorRegistro.Visible = true;
+
+                msjError = $"{DateTime.Now} | Registro: {dictResultadoRegistro["Error"]}";
+                administracion.CargarErrorLog(msjError);
             }
             else
             {

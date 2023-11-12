@@ -4,27 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Biblioteca
 {
     public class Stock 
     {
         private static Stock stock;
-        private static int cantPapel;
-        private static int cantTinta;
-        private static int cantTroquel;
-        private static int cantEncuadernacion;
-        private const int CantPapel = 7000;
-        private const int CantTinta = 7000;
-        private const int CantTroquel = 7000;
-        private const int CantEncuadernacion = 7000;
-             
+        //private static int cantPapel;
+        //private static int cantTinta;
+        //private static int cantTroquel;
+        //private static int cantEncuadernacion;
+        private const int pocoStock = 2000;
+
         private Stock()
         {
-            cantPapel = CantPapel;
-            cantTinta = CantTinta;
-            cantTroquel = CantTroquel;
-            cantEncuadernacion = CantEncuadernacion;
+            //cantPapel = StockDAO.Leer()["Papel"];
+            //cantTinta = StockDAO.Leer()["Tinta"];
+            //cantTroquel = StockDAO.Leer()["Troquel"];
+            //cantEncuadernacion = StockDAO.Leer()["Encuadernacion"];            
         }
 
         /// <summary>
@@ -53,13 +51,13 @@ namespace Biblioteca
 
             if (insumo == "papel")
             {
-                if (Papel < CantPapel * 0.2)
+                if (Papel < pocoStock)
                 {
                     valores.Add(0);
                     valores.Add(1);
                     return valores;
                 }
-                if (Papel >= CantPapel * 0.2)
+                if (Papel >= pocoStock)
                 {
                     valores.Add(0);
                     valores.Add(0);
@@ -68,13 +66,13 @@ namespace Biblioteca
             }
             if (insumo == "tinta")
             {
-                if (Tinta < CantTinta * 0.2)
+                if (Tinta < pocoStock)
                 {
                     valores.Add(1);
                     valores.Add(1);
                     return valores;
                 }
-                if (Tinta >= CantTinta * 0.2)
+                if (Tinta >= pocoStock)
                 {
                     valores.Add(1);
                     valores.Add(0);
@@ -83,13 +81,13 @@ namespace Biblioteca
             }
             if (insumo == "troquel")
             {
-                if (Troquel < CantTroquel * 0.2)
+                if (Troquel < pocoStock)
                 {
                     valores.Add(2);
                     valores.Add(1);
                     return valores;
                 }
-                if (Troquel >= CantTroquel * 0.2)
+                if (Troquel >= pocoStock)
                 {
                     valores.Add(2);
                     valores.Add(0);
@@ -98,13 +96,13 @@ namespace Biblioteca
             }
             if (insumo == "encuadernacion")
             {
-                if (Encuadernacion < CantEncuadernacion * 0.2)
+                if (Encuadernacion < pocoStock)
                 {
                     valores.Add(3);
                     valores.Add(1);
                     return valores;
                 }
-                if (Encuadernacion >= CantEncuadernacion * 0.2)
+                if (Encuadernacion >= pocoStock)
                 {
                     valores.Add(3);
                     valores.Add(0);
@@ -125,9 +123,10 @@ namespace Biblioteca
         /// <param name="encuIngresadoStr"></param>
         /// <param name="stock"></param>
         /// <returns>Un Dictionary vacio en caso de fallar la compra, y con los elementos a comprar en caso de ser correcta.</returns>
-        public Dictionary<string, int> BotonComprarStock(string papelIngresadoStr, string tintaIngresadaStr, string troquelIngresadoStr, string encuIngresadoStr, Stock stock)
+        public bool BotonComprarStock(string papelIngresadoStr, string tintaIngresadaStr, string troquelIngresadoStr, string encuIngresadoStr, Stock stock)
         {
-            Dictionary<string, int> materiales = new Dictionary<string, int>();
+            //Dictionary<string, int> materiales = new Dictionary<string, int>();
+            bool agregado = false;
 
             bool papelConvertido = int.TryParse(papelIngresadoStr, out int papelIngresado);
             bool tintaConvertida = int.TryParse(tintaIngresadaStr, out int tintaIngresada);
@@ -141,23 +140,33 @@ namespace Biblioteca
                 (papelConvertido && tintaConvertida && troquelConvertido && encuConvertido) &&
                 (papelIngresado >= 0 && tintaIngresada >= 0 && troquelIngresado >= 0 && encuIngresado >= 0))
             {
-                materiales.Add("Papel", papelIngresado);
-                materiales.Add("Tinta", tintaIngresada);
-                materiales.Add("Troquel", troquelIngresado);
-                materiales.Add("Encuadernacion", encuIngresado);
+                //materiales.Add("Papel", papelIngresado);
+                //materiales.Add("Tinta", tintaIngresada);
+                //materiales.Add("Troquel", troquelIngresado);
+                //materiales.Add("Encuadernacion", encuIngresado);
 
-                return materiales;
+                StockDAO.Modificar(papelIngresado, "papel");
+                StockDAO.Modificar(tintaIngresada, "tinta");
+                StockDAO.Modificar(troquelIngresado, "troquel");
+                StockDAO.Modificar(encuIngresado, "encuadernacion");
+                
+                agregado = true;
+                return agregado;
             }
             else
             {
-                return materiales;
+                return agregado;
             }
         }
 
-        public int Papel { get { return cantPapel; } set { cantPapel += value; } }
-        public int Tinta { get { return cantTinta; } set { cantTinta += value; } }
-        public int Troquel { get { return cantTroquel; } set { cantTroquel += value; } }
-        public int Encuadernacion { get { return cantEncuadernacion; } set { cantEncuadernacion += value; } }
+        public int Papel { get { return StockDAO.Leer()["Papel"]; } set { StockDAO.Modificar(value, "papel"); } }
+        public int Tinta { get { return StockDAO.Leer()["Tinta"];  } set { StockDAO.Modificar(value, "tinta"); } }
+        public int Troquel { get { return StockDAO.Leer()["Troquel"]; } set { StockDAO.Modificar(value, "troquel"); } }
+        public int Encuadernacion { get { return StockDAO.Leer()["Encuadernacion"]; } set { StockDAO.Modificar(value, "encuadernacion"); } }
+        //public int Papel { get { return cantPapel; } set { cantPapel += value; } }
+        //public int Tinta { get { return cantTinta; } set { cantTinta += value; } }
+        //public int Troquel { get { return cantTroquel; } set { cantTroquel += value; } }
+        //public int Encuadernacion { get { return cantEncuadernacion; } set { cantEncuadernacion += value; } }
 
         /// <summary>
         /// Para el singleton, solo se puede generar una vez.

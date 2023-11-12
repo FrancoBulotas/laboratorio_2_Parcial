@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Biblioteca
 {
@@ -81,7 +84,7 @@ namespace Biblioteca
 
             if (cantInsumo)
             {
-                return (random.Next(10000) + 100).ToString();
+                return (random.Next(100000) + 100).ToString();
             }
             else
             {
@@ -181,7 +184,7 @@ namespace Biblioteca
         /// </summary>
         /// <param name="nombreIngresado"></param>
         /// <param name="contraseniaIngresada"></param>
-        /// <returns></returns>
+        /// <returns>Retorna un Dictionary<string, string> con el 'Tipo Usuario' que se loguea, el 'Indice' del usuario, y un 'Error' en caso de haberlo </returns>
         public Dictionary<string, string> ValidarUsuarioLogin(string nombreIngresado, string contraseniaIngresada)
         {
             if (ListaUsuarios.Count >= 1)
@@ -230,7 +233,15 @@ namespace Biblioteca
             return dictResultadoLogin;
         }
 
-
+        /// <summary>
+        /// Valida que los datos del usuario sean correctos a la hora de un registro.
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="contra"></param>
+        /// <param name="repContra"></param>
+        /// <param name="tipoUsuario"></param>
+        /// <param name="id"></param>
+        /// <returns>Devuelve un Dictionary<string, string> donde la llave es 'Error', por defecto vacia, y en caso de error con el detalle del mismo.</returns>
         public Dictionary<string, string> ValidarUsuarioRegistro(string nombre, string contra, string repContra, string tipoUsuario, int id=-1)
         {
             if (nombre != String.Empty)
@@ -292,7 +303,11 @@ namespace Biblioteca
             return dictResultadoRegistro;
         }
 
-
+        /// <summary>
+        /// Obtiene el indice de un usuario en la lista de usuarios segun su id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna el indice del usuario en caso de encontrarlo, sino devuelve -1.</returns>
         public int ObtenerIndiceListaUsuarios(int id)
         {
             int indice = -1;
@@ -305,6 +320,44 @@ namespace Biblioteca
                 }
             }
             return indice;
+        }
+
+        public void SerializarXMLStock(Stock stock)
+        {
+            using (StreamWriter streamWriter = new StreamWriter("stock\\stock.xml"))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Stock));
+
+                xmlSerializer.Serialize(streamWriter, stock);
+            }
+        }
+
+        public static void SerializarJSON(Dictionary<string, string> config)
+        {
+            string configJSON = JsonConvert.SerializeObject(config);
+
+            File.WriteAllText("config\\config.json", configJSON);
+        }
+
+        public static Dictionary<string, string> DeserializarJSON()
+        {
+            string configJSON = File.ReadAllText("config\\config.json");
+
+            Dictionary<string, string> config = JsonConvert.DeserializeObject<Dictionary<string, string>>(configJSON);
+
+            return config;
+        }
+
+        /// <summary>
+        /// Se encarga de cargar el detalle del error al archivo errores.log
+        /// </summary>
+        /// <param name="error"></param>
+        public void CargarErrorLog(string error)
+        {
+            using (StreamWriter sw = new StreamWriter("log\\errores.log", true))
+            {
+                sw.WriteLine(error);   
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Biblioteca;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,20 +17,23 @@ namespace Frms
     public partial class FrmMenuSupervisor : Form
     {
         internal Administracion administracion;
-        //private List<Usuario> listaUsuarios;
         internal FrmLogin login;
         internal int indexUsuarioLogueado;
         internal ArrayList arrayControlStock = new ArrayList();
         internal Dictionary<string, int> materialesComprados = new Dictionary<string, int>();
+        internal bool insumosComprados = false;
         private FrmMenuSupervisorCRUD menuCRUD;
+        private FrmConfiguracion menuConfig;
+
+        public FrmMenuSupervisor() { }
 
         public FrmMenuSupervisor(Administracion administracion, int indexUsuario, FrmLogin login)
         {
             InitializeComponent();
             this.administracion = administracion;
-            //this.listaUsuarios = listaUsuarios;
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
+            administracion.SerializarXMLStock(login.stock);
         }
 
         private void FrmMenu_Load(object sender, EventArgs e)
@@ -41,7 +45,7 @@ namespace Frms
 
             Visual.CargarUsuariosDataGrid(dataGridView1, administracion);
             Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
-            Visual.CargarStockDg(dataGridView2, login.stock);
+            Visual.CargarStockDataGrid(dataGridView2, login.stock);
 
         }
 
@@ -62,23 +66,30 @@ namespace Frms
             this.Hide();
             login.menuOperario.botonVolverSup.Visible = true;
             login.menuOperario.Show();
-            Visual.CargarStockDg(login.menuOperario.dataGridView2, login.stock);
+            Visual.CargarStockDataGrid(login.menuOperario.dataGridView2, login.stock);
             Visual.ControlDataGridStock(login.stock, login.menuOperario.dataGridView2, false);
         }
 
         private void buttonComprar_Click(object sender, EventArgs e)
         {
-            materialesComprados = login.stock.BotonComprarStock(textBoxPapel.Text, textBoxTinta.Text, textBoxTroquel.Text, textBoxEncuadernacion.Text, login.stock);
+            insumosComprados = login.stock.BotonComprarStock(textBoxPapel.Text, textBoxTinta.Text, textBoxTroquel.Text, textBoxEncuadernacion.Text, login.stock);
 
-            Visual.MostrarStockComprado(this, materialesComprados);
-            Visual.CargarStockDg(dataGridView2, login.stock);
+            Visual.ValidarStockComprado(this, insumosComprados);
+            Visual.CargarStockDataGrid(dataGridView2, login.stock);
             Visual.ControlDataGridStock(login.stock, dataGridView2, false);
+            administracion.SerializarXMLStock(login.stock);
         }
 
         private void buttonEditarUsr_Click(object sender, EventArgs e)
         {
             menuCRUD = new FrmMenuSupervisorCRUD(administracion, this);
             menuCRUD.Show();
+        }
+
+        private void buttonConfiguracion_Click(object sender, EventArgs e)
+        {
+            menuConfig = new FrmConfiguracion();;
+            menuConfig.Show();
         }
     }
 }

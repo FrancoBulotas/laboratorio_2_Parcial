@@ -46,6 +46,7 @@ namespace Biblioteca
             }
             catch (Exception e)
             {
+                
                 return false;
                 throw;
             }
@@ -91,29 +92,9 @@ namespace Biblioteca
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="nuevoNombre"></param>
+        /// <param name="nuevoDato"></param>
         /// <param name="id"></param>
-        //public static void ModificarNombre(string nuevoNombre, int id)
-        //{
-        //    try
-        //    {
-        //        command.Parameters.Clear();
-        //        connection.Open();
-        //        command.CommandText = $"UPDATE usuarios SET nombre = @nuevoNombre WHERE id = @id";
-        //        command.Parameters.AddWithValue("@nuevoNombre", nuevoNombre);
-        //        command.Parameters.AddWithValue("@id", id);
-        //        int rows = command.ExecuteNonQuery();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
-
+        /// <param name="columna"></param>
         public static void Modificar(string nuevoDato, int id, string columna)
         {
             try
@@ -134,31 +115,6 @@ namespace Biblioteca
                 connection.Close();
             }
         }
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="nuevaContra"></param>
-        ///// <param name="id"></param>
-        //public static void ModificarContrasenia(string nuevaContra, int id)
-        //{
-        //    try
-        //    {
-        //        command.Parameters.Clear();
-        //        connection.Open();
-        //        command.CommandText = $"UPDATE usuarios SET contrasenia = @nuevaContra WHERE id = @id";
-        //        command.Parameters.AddWithValue("@nuevaContra", nuevaContra);
-        //        command.Parameters.AddWithValue("@id", id);
-        //        int rows = command.ExecuteNonQuery();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
 
         /// <summary>
         /// 
