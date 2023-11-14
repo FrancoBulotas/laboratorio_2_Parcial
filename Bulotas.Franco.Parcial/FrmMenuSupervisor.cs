@@ -25,8 +25,6 @@ namespace Frms
         private FrmMenuSupervisorCRUD menuCRUD;
         private FrmConfiguracion menuConfig;
 
-        public FrmMenuSupervisor() { }
-
         public FrmMenuSupervisor(Administracion administracion, int indexUsuario, FrmLogin login)
         {
             InitializeComponent();
@@ -88,7 +86,7 @@ namespace Frms
 
         private void buttonConfiguracion_Click(object sender, EventArgs e)
         {
-            menuConfig = new FrmConfiguracion();;
+            menuConfig = new FrmConfiguracion(login);
             menuConfig.Show();
         }
     }

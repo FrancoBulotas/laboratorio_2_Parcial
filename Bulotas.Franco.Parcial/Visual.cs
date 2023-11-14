@@ -413,11 +413,11 @@ namespace Frms
 
             if (login)
             {
-                rutaImagenFondo = Path.Combine(directorioEjecutable, Administracion.DeserializarJSON()["FondoLogin"]);
+                rutaImagenFondo = Path.Combine(directorioEjecutable, Administracion.DeserializarJSONConfig()["FondoLogin"]);
             }
             else
             {
-                rutaImagenFondo = Path.Combine(directorioEjecutable, Administracion.DeserializarJSON()["FondoApp"]);
+                rutaImagenFondo = Path.Combine(directorioEjecutable, Administracion.DeserializarJSONConfig()["FondoApp"]);
 
             }
 
@@ -427,7 +427,7 @@ namespace Frms
         public static Icon CargarIcono()
         {
             string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
-            string rutaIcono = Path.Combine(directorioEjecutable, Administracion.DeserializarJSON()["Icono"]);
+            string rutaIcono = Path.Combine(directorioEjecutable, Administracion.DeserializarJSONConfig()["Icono"]);
             return  new Icon(rutaIcono);
         }
 

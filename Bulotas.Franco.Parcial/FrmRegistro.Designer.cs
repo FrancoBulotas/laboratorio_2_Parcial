@@ -167,6 +167,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(279, 358);
             Controls.Add(linkLabelRandom);
             Controls.Add(checkBoxSupervisor);
@@ -179,6 +180,7 @@
             Controls.Add(tbNombreUsuario);
             Controls.Add(label1);
             Controls.Add(botonCancelar);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FrmRegistro";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sispro - Registro";

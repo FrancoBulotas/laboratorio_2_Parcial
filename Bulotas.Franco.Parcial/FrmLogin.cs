@@ -13,13 +13,15 @@ namespace Frms
         private Dictionary<string, string> datosUsuario = new Dictionary<string, string>();
         private Dictionary<string, string> resultadoValidez = new Dictionary<string, string>();
         private List<string> pedidos = new List<string>();
+        internal FrmRegistro registro;
         private string msjError;
 
         public FrmLogin()
         {
             stock = Stock.InstanciaStock;
-
             administracion.SerializarXMLStock(stock);
+
+            registro = new FrmRegistro(this, administracion);
 
             this.BackgroundImage = Visual.CargarFondo(true);
             this.Icon = Visual.CargarIcono();
@@ -64,7 +66,7 @@ namespace Frms
                 administracion.CargarErrorLog(msjError);
 
                 resultadoValidez["Error"] = "";
-            }      
+            }
         }
 
         private void botonSalir_Click(object sender, EventArgs e)
@@ -74,17 +76,16 @@ namespace Frms
 
         private void registro_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //FrmRegistro registro = new FrmRegistro(listaUsuarios, this, administracion);
-            FrmRegistro registro = new FrmRegistro(this, administracion);
             tNombre.Text = string.Empty;
             tPass.Text = string.Empty;
             registro.Show();
+            this.Hide();
         }
 
         private void linkLabelHardcodeOp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             datosUsuario = administracion.HardcodearUsuario("operario");
-            
+
             tNombre.Text = datosUsuario["Nombre"];
             tPass.Text = datosUsuario["Contrasenia"];
         }

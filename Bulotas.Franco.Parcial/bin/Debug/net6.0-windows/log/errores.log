@@ -10,3 +10,4 @@
 11/11/2023 20:56:01 | Creacion Usuario: Seleccionar un tipo de usuario valido.
 11/11/2023 20:56:12 | Creacion Usuario: Las contraseñas no coinciden.
 11/11/2023 20:56:49 | Modificacion Usuario: Seleccionar un tipo de usuario valido.
+12/11/2023 15:18:31 | String '' was not recognized as a valid Boolean. | Origen: System.Private.CoreLib | Metodo: Boolean Parse(System.ReadOnlySpan`1[System.Char])

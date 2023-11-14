@@ -315,6 +315,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(498, 284);
             Controls.Add(labelTipoUsuarioActual);
             Controls.Add(labelErrorRegistro);

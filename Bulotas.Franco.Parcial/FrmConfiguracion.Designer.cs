@@ -34,15 +34,15 @@
             pictureBox4 = new PictureBox();
             pictureBox5 = new PictureBox();
             pictureBox6 = new PictureBox();
-            checkBox1 = new CheckBox();
-            checkBox2 = new CheckBox();
-            checkBox3 = new CheckBox();
-            checkBox4 = new CheckBox();
-            checkBox5 = new CheckBox();
-            checkBox6 = new CheckBox();
             label1 = new Label();
             label2 = new Label();
             botonSalir = new Button();
+            buttonFondoApp1 = new Button();
+            buttonFondoApp2 = new Button();
+            buttonFondoApp3 = new Button();
+            buttonFondoLogin1 = new Button();
+            buttonFondoLogin2 = new Button();
+            buttonFondoLogin3 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -53,6 +53,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox1.Location = new Point(23, 53);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(144, 91);
@@ -62,6 +63,7 @@
             // 
             // pictureBox2
             // 
+            pictureBox2.BorderStyle = BorderStyle.Fixed3D;
             pictureBox2.Location = new Point(206, 53);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(144, 91);
@@ -71,6 +73,7 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.BorderStyle = BorderStyle.Fixed3D;
             pictureBox3.Location = new Point(384, 53);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(144, 91);
@@ -80,90 +83,33 @@
             // 
             // pictureBox4
             // 
-            pictureBox4.Location = new Point(23, 243);
+            pictureBox4.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox4.Location = new Point(41, 234);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(144, 91);
+            pictureBox4.Size = new Size(105, 118);
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.TabIndex = 3;
             pictureBox4.TabStop = false;
             // 
             // pictureBox5
             // 
-            pictureBox5.Location = new Point(206, 243);
+            pictureBox5.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox5.Location = new Point(219, 234);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(144, 91);
+            pictureBox5.Size = new Size(105, 118);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 4;
             pictureBox5.TabStop = false;
             // 
             // pictureBox6
             // 
-            pictureBox6.Location = new Point(384, 243);
+            pictureBox6.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox6.Location = new Point(398, 234);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(144, 91);
+            pictureBox6.Size = new Size(107, 118);
             pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox6.TabIndex = 5;
             pictureBox6.TabStop = false;
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.BackColor = Color.Transparent;
-            checkBox1.Location = new Point(86, 150);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(15, 14);
-            checkBox1.TabIndex = 6;
-            checkBox1.UseVisualStyleBackColor = false;
-            // 
-            // checkBox2
-            // 
-            checkBox2.AutoSize = true;
-            checkBox2.BackColor = Color.Transparent;
-            checkBox2.Location = new Point(271, 150);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(15, 14);
-            checkBox2.TabIndex = 7;
-            checkBox2.UseVisualStyleBackColor = false;
-            // 
-            // checkBox3
-            // 
-            checkBox3.AutoSize = true;
-            checkBox3.BackColor = Color.Transparent;
-            checkBox3.Location = new Point(454, 150);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(15, 14);
-            checkBox3.TabIndex = 8;
-            checkBox3.UseVisualStyleBackColor = false;
-            // 
-            // checkBox4
-            // 
-            checkBox4.AutoSize = true;
-            checkBox4.BackColor = Color.Transparent;
-            checkBox4.Location = new Point(86, 340);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Size = new Size(15, 14);
-            checkBox4.TabIndex = 9;
-            checkBox4.UseVisualStyleBackColor = false;
-            // 
-            // checkBox5
-            // 
-            checkBox5.AutoSize = true;
-            checkBox5.BackColor = Color.Transparent;
-            checkBox5.Location = new Point(271, 340);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new Size(15, 14);
-            checkBox5.TabIndex = 10;
-            checkBox5.UseVisualStyleBackColor = false;
-            // 
-            // checkBox6
-            // 
-            checkBox6.AutoSize = true;
-            checkBox6.BackColor = Color.Transparent;
-            checkBox6.Location = new Point(454, 340);
-            checkBox6.Name = "checkBox6";
-            checkBox6.Size = new Size(15, 14);
-            checkBox6.TabIndex = 11;
-            checkBox6.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -190,7 +136,7 @@
             // botonSalir
             // 
             botonSalir.BackColor = SystemColors.ControlDark;
-            botonSalir.Location = new Point(447, 367);
+            botonSalir.Location = new Point(447, 407);
             botonSalir.Margin = new Padding(0);
             botonSalir.Name = "botonSalir";
             botonSalir.Size = new Size(90, 29);
@@ -199,27 +145,90 @@
             botonSalir.UseVisualStyleBackColor = false;
             botonSalir.Click += botonSalir_Click;
             // 
+            // buttonFondoApp1
+            // 
+            buttonFondoApp1.BackColor = SystemColors.ActiveCaption;
+            buttonFondoApp1.Location = new Point(83, 150);
+            buttonFondoApp1.Name = "buttonFondoApp1";
+            buttonFondoApp1.Size = new Size(18, 18);
+            buttonFondoApp1.TabIndex = 16;
+            buttonFondoApp1.UseVisualStyleBackColor = false;
+            buttonFondoApp1.Click += buttonFondoApp1_Click;
+            // 
+            // buttonFondoApp2
+            // 
+            buttonFondoApp2.BackColor = SystemColors.ActiveCaption;
+            buttonFondoApp2.Location = new Point(262, 150);
+            buttonFondoApp2.Name = "buttonFondoApp2";
+            buttonFondoApp2.Size = new Size(18, 18);
+            buttonFondoApp2.TabIndex = 17;
+            buttonFondoApp2.UseVisualStyleBackColor = false;
+            buttonFondoApp2.Click += buttonFondoApp2_Click;
+            // 
+            // buttonFondoApp3
+            // 
+            buttonFondoApp3.BackColor = SystemColors.ActiveCaption;
+            buttonFondoApp3.Location = new Point(447, 150);
+            buttonFondoApp3.Name = "buttonFondoApp3";
+            buttonFondoApp3.Size = new Size(18, 18);
+            buttonFondoApp3.TabIndex = 18;
+            buttonFondoApp3.UseVisualStyleBackColor = false;
+            buttonFondoApp3.Click += buttonFondoApp3_Click;
+            // 
+            // buttonFondoLogin1
+            // 
+            buttonFondoLogin1.BackColor = SystemColors.ActiveCaption;
+            buttonFondoLogin1.Location = new Point(83, 358);
+            buttonFondoLogin1.Name = "buttonFondoLogin1";
+            buttonFondoLogin1.Size = new Size(18, 18);
+            buttonFondoLogin1.TabIndex = 19;
+            buttonFondoLogin1.UseVisualStyleBackColor = false;
+            buttonFondoLogin1.Click += buttonFondoLogin1_Click;
+            // 
+            // buttonFondoLogin2
+            // 
+            buttonFondoLogin2.BackColor = SystemColors.ActiveCaption;
+            buttonFondoLogin2.Location = new Point(262, 358);
+            buttonFondoLogin2.Name = "buttonFondoLogin2";
+            buttonFondoLogin2.Size = new Size(18, 18);
+            buttonFondoLogin2.TabIndex = 20;
+            buttonFondoLogin2.UseVisualStyleBackColor = false;
+            buttonFondoLogin2.Click += buttonFondoLogin2_Click;
+            // 
+            // buttonFondoLogin3
+            // 
+            buttonFondoLogin3.BackColor = SystemColors.ActiveCaption;
+            buttonFondoLogin3.Location = new Point(447, 358);
+            buttonFondoLogin3.Name = "buttonFondoLogin3";
+            buttonFondoLogin3.Size = new Size(18, 18);
+            buttonFondoLogin3.TabIndex = 21;
+            buttonFondoLogin3.UseVisualStyleBackColor = false;
+            buttonFondoLogin3.Click += buttonFondoLogin3_Click;
+            // 
             // FrmConfiguracion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(546, 405);
+            ClientSize = new Size(546, 445);
+            Controls.Add(buttonFondoLogin3);
+            Controls.Add(buttonFondoLogin2);
+            Controls.Add(buttonFondoLogin1);
+            Controls.Add(buttonFondoApp3);
+            Controls.Add(buttonFondoApp2);
+            Controls.Add(buttonFondoApp1);
             Controls.Add(botonSalir);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(checkBox6);
-            Controls.Add(checkBox5);
-            Controls.Add(checkBox4);
-            Controls.Add(checkBox3);
-            Controls.Add(checkBox2);
-            Controls.Add(checkBox1);
             Controls.Add(pictureBox6);
             Controls.Add(pictureBox5);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "FrmConfiguracion";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Sispro - Configuracion";
             Load += FrmConfiguracion_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -240,14 +249,14 @@
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
         private PictureBox pictureBox6;
-        private CheckBox checkBox1;
-        private CheckBox checkBox2;
-        private CheckBox checkBox3;
-        private CheckBox checkBox4;
-        private CheckBox checkBox5;
-        private CheckBox checkBox6;
         private Label label1;
         private Label label2;
         private Button botonSalir;
+        private Button buttonFondoApp1;
+        private Button buttonFondoApp2;
+        private Button buttonFondoApp3;
+        private Button buttonFondoLogin1;
+        private Button buttonFondoLogin2;
+        private Button buttonFondoLogin3;
     }
 }

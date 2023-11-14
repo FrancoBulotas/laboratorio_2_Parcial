@@ -15,19 +15,16 @@ namespace Frms
 {
     public partial class FrmRegistro : Form
     {
-        //private List<Usuario> listaUsuarios;
-        public FrmLogin login;
+        internal FrmLogin login;
         private Administracion administracion;
         private Dictionary<string, string> dictResultadoRegistro = new Dictionary<string, string>();
         private string msjError;
 
-        //public FrmRegistro(List<Usuario> listaUsuarios, FrmLogin login, Administracion rrhh)
         public FrmRegistro(FrmLogin login, Administracion administracion)
         {
             InitializeComponent();
 
             this.administracion = administracion;
-            //this.listaUsuarios = listaUsuarios;
             this.login = login;
             login.Hide();
 
@@ -76,61 +73,6 @@ namespace Frms
             }
 
             dictResultadoRegistro["Error"] = "";
-
-            //if (nombre != String.Empty)
-            //{
-            //    if (contra != String.Empty && contra == repContra)
-            //    {
-            //        if (checkBoxOperario.Checked && checkBoxSupervisor.Checked == false)
-            //        {
-            //            tipoUsuario = checkBoxOperario.Text.ToLower();
-            //        }
-            //        else if (checkBoxOperario.Checked == false && checkBoxSupervisor.Checked)
-            //        {
-            //            tipoUsuario = checkBoxSupervisor.Text.ToLower();
-            //        }
-
-            //        //Usuario user = new Usuario(nombre, contra, tipoUsuario);
-            //        //if (administracion.AgregarUsuario(this.listaUsuarios, user, tipoUsuario))
-
-            //        if (UsuarioDAO.Guardar(nombre, contra, tipoUsuario))
-            //        {
-            //            administracion.ListaUsuarios = UsuarioDAO.LeerTodo();
-            //            this.Hide();
-            //            login.Show();
-            //            MessageBox.Show($"Registrado Correctamente \nUsuario: {nombre} \nContraseña: {contra} \nTipo Usuario: {tipoUsuario}", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        }
-            //        else
-            //        {
-            //            if (tipoUsuario == string.Empty)
-            //            {
-            //                this.labelErrorRegistro.Text = "Error. Seleccionar un tipo de usuario.";
-            //            }
-            //            else
-            //            {
-            //                this.labelErrorRegistro.Text = "Error al registrar usuario.";
-            //            }
-            //            this.labelErrorRegistro.Visible = true;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (contra != repContra)
-            //        {
-            //            this.labelErrorRegistro.Text = "Error. Las contraseñas no coinciden.";
-            //        }
-            //        else
-            //        {
-            //            this.labelErrorRegistro.Text = "Error. Contraseña vacia.";
-            //        }
-            //        this.labelErrorRegistro.Visible = true;
-            //    }
-            //}
-            //else
-            //{
-            //    this.labelErrorRegistro.Text = "Error. Nombre de usuario vacio.";
-            //    this.labelErrorRegistro.Visible = true;
-            //}
         }
 
         private void linkLabelVaciar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

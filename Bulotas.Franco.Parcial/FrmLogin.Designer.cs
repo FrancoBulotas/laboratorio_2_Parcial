@@ -32,7 +32,7 @@
             tPass = new TextBox();
             tNombre = new TextBox();
             labelError = new Label();
-            registro = new LinkLabel();
+            labelRegistro = new LinkLabel();
             botonSalir = new Button();
             label1 = new Label();
             linkLabelHardcodeOp = new LinkLabel();
@@ -80,18 +80,16 @@
             labelError.Text = "ERROR";
             labelError.Visible = false;
             // 
-            // registro
+            // labelRegistro
             // 
-            registro.AutoSize = true;
-            registro.BackColor = Color.Transparent;
-            registro.LinkColor = Color.Black;
-            registro.Location = new Point(12, 340);
-            registro.Name = "registro";
-            registro.Size = new Size(77, 15);
-            registro.TabIndex = 6;
-            registro.TabStop = true;
-            registro.Text = "REGISTRARSE";
-            registro.LinkClicked += registro_LinkClicked;
+            labelRegistro.AutoSize = true;
+            labelRegistro.BackColor = Color.Transparent;
+            labelRegistro.LinkColor = Color.Black;
+            labelRegistro.Location = new Point(12, 340);
+            labelRegistro.Name = "labelRegistro";
+            labelRegistro.Size = new Size(0, 15);
+            labelRegistro.TabIndex = 6;
+            labelRegistro.LinkClicked += registro_LinkClicked;
             // 
             // botonSalir
             // 
@@ -146,12 +144,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(275, 367);
             Controls.Add(linkLabelHardcodeSup);
             Controls.Add(linkLabelHardcodeOp);
             Controls.Add(label1);
             Controls.Add(botonSalir);
-            Controls.Add(registro);
+            Controls.Add(labelRegistro);
             Controls.Add(labelError);
             Controls.Add(tNombre);
             Controls.Add(tPass);
@@ -169,7 +168,7 @@
         internal TextBox tPass;
         internal TextBox tNombre;
         internal Label labelError;
-        private LinkLabel registro;
+        private LinkLabel labelRegistro;
         private Button botonSalir;
         private Label label1;
         private LinkLabel linkLabelHardcodeOp;

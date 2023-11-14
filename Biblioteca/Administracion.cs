@@ -84,7 +84,7 @@ namespace Biblioteca
 
             if (cantInsumo)
             {
-                return (random.Next(100000) + 100).ToString();
+                return (random.Next(10000) + 100).ToString();
             }
             else
             {
@@ -332,14 +332,22 @@ namespace Biblioteca
             }
         }
 
-        public static void SerializarJSON(Dictionary<string, string> config)
+        /// <summary>
+        /// Se encarga de serializar un Dict de configuraciones en un archivo json.
+        /// </summary>
+        /// <param name="config"></param>
+        public static void SerializarJSONConfig(Dictionary<string, string> config)
         {
             string configJSON = JsonConvert.SerializeObject(config);
 
             File.WriteAllText("config\\config.json", configJSON);
         }
 
-        public static Dictionary<string, string> DeserializarJSON()
+        /// <summary>
+        /// Se encarga de deserializar el json de la configuracion.
+        /// </summary>
+        /// <returns>Retorna un dict con claves: FondoApp, FondoLogin, Icono. Donde su valor es la ruta de la imagen.</returns>
+        public static Dictionary<string, string> DeserializarJSONConfig()
         {
             string configJSON = File.ReadAllText("config\\config.json");
 

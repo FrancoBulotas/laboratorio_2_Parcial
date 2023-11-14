@@ -524,6 +524,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.HighlightText;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1012, 461);
             Controls.Add(labelEncuExitosa);
             Controls.Add(labelTroqueladoExitoso);
@@ -564,8 +565,8 @@
             Name = "FrmMenuOperario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sispro";
-            Load += FrmPruebaMenu_Load;
             FormClosing += FrmPruebaMenu_FormClosing;
+            Load += FrmPruebaMenu_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
