@@ -12,14 +12,17 @@ namespace Frms
         internal Stock stock;
         private Dictionary<string, string> datosUsuario = new Dictionary<string, string>();
         private Dictionary<string, string> resultadoValidez = new Dictionary<string, string>();
-        private List<string> pedidos = new List<string>();
+        private List<Administracion> pedidos = new List<Administracion>();
         internal FrmRegistro registro;
         private string msjError;
+        internal Action<DataGridView, Administracion, int> cargaDeUsuariosDataGrid;
 
         public FrmLogin()
         {
             stock = Stock.InstanciaStock;
             administracion.SerializarXMLStock(stock);
+            administracion.EventoLogError += Administracion_EventoLogError;
+            cargaDeUsuariosDataGrid = Visual.CargarUsuariosDataGrid;
 
             registro = new FrmRegistro(this, administracion);
 
@@ -27,6 +30,11 @@ namespace Frms
             this.Icon = Visual.CargarIcono();
 
             InitializeComponent();
+        }
+
+        private void Administracion_EventoLogError(object sender, string msjError)
+        {
+            labelError.Visible = true;
         }
 
         private void login_Click(object sender, EventArgs e)
@@ -60,11 +68,8 @@ namespace Frms
             else if (resultadoValidez["Error"].Length > 0)
             {
                 labelError.Text = resultadoValidez["Error"];
-                labelError.Visible = true;
-
                 msjError = $"{DateTime.Now} | Loguin: {resultadoValidez["Error"]}";
                 administracion.CargarErrorLog(msjError);
-
                 resultadoValidez["Error"] = "";
             }
         }

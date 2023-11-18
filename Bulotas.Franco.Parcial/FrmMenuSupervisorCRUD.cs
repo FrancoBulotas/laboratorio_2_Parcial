@@ -1,4 +1,5 @@
 ﻿using Biblioteca;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,7 +36,8 @@ namespace Frms
             this.BackgroundImage = Visual.CargarFondo(false);
             this.Icon = Visual.CargarIcono();
 
-            Visual.CargarUsuariosDataGrid(dataGridViewUsr, administracion, 0);
+            //Visual.CargarUsuariosDataGrid(dataGridViewUsr, administracion, 0);
+            formSupervisor.login.cargaDeUsuariosDataGrid(dataGridViewUsr, administracion, 0);
         }
 
         private void dataGridViewUsr_CellContentClick(object sender, DataGridViewCellEventArgs e)

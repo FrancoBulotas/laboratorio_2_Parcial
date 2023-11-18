@@ -115,7 +115,6 @@ namespace Biblioteca
         /// <param name="tintaIngresadaStr"></param>
         /// <param name="troquelIngresadoStr"></param>
         /// <param name="encuIngresadoStr"></param>
-        /// <param name="stock"></param>
         /// <returns>Un Dictionary vacio en caso de fallar la compra, y con los elementos a comprar en caso de ser correcta.</returns>
         public bool BotonComprarStock(string papelIngresadoStr, string tintaIngresadaStr, string troquelIngresadoStr, string encuIngresadoStr)
         {

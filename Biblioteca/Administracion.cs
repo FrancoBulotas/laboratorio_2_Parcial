@@ -16,6 +16,9 @@ namespace Biblioteca
         private Dictionary<string, string> dictResultadoRegistro = new Dictionary<string, string>();
         private Dictionary<string, string> dictInfo = new Dictionary<string, string>();
 
+        public delegate void LogErrores(object sender, string msjError);
+
+        public event LogErrores EventoLogError;
 
         public Administracion()
         {
@@ -97,36 +100,48 @@ namespace Biblioteca
         /// </summary>
         /// <param name="form"></param>
         /// <returns>Retorna una lista de string con los pedidos.</returns>
-        public List<string> GenerarPedidosDataGridView()
+        public List<Administracion> GenerarPedidosDataGridView()
         {
-            List<string> productosTotales = new List<string>();
+            List<Administracion> productosTotales = new List<Administracion>();
             List<string> nombresProductos = new List<string> { "boleta", "libro", "cuadernillo" };
             Random random = new();
             string nombreProducto;
+            int cant1 = 0;
+            int cant2 = 0;
 
             for (int i = 0; i < 20; i++)
             {
-                string detallesProducto = "";
-
                 nombreProducto = nombresProductos[random.Next(nombresProductos.Count)];
 
                 if (nombreProducto == "boleta")
                 {
                     Boleta boleta = new Boleta();
-                    detallesProducto = boleta.MostrarInfoPedido(0, 0, 0)["Info"];
+                    productosTotales.Add(boleta);
                 }
                 else if (nombreProducto == "libro")
                 {
                     Libro libro = new Libro();
-                    detallesProducto = libro.MostrarInfoPedido(0, 0, 0)["Info"];
+                    productosTotales.Add(libro);
                 }
                 else if (nombreProducto == "cuadernillo")
                 {
                     Cuadernillo cuadernillo = new Cuadernillo();
-                    detallesProducto = cuadernillo.MostrarInfoPedido(0, 0, 0)["Info"];
+                    productosTotales.Add(cuadernillo);
                 }
-                productosTotales.Add(detallesProducto);
             }
+
+            OrdenarPedidosPorCantidad(productosTotales, (p1, p2) =>
+            {
+                if(p1 is Libro) { cant1 = ((Libro)p1).Cantidad; }
+                if(p1 is Boleta) { cant1 = ((Boleta)p1).Cantidad; }
+                if(p1 is Cuadernillo) { cant1 = ((Cuadernillo)p1).Cantidad; }
+                if(p2 is Libro) { cant2 = ((Libro)p2).Cantidad; }
+                if(p2 is Boleta) { cant2 = ((Boleta)p2).Cantidad; }
+                if(p2 is Cuadernillo) { cant2 = ((Cuadernillo)p2).Cantidad; }
+
+                return (cant1).CompareTo(cant2);
+            });
+
             return productosTotales;
         }
 
@@ -349,6 +364,27 @@ namespace Biblioteca
             {
                 sw.WriteLine(error);   
             }
+
+            DispararEventoLogError(error);
         }
+
+        private void DispararEventoLogError(string mensajeError)
+        {
+            if (EventoLogError is not null)
+            {
+                EventoLogError.Invoke(this, mensajeError);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pedidos"></param>
+        /// <param name="comparador"></param>
+        public static void OrdenarPedidosPorCantidad(List<Administracion> pedidos, Comparison<Administracion> comparador)
+        {
+            pedidos.Sort(comparador);
+        }
+
     }
 }

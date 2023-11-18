@@ -27,7 +27,7 @@ namespace Frms
             this.administracion = administracion;
             this.login = login;
             login.Hide();
-
+            administracion.EventoLogError += Administracion_EventoLogError;
             this.BackgroundImage = Visual.CargarFondo(true);
             this.Icon = Visual.CargarIcono();
         }
@@ -59,7 +59,6 @@ namespace Frms
             if (dictResultadoRegistro["Error"].Length > 0)
             {
                 labelErrorRegistro.Text = dictResultadoRegistro["Error"];
-                labelErrorRegistro.Visible = true;
 
                 msjError = $"{DateTime.Now} | Registro: {dictResultadoRegistro["Error"]}";
                 administracion.CargarErrorLog(msjError);
@@ -84,9 +83,9 @@ namespace Frms
             this.checkBoxSupervisor.Checked = false;
         }
 
-        private void tbRepContraseña_TextChanged(object sender, EventArgs e)
+        private void Administracion_EventoLogError(object sender, string msjError)
         {
-
+            labelErrorRegistro.Visible = true;
         }
 
         private void linkLabelRandom_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -106,6 +105,11 @@ namespace Frms
                 this.checkBoxOperario.Checked = false;
                 this.checkBoxSupervisor.Checked = true;
             }
+        }
+
+        private void tbRepContraseña_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -72,13 +72,36 @@ namespace Frms
         /// </summary>
         /// <param name="dg"></param>
         /// <param name="pedidos"></param>
-        public static void CargarPedidosDataGridView(DataGridView dg, List<string> pedidos)
+        public static void CargarPedidosDataGridView(DataGridView dg, List<Administracion> pedidos)
         {
-            for (int i = 0; i < pedidos.Count(); i++)
+            //for (int i = 0; i < pedidos.Count(); i++)
+            //{
+            //    string[] pedido = pedidos[i].Split("-");
+            //    dg.Rows.Add(pedido);
+            //}
+            string[] pedido = new string[6];
+
+            foreach (Administracion prod in pedidos)
             {
-                string[] pedido = pedidos[i].Split("-");
+                if (prod is Libro)
+                {
+                    Libro libro = (Libro)prod;
+                    pedido = libro.MostrarInfoPedido()["Info"].Split("-");
+                }
+                else if (prod is Boleta)
+                {
+                    Boleta boleta = (Boleta)prod;
+                    pedido = boleta.MostrarInfoPedido()["Info"].Split("-");
+                }
+                else
+                {
+                    Cuadernillo cuadernillo = (Cuadernillo)prod;
+                    pedido = cuadernillo.MostrarInfoPedido()["Info"].Split("-");
+                }
+
                 dg.Rows.Add(pedido);
             }
+
         }
 
         /// <summary>

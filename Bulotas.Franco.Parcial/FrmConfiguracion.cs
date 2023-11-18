@@ -76,12 +76,11 @@ namespace Frms
 
         private void AplicarFondo(bool app, string num)
         {
+            dictConfiguracion = Administracion.DeserializarJSONConfig();
 
             if (app)
             {
-                dictConfiguracion = Administracion.DeserializarJSONConfig();
-                dictConfiguracion["FondoApp"] = $"visual\\fondo-app{num}.jpg";
-                
+                dictConfiguracion["FondoApp"] = $"visual\\fondo-app{num}.jpg";   
                 Administracion.SerializarJSONConfig(dictConfiguracion);
 
                 login.menuOperario.BackgroundImage = Visual.CargarFondo(false);
@@ -89,9 +88,7 @@ namespace Frms
             }
             else
             {
-                dictConfiguracion = Administracion.DeserializarJSONConfig();
                 dictConfiguracion["FondoLogin"] = $"visual\\fondo-login{num}.jpg";
-
                 Administracion.SerializarJSONConfig(dictConfiguracion);
 
                 login.BackgroundImage = Visual.CargarFondo(true);

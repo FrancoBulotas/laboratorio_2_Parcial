@@ -1,5 +1,6 @@
 ﻿using Biblioteca;
 using Microsoft.VisualBasic.Devices;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,7 +42,8 @@ namespace Frms
 
             this.nombreLogueado.Text = administracion.ListaUsuarios[indexUsuarioLogueado].NombreUsuario;
 
-            Visual.CargarUsuariosDataGrid(dataGridView1, administracion);
+            //Visual.CargarUsuariosDataGrid(dataGridView1, administracion);
+            login.cargaDeUsuariosDataGrid(dataGridView1, administracion, -1);
             Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
             Visual.CargarStockDataGrid(dataGridView2, login.stock);
             Visual.ControlDataGridStock(login.stock, dataGridView2);

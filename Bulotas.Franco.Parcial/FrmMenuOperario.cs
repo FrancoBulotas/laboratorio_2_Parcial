@@ -68,7 +68,8 @@ namespace Frms
             Visual.ControlDataGridStock(login.stock, dataGridView2);
             Visual.ControlDataGridStock(login.stock, login.menuSupervisor.dataGridView2);
 
-            Visual.CargarUsuariosDataGrid(login.menuSupervisor.dataGridView1, administracion, administracion.ListaUsuarios[indexUsuarioLogueado].ID);
+            //Visual.CargarUsuariosDataGrid(login.menuSupervisor.dataGridView1, administracion, administracion.ListaUsuarios[indexUsuarioLogueado].ID);
+            login.cargaDeUsuariosDataGrid(login.menuSupervisor.dataGridView1, administracion, administracion.ListaUsuarios[indexUsuarioLogueado].ID);
 
             administracion.SerializarXMLStock(login.stock);
 
