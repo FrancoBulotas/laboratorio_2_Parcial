@@ -32,7 +32,6 @@ namespace Biblioteca
 
             try
             {
-                connection.Open();
                 command.CommandText = $"SELECT * FROM stock";
 
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -63,15 +62,19 @@ namespace Biblioteca
         /// </summary>
         /// <param name="cant"></param>
         /// <param name="columna"></param>
-        public static void Modificar(int cant, string columna)
+        public static Dictionary<string, int> Modificar(int papelIngresado, int tintaIngresada, int troquelIngresado, int encuIngresado)
         {
             try
             {
                 command.Parameters.Clear();
                 connection.Open();
-                command.CommandText = $"UPDATE stock SET {columna} += (@cant)";
-                command.Parameters.AddWithValue("@cant", cant);
+                command.CommandText = $"UPDATE stock SET papel += @papelIngresado, tinta += @tintaIngresada, troquel += @troquelIngresado, encuadernacion += @encuIngresado";
+                command.Parameters.AddWithValue("@papelIngresado", papelIngresado);
+                command.Parameters.AddWithValue("@tintaIngresada", tintaIngresada);
+                command.Parameters.AddWithValue("@troquelIngresado", troquelIngresado);
+                command.Parameters.AddWithValue("@encuIngresado", encuIngresado);
                 int rows = command.ExecuteNonQuery();
+                return Leer();
             }
             catch (Exception e)
             {

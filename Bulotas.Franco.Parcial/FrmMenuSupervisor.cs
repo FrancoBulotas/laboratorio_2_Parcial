@@ -44,7 +44,7 @@ namespace Frms
             Visual.CargarUsuariosDataGrid(dataGridView1, administracion);
             Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
             Visual.CargarStockDataGrid(dataGridView2, login.stock);
-
+            Visual.ControlDataGridStock(login.stock, dataGridView2);
         }
 
         private void FrmMenuSupervisor_FormClosing(object sender, FormClosingEventArgs e)
@@ -65,16 +65,16 @@ namespace Frms
             login.menuOperario.botonVolverSup.Visible = true;
             login.menuOperario.Show();
             Visual.CargarStockDataGrid(login.menuOperario.dataGridView2, login.stock);
-            Visual.ControlDataGridStock(login.stock, login.menuOperario.dataGridView2, false);
+            Visual.ControlDataGridStock(login.stock, login.menuOperario.dataGridView2);
         }
 
         private void buttonComprar_Click(object sender, EventArgs e)
         {
-            insumosComprados = login.stock.BotonComprarStock(textBoxPapel.Text, textBoxTinta.Text, textBoxTroquel.Text, textBoxEncuadernacion.Text, login.stock);
+            insumosComprados = login.stock.BotonComprarStock(textBoxPapel.Text, textBoxTinta.Text, textBoxTroquel.Text, textBoxEncuadernacion.Text);
 
             Visual.ValidarStockComprado(this, insumosComprados);
             Visual.CargarStockDataGrid(dataGridView2, login.stock);
-            Visual.ControlDataGridStock(login.stock, dataGridView2, false);
+            Visual.ControlDataGridStock(login.stock, dataGridView2);
             administracion.SerializarXMLStock(login.stock);
         }
 

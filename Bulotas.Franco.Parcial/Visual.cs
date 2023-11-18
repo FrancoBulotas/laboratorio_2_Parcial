@@ -46,8 +46,7 @@ namespace Frms
         /// </summary>
         /// <param name="stock"></param>
         /// <param name="dg"></param>
-        /// <param name="salir"></param>
-        internal static void ControlDataGridStock(Stock stock, DataGridView dg, bool salir)
+        internal static void ControlDataGridStock(Stock stock, DataGridView dg)
         {
             ControlColorCantidadStock(stock, dg, "papel");
             ControlColorCantidadStock(stock, dg, "tinta");
@@ -62,10 +61,10 @@ namespace Frms
         /// <param name="stock"></param>
         public static void CargarMaterialesDataGridView(DataGridView dg, Stock stock)
         {
-            dg.Rows.Add("Papel", stock.Papel.ToString());
-            dg.Rows.Add("Tinta", stock.Tinta.ToString());
-            dg.Rows.Add("Troquel", stock.Troquel.ToString());
-            dg.Rows.Add("Encuadernacion", stock.Encuadernacion.ToString());
+            dg.Rows.Add("Papel", stock.CantStock["Papel"].ToString());
+            dg.Rows.Add("Tinta", stock.CantStock["Tinta"].ToString());
+            dg.Rows.Add("Troquel", stock.CantStock["Troquel"].ToString());
+            dg.Rows.Add("Encuadernacion", stock.CantStock["Encuadernacion"].ToString());
         }
 
         /// <summary>
@@ -104,8 +103,6 @@ namespace Frms
                 // Se selecciona la celda del checkbox
                 DataGridViewCheckBoxCell celdaSeleccion = filasPedidos.Cells["Seleccion"] as DataGridViewCheckBoxCell;
 
-                // Tuve que hacer esto porque sino al seleccionar por segunda vez un elemento rompia (como que celdaSeleccion.Value cambiaba
-                // y no podia convertirlo) NO LO PUDE SOLUCIONAR DE OTRA MANERA
                 try
                 {
                     resultado = !Convert.ToBoolean(celdaSeleccion.Value);
@@ -113,16 +110,15 @@ namespace Frms
                 catch (FormatException error)
                 {
                     resultado = false;
-                    msjError = $"{DateTime.Now} | {error.Message} | Origen: {error.Source} | Metodo: {error.TargetSite}";
-                    form.administracion.CargarErrorLog(msjError);
+                    form.administracion.CargarErrorLog(form.administracion.MensajeError(error));
                 }
 
                 if (resultado)
                 {
-                    if (Convert.ToInt32(filasPedidos.Cells["Papel"].Value) <= form.login.stock.Papel &&
-                        Convert.ToInt32(filasPedidos.Cells["Tinta"].Value) <= form.login.stock.Tinta &&
-                        Convert.ToInt32(filasPedidos.Cells["Troquel"].Value) <= form.login.stock.Troquel &&
-                        Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value) <= form.login.stock.Encuadernacion)
+                    if (Convert.ToInt32(filasPedidos.Cells["Papel"].Value) <= form.login.stock.CantStock["Papel"] &&
+                        Convert.ToInt32(filasPedidos.Cells["Tinta"].Value) <= form.login.stock.CantStock["Tinta"] &&
+                        Convert.ToInt32(filasPedidos.Cells["Troquel"].Value) <= form.login.stock.CantStock["Troquel"] &&
+                        Convert.ToInt32(filasPedidos.Cells["Encuadernacion"].Value) <= form.login.stock.CantStock["Encuadernacion"])
                     {
                         form.cantPapelAConsumir = Convert.ToInt32(filasPedidos.Cells["Papel"].Value);
                         form.cantTintaAConsumir = Convert.ToInt32(filasPedidos.Cells["Tinta"].Value);
@@ -196,7 +192,6 @@ namespace Frms
         /// <param name="usuario">Instancia de un usuario</param>
         public static void InfoProcesoProduccion(FrmMenuOperario form, bool impresionFinalizada, bool troqueladoFinalizado, bool encuadernacionFinalizada, Usuario usuario)
         {
-            //string gananciaEnLimpio = filaPedidoElegido.Cells["Ganancia"].Value.ToString().Remove(0,1);
             string mensaje = "";
             if (form.contProcesos == 1 && impresionFinalizada)
             {
@@ -265,11 +260,6 @@ namespace Frms
             }
             else
             {
-                //form.login.stock.Papel = materiales["Papel"];
-                //form.login.stock.Tinta = materiales["Tinta"];
-                //form.login.stock.Troquel = materiales["Troquel"];
-                //form.login.stock.Encuadernacion = materiales["Encuadernacion"];
-
                 form.textBoxPapel.Text = "0";
                 form.textBoxTinta.Text = "0";
                 form.textBoxTroquel.Text = "0";
@@ -323,30 +313,30 @@ namespace Frms
         /// <param name="troqueladora"></param>
         public static void ActualizarFormAlChequear(FrmMenuOperario form, RadioButton boton, Label label, ProgressBar barra, bool impresora, bool troqueladora)
         {
+
             boton.Enabled = false;
             ModificarProgressBar(barra);
             label.Visible = true;
 
             if (impresora)
             {
-                form.login.stock.Papel = -form.cantPapelAConsumir;
-                form.login.stock.Tinta = -form.cantTintaAConsumir;
+                form.login.stock.CantStock = StockDAO.Modificar(-form.cantPapelAConsumir, -form.cantTintaAConsumir, 0, 0);
                 form.cantPapelAConsumir = 0;
                 form.cantTintaAConsumir = 0;
             }
             else if (troqueladora)
             {
-                form.login.stock.Troquel = -form.cantTroquelAConsumir;
+                form.login.stock.CantStock = StockDAO.Modificar(0, 0, -form.cantTroquelAConsumir, 0);
                 form.cantTroquelAConsumir = 0;
             }
             else
             {
-                form.login.stock.Encuadernacion = -form.cantEncuAConsumir;
+                form.login.stock.CantStock = StockDAO.Modificar(0, 0, 0, -form.cantEncuAConsumir);
                 form.cantEncuAConsumir = 0;
             }
 
             CargarStockDataGrid(form.dataGridView2, form.login.stock);
-            ControlDataGridStock(form.login.stock, form.dataGridView2, false);
+            ControlDataGridStock(form.login.stock, form.dataGridView2);
 
             if (impresora || troqueladora)
             {

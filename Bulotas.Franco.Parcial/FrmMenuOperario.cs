@@ -16,7 +16,6 @@ namespace Frms
 {
     public partial class FrmMenuOperario : Form
     {
-        //internal List<Usuario> listaUsuarios;
         internal Administracion administracion;
         internal int indexUsuarioLogueado;
         internal FrmLogin login;
@@ -32,7 +31,6 @@ namespace Frms
         {
             InitializeComponent();
             this.administracion = administracion;
-            //this.listaUsuarios = listaUsuarios;
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
             cantPapelAConsumir = 0;
@@ -50,8 +48,8 @@ namespace Frms
             this.nombreLogueado.Text = administracion.ListaUsuarios[indexUsuarioLogueado].NombreUsuario;
 
             Visual.CargarMaterialesDataGridView(dataGridView2, login.stock);
-
             Visual.CargarStockDataGrid(dataGridView2, login.stock);
+            Visual.ControlDataGridStock(login.stock, dataGridView2);
         }
 
         private void FrmPruebaMenu_FormClosing(object sender, FormClosingEventArgs e)
@@ -67,8 +65,8 @@ namespace Frms
         private void botonVolverSup_Click(object sender, EventArgs e)
         {
             Visual.CargarStockDataGrid(login.menuSupervisor.dataGridView2, login.stock);
-            Visual.ControlDataGridStock(login.stock, dataGridView2, false);
-            Visual.ControlDataGridStock(login.stock, login.menuSupervisor.dataGridView2, false);
+            Visual.ControlDataGridStock(login.stock, dataGridView2);
+            Visual.ControlDataGridStock(login.stock, login.menuSupervisor.dataGridView2);
 
             Visual.CargarUsuariosDataGrid(login.menuSupervisor.dataGridView1, administracion, administracion.ListaUsuarios[indexUsuarioLogueado].ID);
 
@@ -83,7 +81,7 @@ namespace Frms
         {
             administracion.SerializarXMLStock(login.stock);
 
-            Visual.ControlDataGridStock(login.stock, dataGridView2, true);
+            Visual.ControlDataGridStock(login.stock, dataGridView2);
             this.Hide();
             login.Show();
         }

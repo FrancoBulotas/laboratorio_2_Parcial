@@ -74,14 +74,6 @@ namespace Frms
             this.Close();
         }
 
-        private void registro_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            tNombre.Text = string.Empty;
-            tPass.Text = string.Empty;
-            registro.Show();
-            this.Hide();
-        }
-
         private void linkLabelHardcodeOp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             datosUsuario = administracion.HardcodearUsuario("operario");
@@ -96,6 +88,14 @@ namespace Frms
 
             tNombre.Text = datosUsuario["Nombre"];
             tPass.Text = datosUsuario["Contrasenia"];
+        }
+
+        private void linkLabelRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            tNombre.Text = string.Empty;
+            tPass.Text = string.Empty;
+            registro.Show();
+            this.Hide();
         }
     }
 }

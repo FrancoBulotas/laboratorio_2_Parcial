@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace Biblioteca
 {
-    public class Administracion : Empresa
+    public class Administracion : Empresa, IMensajeError
     {
         private Dictionary<string, string> dictResultadoLogin = new Dictionary<string, string>();
         private Dictionary<string, string> dictResultadoRegistro = new Dictionary<string, string>();
@@ -129,34 +129,6 @@ namespace Biblioteca
             }
             return productosTotales;
         }
-
-        /// <summary>
-        /// Agrega un usuario a la lista de usuarios. Valida que no exista.
-        /// </summary>
-        /// <param name="listaUsuariosExtra"></param>
-        /// <param name="usuario"></param>
-        /// <param name="tipoUsuario"></param>
-        /// <returns>Retorna true si se agrego correctamente, false si ya existe</returns>
-        //public bool AgregarUsuario(List<Usuario> listaUsuariosExtra, Usuario usuario, string tipoUsuario)
-        //{
-        //    listaUsuarios = listaUsuariosExtra;
-
-        //    if (tipoUsuario == string.Empty) { return false; }
-
-        //    foreach (Usuario usr in listaUsuarios)
-        //    {
-        //        if (usr != null)
-        //        {
-        //            if (usr.NombreUsuario == usuario.NombreUsuario)
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //    }
-        //    listaUsuarios.Add(usuario);
-        //    return true;
-        //}
-
 
         /// <summary>
         /// Se encarga de Hardcodear el usuario y contrasenia del tipo de usuario seleccionado, para agilizar el ingreso.
@@ -326,9 +298,15 @@ namespace Biblioteca
         {
             using (StreamWriter streamWriter = new StreamWriter("stock\\stock.xml"))
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Stock));
-
-                xmlSerializer.Serialize(streamWriter, stock);
+                try
+                {
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(Stock));
+                    xmlSerializer.Serialize(streamWriter, stock);
+                }
+                catch (InvalidOperationException  error)
+                {
+                    CargarErrorLog(MensajeError(error));
+                }
             }
         }
 
@@ -346,7 +324,7 @@ namespace Biblioteca
         /// <summary>
         /// Se encarga de deserializar el json de la configuracion.
         /// </summary>
-        /// <returns>Retorna un dict con claves: FondoApp, FondoLogin, Icono. Donde su valor es la ruta de la imagen.</returns>
+        /// <returns>Retorna un dict con claves: FondoApp, FondoLogin, Icono. Donde su valor es la ruta relativa de la imagen.</returns>
         public static Dictionary<string, string> DeserializarJSONConfig()
         {
             string configJSON = File.ReadAllText("config\\config.json");
@@ -354,6 +332,11 @@ namespace Biblioteca
             Dictionary<string, string> config = JsonConvert.DeserializeObject<Dictionary<string, string>>(configJSON);
 
             return config;
+        }
+
+        public string MensajeError(Exception error)
+        {
+            return $"{DateTime.Now} | {error.ToString().Split(":")[0]} | Info: {error.Message} | Metodo: {error.TargetSite}";
         }
 
         /// <summary>

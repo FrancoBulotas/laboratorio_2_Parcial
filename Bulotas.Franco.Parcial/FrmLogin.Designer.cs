@@ -32,11 +32,11 @@
             tPass = new TextBox();
             tNombre = new TextBox();
             labelError = new Label();
-            labelRegistro = new LinkLabel();
             botonSalir = new Button();
             label1 = new Label();
             linkLabelHardcodeOp = new LinkLabel();
             linkLabelHardcodeSup = new LinkLabel();
+            linkLabelRegistrarse = new LinkLabel();
             SuspendLayout();
             // 
             // login
@@ -79,17 +79,6 @@
             labelError.TabIndex = 4;
             labelError.Text = "ERROR";
             labelError.Visible = false;
-            // 
-            // labelRegistro
-            // 
-            labelRegistro.AutoSize = true;
-            labelRegistro.BackColor = Color.Transparent;
-            labelRegistro.LinkColor = Color.Black;
-            labelRegistro.Location = new Point(12, 340);
-            labelRegistro.Name = "labelRegistro";
-            labelRegistro.Size = new Size(0, 15);
-            labelRegistro.TabIndex = 6;
-            labelRegistro.LinkClicked += registro_LinkClicked;
             // 
             // botonSalir
             // 
@@ -140,17 +129,30 @@
             linkLabelHardcodeSup.Text = "HARDCODEAR SUPERVISOR";
             linkLabelHardcodeSup.LinkClicked += linkLabelHardcodeSup_LinkClicked;
             // 
+            // linkLabelRegistrarse
+            // 
+            linkLabelRegistrarse.AutoSize = true;
+            linkLabelRegistrarse.BackColor = Color.Transparent;
+            linkLabelRegistrarse.LinkColor = Color.Black;
+            linkLabelRegistrarse.Location = new Point(12, 340);
+            linkLabelRegistrarse.Name = "linkLabelRegistrarse";
+            linkLabelRegistrarse.Size = new Size(77, 15);
+            linkLabelRegistrarse.TabIndex = 12;
+            linkLabelRegistrarse.TabStop = true;
+            linkLabelRegistrarse.Text = "REGISTRARSE";
+            linkLabelRegistrarse.LinkClicked += linkLabelRegistrarse_LinkClicked;
+            // 
             // FrmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(275, 367);
+            Controls.Add(linkLabelRegistrarse);
             Controls.Add(linkLabelHardcodeSup);
             Controls.Add(linkLabelHardcodeOp);
             Controls.Add(label1);
             Controls.Add(botonSalir);
-            Controls.Add(labelRegistro);
             Controls.Add(labelError);
             Controls.Add(tNombre);
             Controls.Add(tPass);
@@ -168,10 +170,10 @@
         internal TextBox tPass;
         internal TextBox tNombre;
         internal Label labelError;
-        private LinkLabel labelRegistro;
         private Button botonSalir;
         private Label label1;
         private LinkLabel linkLabelHardcodeOp;
         private LinkLabel linkLabelHardcodeSup;
+        private LinkLabel linkLabelRegistrarse;
     }
 }
