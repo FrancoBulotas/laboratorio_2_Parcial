@@ -16,6 +16,8 @@ namespace Frms
     {
         private FrmLogin login;
         private Dictionary<string, string> dictConfiguracion;
+        private string rutaFondoAppCargado = "";
+        private string rutaFondoLoginCargado = "";
 
         public FrmConfiguracion(FrmLogin login)
         {
@@ -37,6 +39,17 @@ namespace Frms
             pictureBox4.Image = Image.FromFile($"{directorioEjecutable}\\visual\\fondo-login1.jpg");
             pictureBox5.Image = Image.FromFile($"{directorioEjecutable}\\visual\\fondo-login2.jpg");
             pictureBox6.Image = Image.FromFile($"{directorioEjecutable}\\visual\\fondo-login3.jpg");
+
+            buttonFondoApp1.Click += buttonFondoApp1_Click;
+            buttonFondoApp2.Click += buttonFondoApp2_Click;
+            buttonFondoApp3.Click += buttonFondoApp3_Click;
+            buttonFondoApp4.Click += buttonFondoApp4_Click;
+            buttonFondoLogin1.Click += buttonFondoLogin1_Click;
+            buttonFondoLogin2.Click += buttonFondoLogin2_Click;
+            buttonFondoLogin3.Click += buttonFondoLogin3_Click;
+            buttonFondoLogin4.Click += buttonFondoLogin4_Click;
+
+            btnSubirArchivo.Click += btnSubirArchivo_Click;
         }
 
         private void botonSalir_Click(object sender, EventArgs e)
@@ -46,41 +59,51 @@ namespace Frms
 
         private void buttonFondoApp1_Click(object sender, EventArgs e)
         {
-            AplicarFondo(true, "1");
+            AplicarFondo(true, "visual\\fondo-app1.jpg");
         }
 
         private void buttonFondoApp2_Click(object sender, EventArgs e)
         {
-            AplicarFondo(true, "2");
+            AplicarFondo(true, "visual\\fondo-app2.jpg");
         }
 
         private void buttonFondoApp3_Click(object sender, EventArgs e)
         {
-            AplicarFondo(true, "3");
+            AplicarFondo(true, "visual\\fondo-app3.jpg");
+        }
+
+        private void buttonFondoApp4_Click(object sender, EventArgs e)
+        {
+            AplicarFondo(true, rutaFondoAppCargado);
         }
 
         private void buttonFondoLogin1_Click(object sender, EventArgs e)
         {
-            AplicarFondo(false, "1");
+            AplicarFondo(false, "visual\\fondo-login1.jpg");
         }
 
         private void buttonFondoLogin2_Click(object sender, EventArgs e)
         {
-            AplicarFondo(false, "2");
+            AplicarFondo(false, "visual\\fondo-login2.jpg");
         }
 
         private void buttonFondoLogin3_Click(object sender, EventArgs e)
         {
-            AplicarFondo(false, "3");
+            AplicarFondo(false, "visual\\fondo-login3.jpg");
         }
 
-        private void AplicarFondo(bool app, string num)
+        private void buttonFondoLogin4_Click(object sender, EventArgs e)
+        {
+            AplicarFondo(false, rutaFondoLoginCargado);
+        }
+
+        private void AplicarFondo(bool app, string ruta)
         {
             dictConfiguracion = Administracion.DeserializarJSONConfig();
 
             if (app)
             {
-                dictConfiguracion["FondoApp"] = $"visual\\fondo-app{num}.jpg";   
+                dictConfiguracion["FondoApp"] = ruta;
                 Administracion.SerializarJSONConfig(dictConfiguracion);
 
                 login.menuOperario.BackgroundImage = Visual.CargarFondo(false);
@@ -88,13 +111,93 @@ namespace Frms
             }
             else
             {
-                dictConfiguracion["FondoLogin"] = $"visual\\fondo-login{num}.jpg";
+                dictConfiguracion["FondoLogin"] = ruta;
                 Administracion.SerializarJSONConfig(dictConfiguracion);
 
                 login.BackgroundImage = Visual.CargarFondo(true);
                 login.registro.BackgroundImage = Visual.CargarFondo(true);
             }
-            MessageBox.Show("Modificado correctamente","", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Modificado correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+
+        private async void btnSubirArchivo_Click(object sender, EventArgs e)
+        {
+            await CargarArchivo();
+        }
+
+        private async Task CargarArchivo()
+        {
+            try
+            {
+                FrmDialogoConfiguracion dialogo = new FrmDialogoConfiguracion();
+                DialogResult resultado = dialogo.ShowDialog();
+
+                await Task.Run(() => IniciarCarga(resultado));
+            }
+            catch (Exception error)
+            {
+                login.administracion.CargarErrorLog(login.administracion.MensajeError(error));
+            }
+        }
+
+        private void IniciarCarga(DialogResult resultado)
+        {
+            if (InvokeRequired)
+            {
+                Action<DialogResult> delegado = IniciarCarga;
+                object[] parametros = new object[] { resultado };
+                Invoke(delegado, parametros);
+            }
+            else
+            {
+                using (OpenFileDialog archivosDialog = new OpenFileDialog())
+                {
+                    archivosDialog.Title = "Seleccionar archivo";
+
+                    if (archivosDialog.ShowDialog() == DialogResult.OK)
+                    {
+
+                        if (resultado == DialogResult.OK)
+                        {
+                            pictureBox7.Image = Image.FromFile(archivosDialog.FileName);
+                            rutaFondoAppCargado = archivosDialog.FileName;
+                            pictureBox7.Visible = true;
+                            buttonFondoApp4.Visible = true;
+                        }
+                        else if (resultado == DialogResult.Yes)
+                        {
+                            pictureBox8.Image = Image.FromFile(archivosDialog.FileName);
+                            rutaFondoLoginCargado = archivosDialog.FileName;
+                            pictureBox8.Visible = true;
+                            buttonFondoLogin4.Visible = true;
+                        }
+
+
+                        this.Size = new Size(740, 498);
+                        botonSalir.Location = new Point(625, 425);
+                    }
+                }
+            }
+        }
+
+        //private void ActualizarInterfaz(PictureBox pictureBox, Button boton)
+        //{
+        //    if (InvokeRequired)
+        //    {
+        //        Action<PictureBox, Button> delegado = ActualizarInterfaz;
+        //        object[] parametros = new object[] { pictureBox, boton };
+        //        Invoke(delegado, parametros);
+        //    }
+        //    else
+        //    {
+        //        pictureBox.Visible = true;
+        //        boton.Visible = true;
+        //    }
+        //}
+
+
+
+
     }
 }

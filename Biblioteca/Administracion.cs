@@ -349,6 +349,11 @@ namespace Biblioteca
             return config;
         }
 
+        /// <summary>
+        /// Se encarga de dar formato correcto al mensaje de error en excepcion.
+        /// </summary>
+        /// <param name="error"></param>
+        /// <returns>Devuelve un string con el detalle del error.</returns>
         public string MensajeError(Exception error)
         {
             return $"{DateTime.Now} | {error.ToString().Split(":")[0]} | Info: {error.Message} | Metodo: {error.TargetSite}";
@@ -368,6 +373,10 @@ namespace Biblioteca
             DispararEventoLogError(error);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mensajeError"></param>
         private void DispararEventoLogError(string mensajeError)
         {
             if (EventoLogError is not null)
