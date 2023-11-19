@@ -160,7 +160,7 @@ namespace Biblioteca
                 {
                     datosUsuario.Add("Nombre", usuario.NombreUsuario);
                     datosUsuario.Add("Contrasenia", usuario.Contrasenia);
-                    return datosUsuario;
+                    //return datosUsuario;
                 }
             }
             return datosUsuario;

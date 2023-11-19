@@ -115,10 +115,9 @@ namespace Biblioteca
         /// <param name="tintaIngresadaStr"></param>
         /// <param name="troquelIngresadoStr"></param>
         /// <param name="encuIngresadoStr"></param>
-        /// <returns>Un Dictionary vacio en caso de fallar la compra, y con los elementos a comprar en caso de ser correcta.</returns>
+        /// <returns>True en caso de que se realize la modificacion, false en caso de fallar.</returns>
         public bool BotonComprarStock(string papelIngresadoStr, string tintaIngresadaStr, string troquelIngresadoStr, string encuIngresadoStr)
         {
-            bool agregado = false;
             bool papelConvertido = int.TryParse(papelIngresadoStr, out int papelIngresado);
             bool tintaConvertida = int.TryParse(tintaIngresadaStr, out int tintaIngresada);
             bool troquelConvertido = int.TryParse(troquelIngresadoStr, out int troquelIngresado);
@@ -133,12 +132,11 @@ namespace Biblioteca
             {
 
                 dictCantidadStock = StockDAO.Modificar(papelIngresado, tintaIngresada, troquelIngresado, encuIngresado);
-                agregado = true;
-                return agregado;
+                return true;
             }
             else
             {
-                return agregado;
+                return false;
             }
         }
 
