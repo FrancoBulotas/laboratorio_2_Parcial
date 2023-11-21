@@ -30,14 +30,14 @@ namespace Frms
         /// <param name="insumo"></param>
         private static void ControlColorCantidadStock(Stock stock, DataGridView dg, string insumo)
         {
-            ArrayList arrayControlStock;
+            int[] arrayControlStock;
             arrayControlStock = stock.ControlStock(insumo);
 
-            if ((int)arrayControlStock[0] >= 0)
+            if (arrayControlStock[0] >= 0)
             {
-                if ((int)arrayControlStock[1] == 1) { dg.Rows[(int)arrayControlStock[0]].DefaultCellStyle.BackColor = Color.Red; }
+                if (arrayControlStock[1] == 1) { dg.Rows[arrayControlStock[0]].DefaultCellStyle.BackColor = Color.Red; }
 
-                else if ((int)arrayControlStock[1] == 0) { dg.Rows[(int)arrayControlStock[0]].DefaultCellStyle.BackColor = Color.White; }
+                else if (arrayControlStock[1] == 0) { dg.Rows[arrayControlStock[0]].DefaultCellStyle.BackColor = Color.White; }
             }
         }
 
@@ -133,7 +133,7 @@ namespace Frms
                 catch (FormatException error)
                 {
                     resultado = false;
-                    form.administracion.CargarErrorLog(form.administracion.MensajeError(error));
+                    form.administracion.archivo.CargarErrorLog(form.administracion.MensajeError(error));
                 }
 
                 if (resultado)
@@ -274,11 +274,12 @@ namespace Frms
         /// Se encarga de cargar en la instancia del stock, la cantidad de insumos comprados previamente.
         /// </summary>
         /// <param name="form"></param>
-        /// <param name="materiales"></param>
-        public static void ValidarStockComprado(FrmMenuSupervisor form, bool insumosComprados)//, Dictionary<string, int> materiales)
+        /// <param name="insumosComprados"></param>
+        public static void ValidarStockComprado(FrmMenuSupervisor form, bool insumosComprados)
         {
             if (!insumosComprados)
             {
+
                 MessageBox.Show("Ingrese valores numericos positivos", "Sispro", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -426,11 +427,11 @@ namespace Frms
 
             if (login)
             {
-                rutaImagenFondo = Path.Combine(directorioEjecutable, Administracion.DeserializarJSONConfig()["FondoLogin"]);
+                rutaImagenFondo = Path.Combine(directorioEjecutable, Archivo.DeserializarJSONConfig()["FondoLogin"]);
             }
             else
             {
-                rutaImagenFondo = Path.Combine(directorioEjecutable, Administracion.DeserializarJSONConfig()["FondoApp"]);
+                rutaImagenFondo = Path.Combine(directorioEjecutable, Archivo.DeserializarJSONConfig()["FondoApp"]);
 
             }
 
@@ -440,7 +441,7 @@ namespace Frms
         public static Icon CargarIcono()
         {
             string directorioEjecutable = AppDomain.CurrentDomain.BaseDirectory;
-            string rutaIcono = Path.Combine(directorioEjecutable, Administracion.DeserializarJSONConfig()["Icono"]);
+            string rutaIcono = Path.Combine(directorioEjecutable, Archivo.DeserializarJSONConfig()["Icono"]);
             return  new Icon(rutaIcono);
         }
 
@@ -554,7 +555,7 @@ namespace Frms
                 if(mensaje == "Modificado Correctamente") { msjError = $"{DateTime.Now} | Modificacion Usuario: {form.dictResultadoRegistro["Error"]}"; }
                 else { msjError = $"{DateTime.Now} | Creacion Usuario: {form.dictResultadoRegistro["Error"]}"; }
 
-                form.administracion.CargarErrorLog(msjError);
+                form.administracion.archivo.CargarErrorLog(msjError);
             }
             else
             {

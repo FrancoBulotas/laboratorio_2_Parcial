@@ -32,7 +32,7 @@ namespace Frms
             this.administracion = administracion;
             indexUsuarioLogueado = indexUsuario;
             this.login = login;
-            administracion.SerializarXMLStock(login.stock);
+            //administracion.SerializarXML(login.stock);
         }
 
         private void FrmMenu_Load(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace Frms
             Visual.ValidarStockComprado(this, insumosComprados);
             Visual.CargarStockDataGrid(dataGridView2, login.stock);
             Visual.ControlDataGridStock(login.stock, dataGridView2);
-            administracion.SerializarXMLStock(login.stock);
+            //administracion.SerializarXML(login.stock);
         }
 
         private void buttonEditarUsr_Click(object sender, EventArgs e)

@@ -10,18 +10,24 @@ using System.Xml.Serialization;
 
 namespace Biblioteca
 {
-    public class Administracion : Empresa, IMensajeError
+    public class Administracion : Empresa, IMensaje, ILoginUsuario
     {
         private Dictionary<string, string> dictResultadoLogin = new Dictionary<string, string>();
         private Dictionary<string, string> dictResultadoRegistro = new Dictionary<string, string>();
         private Dictionary<string, string> dictInfo = new Dictionary<string, string>();
 
         public delegate void LogErrores(object sender, string msjError);
-
         public event LogErrores EventoLogError;
+
+        public delegate void ValidacionLoginUsuario(object sender, Dictionary<string, string> dictResultadoLogin);
+        public event ValidacionLoginUsuario EventoLoginUsuario;
+
+        public Archivo archivo;
 
         public Administracion()
         {
+            archivo = new Archivo(this);
+
             dictResultadoLogin.Add("Tipo Usuario", "");
             dictResultadoLogin.Add("Indice", "");
             dictResultadoLogin.Add("Error", "");
@@ -148,7 +154,6 @@ namespace Biblioteca
         /// <summary>
         /// Se encarga de Hardcodear el usuario y contrasenia del tipo de usuario seleccionado, para agilizar el ingreso.
         /// </summary>
-        /// <param name="form"></param>
         /// <param name="tipoUsuarioDado"></param>
         public Dictionary<string,string> HardcodearUsuario(string tipoUsuarioDado)
         {
@@ -160,7 +165,7 @@ namespace Biblioteca
                 {
                     datosUsuario.Add("Nombre", usuario.NombreUsuario);
                     datosUsuario.Add("Contrasenia", usuario.Contrasenia);
-                    //return datosUsuario;
+                    return datosUsuario;
                 }
             }
             return datosUsuario;
@@ -194,6 +199,8 @@ namespace Biblioteca
                                 }
 
                                 dictResultadoLogin["Indice"] = i.ToString();
+
+                                DispararEventoLoginUsuario(dictResultadoLogin);
                                 return dictResultadoLogin;
                             }
                             else
@@ -217,6 +224,7 @@ namespace Biblioteca
                 dictResultadoLogin["Error"] = "No hay usuarios creados.";
             }
 
+            DispararEventoLoginUsuario(dictResultadoLogin);
             return dictResultadoLogin;
         }
 
@@ -309,46 +317,6 @@ namespace Biblioteca
             return indice;
         }
 
-        public void SerializarXMLStock(Stock stock)
-        {
-            using (StreamWriter streamWriter = new StreamWriter("stock\\stock.xml"))
-            {
-                try
-                {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(Stock));
-                    xmlSerializer.Serialize(streamWriter, stock);
-                }
-                catch (InvalidOperationException  error)
-                {
-                    CargarErrorLog(MensajeError(error));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Se encarga de serializar un Dict de configuraciones en un archivo json.
-        /// </summary>
-        /// <param name="config"></param>
-        public static void SerializarJSONConfig(Dictionary<string, string> config)
-        {
-            string configJSON = JsonConvert.SerializeObject(config);
-
-            File.WriteAllText("config\\config.json", configJSON);
-        }
-
-        /// <summary>
-        /// Se encarga de deserializar el json de la configuracion.
-        /// </summary>
-        /// <returns>Retorna un dict con claves: FondoApp, FondoLogin, Icono. Donde su valor es la ruta relativa de la imagen.</returns>
-        public static Dictionary<string, string> DeserializarJSONConfig()
-        {
-            string configJSON = File.ReadAllText("config\\config.json");
-
-            Dictionary<string, string> config = JsonConvert.DeserializeObject<Dictionary<string, string>>(configJSON);
-
-            return config;
-        }
-
         /// <summary>
         /// Se encarga de dar formato correcto al mensaje de error en excepcion.
         /// </summary>
@@ -360,24 +328,10 @@ namespace Biblioteca
         }
 
         /// <summary>
-        /// Se encarga de cargar el detalle del error al archivo errores.log
-        /// </summary>
-        /// <param name="error"></param>
-        public void CargarErrorLog(string error)
-        {
-            using (StreamWriter sw = new StreamWriter("log\\errores.log", true))
-            {
-                sw.WriteLine(error);   
-            }
-
-            DispararEventoLogError(error);
-        }
-
-        /// <summary>
-        /// 
+        /// En caso de que el evento no se nulo, lo dispara con el mensaje de error.
         /// </summary>
         /// <param name="mensajeError"></param>
-        private void DispararEventoLogError(string mensajeError)
+        internal void DispararEventoLogError(string mensajeError)
         {
             if (EventoLogError is not null)
             {
@@ -385,6 +339,17 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// En caso de que el evento no se nulo, lo dispara con el mensaje de error.
+        /// </summary>
+        /// <param name="mensajeError"></param>
+        private void DispararEventoLoginUsuario(Dictionary<string, string> dictResultado)
+        {
+            if (EventoLoginUsuario is not null)
+            {
+                EventoLoginUsuario.Invoke(this, dictResultado);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>

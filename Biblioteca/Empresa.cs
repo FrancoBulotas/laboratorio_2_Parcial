@@ -12,33 +12,8 @@ namespace Biblioteca
 
         public Empresa()
         {
-            //listaUsuarios = GenerarListaUsuarios();
             listaUsuarios = UsuarioDAO.LeerTodo();
         }
-
-        /// <summary>
-        /// Se encarga de generar una lista de usuarios con datos random.
-        /// </summary>
-        /// <returns>Retorna la lista.</returns>
-        //private List<Usuario> GenerarListaUsuarios()
-        //{
-        //    List<string> listaNombres = new List<string>
-        //    {
-        //        "Franco","Pedro","Juan","Fausto","Adriana","Agustina","Joaquin","Malena","Juana","Enrique",
-        //        "Nicolas","Ignacio","Joel"
-        //    };
-
-        //    List<Usuario>? lista = new();
-        //    for(int i = 0; i < listaNombres.Count() ; i++)
-        //    {
-        //        string nombreUsuario = listaNombres[i];
-        //        string contrasenia = ValorRandomUsuario(false);;
-        //        string tipoUsuario = ValorRandomUsuario(true);
-        //        Usuario usuario = new(nombreUsuario, contrasenia, tipoUsuario);
-        //        lista.Add(usuario);
-        //    }
-        //    return lista;
-        //}
 
         /// <summary>
         /// Genera un valor random, tipo de usuario o contrasenia.

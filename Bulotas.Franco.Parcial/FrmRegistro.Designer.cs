@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             botonCancelar = new Button();
-            label1 = new Label();
+            labelRegistro = new Label();
             tbNombreUsuario = new TextBox();
             tbContraseña = new TextBox();
             tbRepContraseña = new TextBox();
@@ -52,16 +52,16 @@
             botonCancelar.UseVisualStyleBackColor = false;
             botonCancelar.Click += botonCancelar_Click;
             // 
-            // label1
+            // labelRegistro
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(171, 46);
-            label1.TabIndex = 1;
-            label1.Text = "REGISTRO";
+            labelRegistro.AutoSize = true;
+            labelRegistro.BackColor = Color.Transparent;
+            labelRegistro.Font = new Font("Segoe UI", 25F, FontStyle.Regular, GraphicsUnit.Point);
+            labelRegistro.Location = new Point(12, 9);
+            labelRegistro.Name = "labelRegistro";
+            labelRegistro.Size = new Size(171, 46);
+            labelRegistro.TabIndex = 1;
+            labelRegistro.Text = "REGISTRO";
             // 
             // tbNombreUsuario
             // 
@@ -88,7 +88,6 @@
             tbRepContraseña.PlaceholderText = "Repetir contraseña";
             tbRepContraseña.Size = new Size(255, 23);
             tbRepContraseña.TabIndex = 4;
-            tbRepContraseña.TextChanged += tbRepContraseña_TextChanged;
             // 
             // botonRegistrar
             // 
@@ -178,7 +177,7 @@
             Controls.Add(tbRepContraseña);
             Controls.Add(tbContraseña);
             Controls.Add(tbNombreUsuario);
-            Controls.Add(label1);
+            Controls.Add(labelRegistro);
             Controls.Add(botonCancelar);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FrmRegistro";
@@ -191,7 +190,7 @@
         #endregion
 
         private Button botonCancelar;
-        private Label label1;
+        private Label labelRegistro;
         private TextBox tbNombreUsuario;
         private TextBox tbContraseña;
         private TextBox tbRepContraseña;

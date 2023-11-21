@@ -20,9 +20,13 @@ namespace Frms
         private Dictionary<string, string> dictResultadoRegistro = new Dictionary<string, string>();
         private string msjError;
 
+        private DatosForms datosFormulario;
+
         public FrmRegistro(FrmLogin login, Administracion administracion)
         {
             InitializeComponent();
+
+            datosFormulario = new DatosForms();
 
             this.administracion = administracion;
             this.login = login;
@@ -30,10 +34,13 @@ namespace Frms
             administracion.EventoLogError += Administracion_EventoLogError;
             this.BackgroundImage = Visual.CargarFondo(true);
             this.Icon = Visual.CargarIcono();
+
+            GuardarDatosForm();
         }
 
         private void botonCancelar_Click(object sender, EventArgs e)
         {
+            GuardarDatosForm();
             this.Hide();
             login.Show();
         }
@@ -61,7 +68,7 @@ namespace Frms
                 labelErrorRegistro.Text = dictResultadoRegistro["Error"];
 
                 msjError = $"{DateTime.Now} | Registro: {dictResultadoRegistro["Error"]}";
-                administracion.CargarErrorLog(msjError);
+                administracion.archivo.CargarErrorLog(msjError);
             }
             else
             {
@@ -107,9 +114,21 @@ namespace Frms
             }
         }
 
-        private void tbRepContraseña_TextChanged(object sender, EventArgs e)
+        private void GuardarDatosForm()
         {
+            datosFormulario.botonCancelar = botonCancelar.Text;
+            datosFormulario.labelRegistro = labelRegistro.Text;
+            datosFormulario.tbNombreUsuario = tbNombreUsuario.Text;
+            datosFormulario.tbContraseña = tbContraseña.Text;
+            datosFormulario.tbRepContraseña = tbRepContraseña.Text;
+            datosFormulario.botonRegistrar = botonRegistrar.Text;
+            datosFormulario.labelErrorRegistro = labelErrorRegistro.Text;
+            datosFormulario.linkLabelVaciar = linkLabelVaciar.Text;
+            datosFormulario.checkBoxOperario = checkBoxOperario.Text;
+            datosFormulario.linkLabelRandom = linkLabelRandom.Text;
+            datosFormulario.checkBoxSupervisor = checkBoxSupervisor.Text;
 
+            login.archivo.SerializarXML(datosFormulario, "FrmRegistro");
         }
     }
 }

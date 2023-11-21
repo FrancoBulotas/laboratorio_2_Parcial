@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DatosForms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <login>INGRESAR</login>
+  <tPass />
+  <tNombre />
+  <labelError>ERROR</labelError>
+  <botonSalir>SALIR</botonSalir>
+  <label1>LOGIN</label1>
+  <linkLabelHardcodeOp>HARDCODEAR OPERARIO</linkLabelHardcodeOp>
+  <linkLabelHardcodeSup>HARDCODEAR SUPERVISOR</linkLabelHardcodeSup>
+  <linkLabelRegistrarse>REGISTRARSE</linkLabelRegistrarse>
+</DatosForms>

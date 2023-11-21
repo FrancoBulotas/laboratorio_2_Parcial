@@ -37,7 +37,7 @@ namespace Frms
             cantTintaAConsumir = 0;
             cantTroquelAConsumir = 0;
             cantEncuAConsumir = 0;
-            administracion.SerializarXMLStock(login.stock);
+            //administracion.SerializarXML(login.stock);
         }
 
         private void FrmPruebaMenu_Load(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace Frms
             //Visual.CargarUsuariosDataGrid(login.menuSupervisor.dataGridView1, administracion, administracion.ListaUsuarios[indexUsuarioLogueado].ID);
             login.cargaDeUsuariosDataGrid(login.menuSupervisor.dataGridView1, administracion, administracion.ListaUsuarios[indexUsuarioLogueado].ID);
 
-            administracion.SerializarXMLStock(login.stock);
+            //administracion.SerializarXML(login.stock);
 
             this.Hide();
             login.menuSupervisor.Show();
@@ -80,7 +80,7 @@ namespace Frms
 
         private void botonSalir_Click(object sender, EventArgs e)
         {
-            administracion.SerializarXMLStock(login.stock);
+            //administracion.SerializarXML(login.stock);
 
             Visual.ControlDataGridStock(login.stock, dataGridView2);
             this.Hide();

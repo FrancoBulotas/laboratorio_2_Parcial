@@ -43,7 +43,23 @@ namespace Testing
         }
 
         [TestMethod]
-        public void 
-        
+        public void BotonComprarStock_AlValidarQueSonCorrectosLosDatosIngresados_DeberiaRetornarTrue()
+        {
+            // Arrange
+            bool resultadoEsperado = true;
+            string papelIngresado = "1";
+            string tintaIngresada = "1";
+            string troquelIngresado = "1";
+            string encuIngresado = "1";
+            Stock stock = Stock.InstanciaStock;
+
+            // Act
+            bool resultadoActual = stock.BotonComprarStock(papelIngresado, tintaIngresada, troquelIngresado, encuIngresado);
+
+            // Assert
+
+            Assert.AreEqual(resultadoEsperado, resultadoActual);
+        }
+
     }
 }

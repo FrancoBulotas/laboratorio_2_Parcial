@@ -99,5 +99,4 @@ D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimest
 D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmMenuSupervisorCRUD.resources
 D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
 D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmConfiguracion.resources
-D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.Properties.Resources.resources
 D:\Escritorio Franco\UTN FRA\Tecnicatura Superior en Programacion\2do Cuatrimestre\Laboratorio II\PRIMER-PARCIAL\Bulotas.Franco.Parcial\obj\Debug\net6.0-windows\Frms.FrmDialogoConfiguracion.resources

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frms", "Frms.csproj", "{E3E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca", "..\Biblioteca\Biblioteca.csproj", "{E4A59C1D-5382-4116-8EF4-85CE85B6E1E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasSispro", "..\PruebasSispro\PruebasSispro.csproj", "{F4CA5D17-CE53-47D0-AE6C-4D20571F44C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "..\PruebasSispro\Testing.csproj", "{F4CA5D17-CE53-47D0-AE6C-4D20571F44C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -17,30 +17,73 @@ namespace Frms
         private string msjError;
         internal Action<DataGridView, Administracion, int> cargaDeUsuariosDataGrid;
 
+        internal Archivo archivo;
+        private DatosForms datosFormulario;
+
         public FrmLogin()
         {
-            stock = Stock.InstanciaStock;
-            administracion.SerializarXMLStock(stock);
-            administracion.EventoLogError += Administracion_EventoLogError;
-            cargaDeUsuariosDataGrid = Visual.CargarUsuariosDataGrid;
+            InitializeComponent();
 
+            archivo = new Archivo(administracion);
+            datosFormulario = new DatosForms();
             registro = new FrmRegistro(this, administracion);
+            stock = Stock.InstanciaStock;
+
+            administracion.EventoLogError += Administracion_EventoLogError;
+
+            cargaDeUsuariosDataGrid = Visual.CargarUsuariosDataGrid;
 
             this.BackgroundImage = Visual.CargarFondo(true);
             this.Icon = Visual.CargarIcono();
 
-            InitializeComponent();
-        }
-
-        private void Administracion_EventoLogError(object sender, string msjError)
-        {
-            labelError.Visible = true;
+            GuardarDatosForm();
         }
 
         private void login_Click(object sender, EventArgs e)
         {
             resultadoValidez = administracion.ValidarUsuarioLogin(tNombre.Text, tPass.Text);
 
+            administracion.EventoLoginUsuario += Administracion_EventoLoginUsuario;
+        }
+
+        private void botonSalir_Click(object sender, EventArgs e)
+        {
+            GuardarDatosForm();
+            this.Close();
+        }
+
+        private void linkLabelHardcodeOp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            datosUsuario = administracion.HardcodearUsuario("operario");
+
+            tNombre.Text = datosUsuario["Nombre"];
+            tPass.Text = datosUsuario["Contrasenia"];
+        }
+
+        private void linkLabelHardcodeSup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            datosUsuario = administracion.HardcodearUsuario("supervisor");
+
+            tNombre.Text = datosUsuario["Nombre"];
+            tPass.Text = datosUsuario["Contrasenia"];
+        }
+
+        private void linkLabelRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            tNombre.Text = string.Empty;
+            tPass.Text = string.Empty;
+            registro.Show();
+            this.Hide();
+        }
+
+
+        private void Administracion_EventoLogError(object sender, string msjError)
+        {
+            labelError.Visible = true;
+        }
+
+        private void Administracion_EventoLoginUsuario(object sender, Dictionary<string, string> dictResultadoLogin)
+        {
             if (resultadoValidez["Tipo Usuario"].Length > 0)
             {
                 if (resultadoValidez["Tipo Usuario"] == "operario")
@@ -69,38 +112,25 @@ namespace Frms
             {
                 labelError.Text = resultadoValidez["Error"];
                 msjError = $"{DateTime.Now} | Loguin: {resultadoValidez["Error"]}";
-                administracion.CargarErrorLog(msjError);
+                administracion.archivo.CargarErrorLog(msjError);
                 resultadoValidez["Error"] = "";
             }
         }
 
-        private void botonSalir_Click(object sender, EventArgs e)
+        private void GuardarDatosForm()
         {
-            this.Close();
+            datosFormulario.login = login.Text;
+            datosFormulario.tPass = tPass.Text;
+            datosFormulario.tNombre = tNombre.Text;
+            datosFormulario.labelError = labelError.Text;
+            datosFormulario.botonSalir = botonSalir.Text;
+            datosFormulario.label1 = label1.Text;
+            datosFormulario.linkLabelHardcodeOp = linkLabelHardcodeOp.Text;
+            datosFormulario.linkLabelHardcodeSup = linkLabelHardcodeSup.Text;
+            datosFormulario.linkLabelRegistrarse = linkLabelRegistrarse.Text;
+
+            archivo.SerializarXML(datosFormulario, "FrmLogin");
         }
 
-        private void linkLabelHardcodeOp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            datosUsuario = administracion.HardcodearUsuario("operario");
-
-            tNombre.Text = datosUsuario["Nombre"];
-            tPass.Text = datosUsuario["Contrasenia"];
-        }
-
-        private void linkLabelHardcodeSup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            datosUsuario = administracion.HardcodearUsuario("supervisor");
-
-            tNombre.Text = datosUsuario["Nombre"];
-            tPass.Text = datosUsuario["Contrasenia"];
-        }
-
-        private void linkLabelRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            tNombre.Text = string.Empty;
-            tPass.Text = string.Empty;
-            registro.Show();
-            this.Hide();
-        }
     }
 }

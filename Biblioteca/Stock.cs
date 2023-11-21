@@ -22,8 +22,8 @@ namespace Biblioteca
         /// <summary>
         /// Se encarga de consultar la cantidad de insumo disponible.
         /// </summary>
-        /// <param name="form"></param>
-        /// <returns>Retorna un string con la cantidad de insumo solicitado</returns>
+        /// <param name="insumo"></param>
+        /// <returns>Retorna un string con la cantidad del insumo solicitado</returns>
         public string ConsultarCantidadInsumo(string insumo)
         { 
             if (insumo == "papel") { return CantStock["Papel"].ToString(); }
@@ -37,74 +37,70 @@ namespace Biblioteca
         /// Monitorea el stock, en caso de haber poco, retorna el indice de la fila que tiene poco y el indice de que color 
         /// tiene que ser pintado (1 en caso de ser rojo, 0 en caso de ser blanco), si hay suficiente retorna -1 en ambos valores.
         /// </summary>
-        /// <param name="form"></param>
+        /// <param name="insumo"></param>
         /// <returns>Un ArrayList con dos numeros enteros. </returns>
-        public ArrayList ControlStock(string insumo)
+        public int[] ControlStock(string insumo)
         {
-            ArrayList valores = new ArrayList();
+            int[] valores = new int[2];
 
             if (insumo == "papel")
             {
                 if (CantStock["Papel"] < pocoStock)
                 {
-                    valores.Add(0);
-                    valores.Add(1);
-                    return valores;
+                    valores[0] = 0;
+                    valores[1] = 1;
                 }
                 if (CantStock["Papel"] >= pocoStock)
                 {
-                    valores.Add(0);
-                    valores.Add(0);
-                    return valores;
+                    valores[0] = 0;
+                    valores[1] = 0;
                 }
+                return valores;
             }
             if (insumo == "tinta")
             {
                 if (CantStock["Tinta"] < pocoStock)
                 {
-                    valores.Add(1);
-                    valores.Add(1);
-                    return valores;
+                    valores[0] = 1;
+                    valores[1] = 1;
                 }
                 if (CantStock["Tinta"] >= pocoStock)
                 {
-                    valores.Add(1);
-                    valores.Add(0);
-                    return valores;
+                    valores[0] = 1;
+                    valores[1] = 0; 
                 }
+                return valores;
             }
             if (insumo == "troquel")
             {
                 if (CantStock["Troquel"] < pocoStock)
                 {
-                    valores.Add(2);
-                    valores.Add(1);
-                    return valores;
+                    valores[0] = 2;
+                    valores[1] = 1;
                 }
                 if (CantStock["Troquel"] >= pocoStock)
                 {
-                    valores.Add(2);
-                    valores.Add(0);
-                    return valores;
+                    valores[0] = 2;
+                    valores[1] = 0;
                 }
+                return valores;
             }
             if (insumo == "encuadernacion")
             {
                 if (CantStock["Encuadernacion"] < pocoStock)
                 {
-                    valores.Add(3);
-                    valores.Add(1);
-                    return valores;
+                    valores[0] = 3;
+                    valores[1] = 1;
                 }
                 if (CantStock["Encuadernacion"] >= pocoStock)
                 {
-                    valores.Add(3);
-                    valores.Add(0);
-                    return valores;
+                    valores[0] = 3;
+                    valores[1] = 0;
                 }
+                return valores;
             }
-            valores.Add(-1);
-            valores.Add(-1);
+            valores[0] = -1;
+            valores[1] = -1;
             return valores;
         }
 

@@ -99,12 +99,12 @@ namespace Frms
 
         private void AplicarFondo(bool app, string ruta)
         {
-            dictConfiguracion = Administracion.DeserializarJSONConfig();
+            dictConfiguracion = Archivo.DeserializarJSONConfig();
 
             if (app)
             {
                 dictConfiguracion["FondoApp"] = ruta;
-                Administracion.SerializarJSONConfig(dictConfiguracion);
+                Archivo.SerializarJSONConfig(dictConfiguracion);
 
                 login.menuOperario.BackgroundImage = Visual.CargarFondo(false);
                 login.menuSupervisor.BackgroundImage = Visual.CargarFondo(false);
@@ -112,7 +112,7 @@ namespace Frms
             else
             {
                 dictConfiguracion["FondoLogin"] = ruta;
-                Administracion.SerializarJSONConfig(dictConfiguracion);
+                Archivo.SerializarJSONConfig(dictConfiguracion);
 
                 login.BackgroundImage = Visual.CargarFondo(true);
                 login.registro.BackgroundImage = Visual.CargarFondo(true);
@@ -137,7 +137,7 @@ namespace Frms
             }
             catch (Exception error)
             {
-                login.administracion.CargarErrorLog(login.administracion.MensajeError(error));
+                login.administracion.archivo.CargarErrorLog(login.administracion.MensajeError(error));
             }
         }
 
@@ -158,45 +158,36 @@ namespace Frms
                     if (archivosDialog.ShowDialog() == DialogResult.OK)
                     {
 
-                        if (resultado == DialogResult.OK)
+                        try
                         {
-                            pictureBox7.Image = Image.FromFile(archivosDialog.FileName);
-                            rutaFondoAppCargado = archivosDialog.FileName;
-                            pictureBox7.Visible = true;
-                            buttonFondoApp4.Visible = true;
+                            if (resultado == DialogResult.OK)
+                            {
+                                pictureBox7.Image = Image.FromFile(archivosDialog.FileName);
+                                rutaFondoAppCargado = archivosDialog.FileName;
+                                pictureBox7.Visible = true;
+                                buttonFondoApp4.Visible = true;
+                            }
+                            else if (resultado == DialogResult.Yes)
+                            {
+                                pictureBox8.Image = Image.FromFile(archivosDialog.FileName);
+                                rutaFondoLoginCargado = archivosDialog.FileName;
+                                pictureBox8.Visible = true;
+                                buttonFondoLogin4.Visible = true;
+                            }
+                            this.Size = new Size(740, 498);
+                            botonSalir.Location = new Point(625, 425);
                         }
-                        else if (resultado == DialogResult.Yes)
+                        catch (Exception error) 
                         {
-                            pictureBox8.Image = Image.FromFile(archivosDialog.FileName);
-                            rutaFondoLoginCargado = archivosDialog.FileName;
-                            pictureBox8.Visible = true;
-                            buttonFondoLogin4.Visible = true;
+                            login.administracion.archivo.CargarErrorLog(login.administracion.MensajeError(error));
+                            MessageBox.Show("Tipo de archivo no valido.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
 
 
-                        this.Size = new Size(740, 498);
-                        botonSalir.Location = new Point(625, 425);
                     }
                 }
             }
         }
-
-        //private void ActualizarInterfaz(PictureBox pictureBox, Button boton)
-        //{
-        //    if (InvokeRequired)
-        //    {
-        //        Action<PictureBox, Button> delegado = ActualizarInterfaz;
-        //        object[] parametros = new object[] { pictureBox, boton };
-        //        Invoke(delegado, parametros);
-        //    }
-        //    else
-        //    {
-        //        pictureBox.Visible = true;
-        //        boton.Visible = true;
-        //    }
-        //}
-
-
 
 
     }
