@@ -137,7 +137,7 @@ namespace Frms
             }
             catch (Exception error)
             {
-                login.administracion.archivo.CargarErrorLog(login.administracion.MensajeError(error));
+                login.archivo.CargarErrorLog(login.administracion.MensajeError(error));
             }
         }
 
@@ -179,7 +179,7 @@ namespace Frms
                         }
                         catch (Exception error) 
                         {
-                            login.administracion.archivo.CargarErrorLog(login.administracion.MensajeError(error));
+                            login.archivo.CargarErrorLog(login.administracion.MensajeError(error));
                             MessageBox.Show("Tipo de archivo no valido.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
 
